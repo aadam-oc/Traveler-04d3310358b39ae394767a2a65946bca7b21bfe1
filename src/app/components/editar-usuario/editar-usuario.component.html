@@ -1,0 +1,35 @@
+<form [formGroup]="editarUsuarioForm" (ngSubmit)="onSubmit()">
+    <div>
+        <label for="correo">Correo:</label>
+        <input id="correo" type="email" formControlName="correo" />
+    </div>
+    <div>
+        <label for="contrasena">Contraseña:</label>
+        <input id="contrasena" type="password" formControlName="contrasena" />
+    </div>
+    <div>
+        <label for="id_rol">ID Rol:</label>
+        <input id="id_rol" type="text" formControlName="id_rol" />
+    </div>
+    <div>
+        <label for="nombre">Nombre:</label>
+        <input id="nombre" type="text" formControlName="nombre" />
+    </div>
+    <div>
+        <label for="apellido1">Primer Apellido:</label>
+        <input id="apellido1" type="text" formControlName="apellido1" />
+    </div>
+    <div>
+        <label for="apellido2">Segundo Apellido:</label>
+        <input id="apellido2" type="text" formControlName="apellido2" />
+    </div>
+    <div>
+        <label for="telefono1">Teléfono 1:</label>
+        <input id="telefono1" type="text" formControlName="telefono1" />
+    </div>
+    <div>
+        <label for="telefono2">Teléfono 2:</label>
+        <input id="telefono2" type="text" formControlName="telefono2" />
+    </div>
+    <button type="submit">Guardar</button>
+</form>

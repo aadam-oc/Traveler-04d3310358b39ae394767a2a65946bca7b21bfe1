@@ -1,0 +1,86 @@
+<div class="hero-container">
+    <img src="/Fondo.png" alt="Fondo" class="hero-background" />
+    <div class="hero-content" id="hero-content"> 
+        <h1 class="welcome-title">WELCOME TO traveler</h1>
+        <hr><br>
+        <p class="welcome-subtitle">¡Explora el mundo con traveler!</p>
+        <p class="welcome-description">
+            Descubre destinos increíbles, encuentra alojamientos perfectos y aprovecha ofertas únicas, todo en un solo lugar. Compara opciones, reserva de forma fácil y segura, y disfruta de un viaje inolvidable. ¡Tu próxima gran aventura comienza con traveler!
+        </p>
+        <a href="javascript:void(0);" class="btn btn-primary" (click)="scrollToSection()">EXPLORAR</a>
+        <div class="social-icons">
+            <a href="#"><img src="http://172.17.131.14:3000/uploads/1742486463803.png" alt="Twitter" class="social-icons"/></a>
+            <a href="#"><img src="http://172.17.131.14:3000/uploads/1742486495704.png" alt="Instagram" class="social-icons"/></a>
+            <a href="#"><img src="http://172.17.131.14:3000/uploads/1742486264667.png" alt="Facebook" class="social-icons"/></a>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="Tittle-destacados-1" id="destacados">
+    <h2>VUELOS DESTACADOS</h2>
+</div>
+
+<div class="card-deck">
+    <div class="card" style="width: 18rem;">
+        <img src="http://172.17.131.14:3000/uploads/1742224263781.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+    </div>
+    <div class="card" style="width: 18rem;">
+        <img src="http://172.17.131.14:3000/uploads/1742224263781.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+    </div>
+    <div class="card" style="width: 18rem;">
+        <img src="http://172.17.131.14:3000/uploads/1742224263781.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+    </div>
+</div>
+
+<div class="Tittle-destacados-2">
+    <h2>ACTIVIDADES DESTACADAS</h2>
+</div>
+
+<div class="card-deck">
+    <div class="actividad expand" *ngFor="let actividad of actividades">
+        <img class="fto-actividad" [src]="actividad.nombre_imagen_actividad"
+            alt="Actividad" />
+        <div class="contenido">
+            <div class="titulo">{{ actividad.nombre_tipo_actividad }}</div>
+            <p>{{ actividad.pais }}, {{ actividad.ciudad }}</p>
+            <p class="descripcion">Descripción: {{ actividad.descripcion
+                }}</p>
+            <div class="precio">{{ actividad.precio }}€/H</div>
+            <a href="#" class="btn btn-primary">Ver actividad</a>
+        </div>
+    </div>
+
+    <button 
+    id="scrollToTop" 
+    class="scroll-top-btn" 
+    *ngIf="mostrarBoton" 
+    (click)="scrollToTop()">
+    <img src="http://172.17.131.14:3000/uploads/1744381510145.png" alt="Subir">
+  </button>
+
+</div>
+
+<br><br>
+<!--<div class="antesFooter">
+    <img src="http://172.17.131.14:3000/uploads/1742225011984.jpeg" alt="Fondo" class="antes-background" />
+    <div class="antes-content">
+        <h2 class="welcome-title">WELCOME TO TRAVELER</h2>
+      </div>
+</div>-->

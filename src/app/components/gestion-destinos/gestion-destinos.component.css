@@ -1,0 +1,391 @@
+/* Estilos generales */
+.container {
+    padding: 20px;
+}
+
+/* Estilos de los paneles */
+mat-expansion-panel {
+    border-radius: 8px;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease;
+}
+
+mat-expansion-panel-header {
+    background-color: #143D2C;
+    padding: 20px;
+    color: #ffffff;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+mat-panel-title h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+    color: #fff;
+}
+
+mat-panel-description {
+    color: #fff;
+    letter-spacing: 1px;
+}
+
+/* Paneles anidados */
+mat-expansion-panel mat-expansion-panel {
+    margin-top: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+mat-expansion-panel mat-expansion-panel mat-panel-title {
+    color: #fff;
+    letter-spacing: 1px;
+    font-size: 1rem;
+}
+
+.paginacion {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+/* Estilos para el formulario de destinos */
+.destino-form {
+    background-color: #f9fafb;
+    padding: 24px;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    margin: 20px 0;
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.destino-form::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, #143D2C, #10b981);
+}
+
+.form-field {
+    margin-bottom: 0;
+    position: relative;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: #143D2C;
+    font-size: 0.95rem;
+}
+
+.form-label::after {
+    content: '*';
+    color: #ef4444;
+    margin-left: 4px;
+}
+
+.form-input {
+    width: 80%;
+    padding: 12px 14px;
+    border: 1px solid #dddddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    background-color: #ffffff;
+    color: #333333;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.form-input:hover {
+    border-color: #10b981;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #143D2C;
+    box-shadow: 0 0 0 3px rgba(20, 61, 44, 0.15);
+}
+
+.form-input::placeholder {
+    color: #9ca3af;
+}
+
+.form-error {
+    color: #ef4444;
+    font-size: 0.85rem;
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.form-error::before {
+    content: '⚠️';
+    margin-right: 6px;
+    font-size: 0.9rem;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.form-buttons {
+    grid-column: 1 / -1;
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.form-button {
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+    border: none;
+    min-width: 120px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.form-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: all 0.6s ease;
+}
+
+.form-button:hover::before {
+    left: 100%;
+}
+
+.submit-button {
+    background-color: #143D2C;
+    color: white;
+}
+
+.submit-button:hover {
+    background-color: #0f2d20;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.submit-button:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.submit-button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.submit-button:disabled::before {
+    display: none;
+}
+
+.cancel-button {
+    background-color: #f3f4f6;
+    color: #4b5563;
+    border: 1px solid #e5e7eb;
+}
+
+.cancel-button:hover {
+    background-color: #e5e7eb;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.cancel-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Estilos para la tabla de destinos */
+.destinos-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    margin: 16px 0;
+    font-size: 0.95rem;
+}
+
+.table-header {
+    background-color: #f5f5f5;
+    border-bottom: 2px solid #143D2C;
+}
+
+.table-header-cell {
+    background-color: #f5f5f5;
+    color: #143D2C;
+    font-weight: 600;
+    padding: 16px;
+    text-align: left;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.table-row:nth-child(even) {
+    background-color: #ffffff;
+}
+
+.table-row:nth-child(odd) {
+    background-color: #f9fafb;
+}
+
+.table-row:hover {
+    background-color: #edf7f0;
+    transition: background-color 0.2s ease;
+}
+
+.table-cell {
+    color: #444444;
+    padding: 14px 16px;
+    border-bottom: 1px solid #eeeeee;
+    vertical-align: middle;
+}
+
+.table-cell:first-child {
+    font-weight: 500;
+}
+
+.action-button {
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin: 0 4px;
+    font-size: 0.9rem;
+}
+
+.edit-button {
+    background-color: #143D2C;
+    color: white;
+}
+
+.edit-button:hover {
+    background-color: #1f5a41;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.delete-button {
+    background-color: #ef4444;
+    color: white;
+}
+
+.delete-button:hover {
+    background-color: #dc2626;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Animaciones */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.table-row {
+    animation: slideIn 0.3s ease-out;
+    animation-fill-mode: both;
+}
+
+.table-row:nth-child(1) {
+    animation-delay: 0.05s;
+}
+
+.table-row:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.table-row:nth-child(3) {
+    animation-delay: 0.15s;
+}
+
+.table-row:nth-child(4) {
+    animation-delay: 0.2s;
+}
+
+.table-row:nth-child(5) {
+    animation-delay: 0.25s;
+}
+
+.table-row:nth-child(6) {
+    animation-delay: 0.3s;
+}
+
+.table-row:nth-child(7) {
+    animation-delay: 0.35s;
+}
+
+.table-row:nth-child(8) {
+    animation-delay: 0.4s;
+}
+
+.table-row:nth-child(9) {
+    animation-delay: 0.45s;
+}
+
+.table-row:nth-child(10) {
+    animation-delay: 0.5s;
+}
+
+/* Estilos para el estado de edición */
+.editing .destino-form::before {
+    background: linear-gradient(90deg, #10b981, #143D2C);
+}
+
+.editing .submit-button {
+    background-color: #10b981;
+}
+
+.editing .submit-button:hover {
+    background-color: #059669;
+}
+
+.editing-row {
+    background-color: #f0fdf4 !important;
+    border-left: 3px solid #10b981;
+}

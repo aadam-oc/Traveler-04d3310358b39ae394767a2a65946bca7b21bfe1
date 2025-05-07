@@ -1,0 +1,218 @@
+<div class="container">
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <h2>Gestion de usuarios</h2>
+            </mat-panel-title>
+            <mat-panel-description>
+                Aquí puedes gestionar los usuarios de la web.
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="user-list">
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Lista de Usuarios
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Total de usuarios: {{ users.length }}
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div class="user-list">
+                    <table class="user-table">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Correo</th>
+                                <th>Rol</th>
+                                <th>Nombre</th>
+                                <th>Apellido 1</th>
+                                <th>Apellido 2</th>
+                                <th>Teléfono 1</th>
+                                <th>Teléfono 2</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let usuario of users">
+                                <td>{{ usuario.id_usuario }}</td>
+                                <td>{{ usuario.correo }}</td>
+                                <td>{{ usuario.nombre_rol }}</td>
+                                <td>{{ usuario.nombre }}</td>
+                                <td>{{ usuario.apellido1 }}</td>
+                                <td>{{ usuario.apellido2 }}</td>
+                                <td>{{ usuario.telefono1 }}</td>
+                                <td>{{ usuario.telefono2 }}</td>
+                                <td>
+                                    <button class="action-button edit-button"
+                                        (click)="onEdit(usuario.id_usuario)">Editar</button>
+                                    <button class="action-button delete-button"
+                                        (click)="onDelete(usuario)">Eliminar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Crear Usuario
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="form-container">
+                    <form [formGroup]="formCrearUsuarioSimple"
+                        (ngSubmit)="onSubmitSimple()">
+                        <h3>Formulario Simple</h3>
+                        <div class="form-group">
+                            <label for="correo"
+                                class="form-label">Correo:</label>
+                            <input type="email" id="correo"
+                                formControlName="correo"
+                                required class="form-input">
+                            <div
+                                *ngIf="formCrearUsuarioSimple.get('correo')?.invalid && formCrearUsuarioSimple.get('correo')?.touched"
+                                class="error-message">
+                                El correo es obligatorio.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="contrasena"
+                                class="form-label">Contraseña:</label>
+                            <input type="password" id="contrasena"
+                                formControlName="contrasena" required
+                                class="form-input">
+                            <div
+                                *ngIf="formCrearUsuarioSimple.get('contrasena')?.invalid && formCrearUsuarioSimple.get('contrasena')?.touched"
+                                class="error-message">
+                                La contraseña es obligatoria.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="id_rol" class="form-label">Rol:</label>
+                            <select id="select_id_rol" formControlName="id_rol"
+                                required class="form-select">
+                                <option value="2">Administrador</option>
+                                <option value="1">Usuario</option>
+                                <option value="3">Gestor de
+                                    alojamientos</option>
+                                <option value="4">Gestor de actividades</option>
+                                <option value="5">Gestor de alojamientos y
+                                    actividades</option>
+                            </select>
+                            <div
+                                *ngIf="formCrearUsuarioSimple.get('id_rol')?.invalid && formCrearUsuarioSimple.get('id_rol')?.touched"
+                                class="error-message">
+                                El rol es obligatorio.
+                            </div>
+                        </div>
+                        <button type="submit" class="form-button">Crear
+                            Usuario</button>
+                    </form>
+                    <br>
+                    <form [formGroup]="formCrearUsuarioCompleto"
+                        (ngSubmit)="onSubmitCompleto()">
+                        <h3>Formulario Completo</h3>
+                        <div class="form-group">
+                            <label for="nombre"
+                                class="form-label">Nombre:</label>
+                            <input type="text" id="nombre"
+                                formControlName="nombre"
+                                required class="form-input">
+                            <div
+                                *ngIf="formCrearUsuarioCompleto.get('nombre')?.invalid && formCrearUsuarioCompleto.get('nombre')?.touched"
+                                class="error-message">
+                                El nombre es obligatorio.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="apellido1" class="form-label">Apellido
+                                1:</label>
+                            <input type="text" id="apellido1"
+                                formControlName="apellido1" required
+                                class="form-input">
+                            <div
+                                *ngIf="formCrearUsuarioCompleto.get('apellido1')?.invalid && formCrearUsuarioCompleto.get('apellido1')?.touched"
+                                class="error-message">
+                                El primer apellido es obligatorio.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="apellido2" class="form-label">Apellido
+                                2:</label>
+                            <input type="text" id="apellido2"
+                                formControlName="apellido2" class="form-input">
+                            <div
+                                *ngIf="formCrearUsuarioCompleto.get('apellido2')?.invalid && formCrearUsuarioCompleto.get('apellido2')?.touched"
+                                class="error-message">
+                                El segundo apellido es obligatorio.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="telefono1" class="form-label">Teléfono
+                                1:</label>
+                            <input type="tel" id="telefono1"
+                                formControlName="telefono1" required
+                                class="form-input">
+                            <div
+                                *ngIf="formCrearUsuarioCompleto.get('telefono1')?.invalid && formCrearUsuarioCompleto.get('telefono1')?.touched"
+                                class="error-message">
+                                El teléfono 1 es obligatorio.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="telefono2" class="form-label">Teléfono
+                                2:</label>
+                            <input type="tel" id="telefono2"
+                                formControlName="telefono2" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label for="correo"
+                                class="form-label">Correo:</label>
+                            <input type="email" id="correo"
+                                formControlName="correo"
+                                required class="form-input">
+                            <div
+                                *ngIf="formCrearUsuarioCompleto.get('correo')?.invalid && formCrearUsuarioCompleto.get('correo')?.touched"
+                                class="error-message">
+                                El correo es obligatorio.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="contrasena"
+                                class="form-label">Contraseña:</label>
+                            <input type="password" id="contrasena"
+                                formControlName="contrasena" required
+                                class="form-input">
+                            <div
+                                *ngIf="formCrearUsuarioCompleto.get('contrasena')?.invalid && formCrearUsuarioCompleto.get('contrasena')?.touched"
+                                class="error-message">
+                                La contraseña es obligatoria.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="id_rol" class="form-label">Rol:</label>
+                            <select id="select_id_rol" formControlName="id_rol"
+                                required class="form-select">
+                                <option value="2">Administrador</option>
+                                <option value="1">Usuario</option>
+                                <option value="3">Gestor de
+                                    alojamientos</option>
+                                <option value="4">Gestor de actividades</option>
+                                <option value="5">Gestor de alojamientos y
+                                    actividades</option>
+                            </select>
+                            <div
+                                *ngIf="formCrearUsuarioCompleto.get('id_rol')?.invalid && formCrearUsuarioCompleto.get('id_rol')?.touched"
+                                class="error-message">
+                                El rol es obligatorio.
+                            </div>
+                        </div>
+                        <button type="submit" class="form-button">Crear Usuario
+                            Completo</button>
+                    </form>
+                </div>
+            </mat-expansion-panel>
+
+        </div>

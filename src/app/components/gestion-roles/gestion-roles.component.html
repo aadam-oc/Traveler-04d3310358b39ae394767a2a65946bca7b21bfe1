@@ -1,0 +1,86 @@
+<div class="container">
+    <mat-accordion multi="true">
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <h2>Gestión de Roles</h2>
+                </mat-panel-title>
+                <mat-panel-description>
+                    Aquí puedes gestionar los roles de la aplicación.
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <!-- Formulario para crear un nuevo rol -->
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Crear Nuevo Rol
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Total de Roles: {{ roles.length }}
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <form class="gestion-roles-form" [formGroup]="formCrearRol"
+                    (ngSubmit)="onSubmit()">
+                    <div class="form-field form-field-nombre-rol">
+                        <label class="form-label form-label-nombre-rol">Nombre
+                            del Rol</label>
+                        <input class="form-input form-input-nombre-rol"
+                            formControlName="nombre_rol"
+                            placeholder="Ingrese el nombre del rol" />
+                        <span class="form-error form-error-nombre-rol"
+                            *ngIf="formCrearRol.get('nombre_rol')?.hasError('required')">
+                            El nombre del rol es obligatorio.
+                        </span>
+                    </div>
+                    <button class="btn btn-primary btn-crear-rol"
+                        type="submit">Crear Rol</button>
+                </form>
+            </mat-expansion-panel>
+
+            <!-- Tabla de roles -->
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Lista de Roles
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="roles-table-container"
+                    *ngIf="roles.length > 0; else noRoles">
+                    <table class="roles-table roles-table-gestion">
+                        <thead class="roles-table-head">
+                            <tr class="roles-table-row roles-table-row-header">
+                                <th
+                                    class="roles-table-header roles-table-header-nombre">Nombre
+                                    del Rol</th>
+                                <th
+                                    class="roles-table-header roles-table-header-acciones">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody class="roles-table-body">
+                            <tr class="roles-table-row roles-table-row-data"
+                                *ngFor="let rol of roles">
+                                <td
+                                    class="roles-table-cell roles-table-cell-nombre">{{
+                                    rol.nombre_rol }}</td>
+                                <td
+                                    class="roles-table-cell roles-table-cell-acciones">
+                                    <button
+                                        class="btn btn-accent btn-editar-rol"
+                                        (click)="onEdit(rol)">Editar</button>
+                                    <button
+                                        class="btn btn-warn btn-eliminar-rol"
+                                        (click)="onDelete(rol)">Eliminar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <ng-template #noRoles>
+                    <p class="no-roles-message no-roles-message-empty">No hay
+                        roles disponibles.</p>
+                </ng-template>
+            </mat-expansion-panel>
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>

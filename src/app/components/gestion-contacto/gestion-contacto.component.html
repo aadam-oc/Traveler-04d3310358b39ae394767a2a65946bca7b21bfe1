@@ -1,0 +1,78 @@
+<div class="container">
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <h2>Gestión de Contactos</h2>
+            </mat-panel-title>
+            <mat-panel-description>
+                Aquí puedes gestionar los contactos de la web.
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="contact-list">
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Lista de Contactos
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Total de contactos: {{ contactos.length }}
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div class="contact-details-container">
+                    <table class="table contact-table">
+                        <thead class="contact-table-header">
+                            <tr class="contact-table-row">
+                                <th
+                                    class="contact-table-header-cell">Nombre</th>
+                                <th
+                                    class="contact-table-header-cell">Correo</th>
+                                <th
+                                    class="contact-table-header-cell">Teléfono</th>
+                                <th
+                                    class="contact-table-header-cell">Asunto</th>
+                                <th
+                                    class="contact-table-header-cell">Mensaje</th>
+                                <th
+                                    class="contact-table-header-cell">Estado</th>
+                                <th class="contact-table-header-cell">Fecha</th>
+                                <th
+                                    class="contact-table-header-cell">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody class="contact-table-body">
+                            <tr class="contact-table-row"
+                                *ngFor="let contacto of contactos">
+                                <td class="contact-table-cell">{{
+                                    contacto.nombre }} {{ contacto.apellido1 }}
+                                    {{ contacto.apellido2 }}</td>
+                                <td class="contact-table-cell">{{
+                                    contacto.correo }}</td>
+                                <td class="contact-table-cell">{{
+                                    contacto.telefono }}</td>
+                                <td class="contact-table-cell">{{
+                                    contacto.asunto }}</td>
+                                <td class="contact-table-cell">{{
+                                    contacto.mensaje }}</td>
+                                <td class="contact-table-cell"
+                                    *ngIf="contacto.resuelto">Resuelto</td>
+                                <td class="contact-table-cell"
+                                    *ngIf="!contacto.resuelto">Sin resolver</td>
+                                <td class="contact-table-cell">{{
+                                    contacto.fecha_contacto | date: 'dd/MM/yyyy'
+                                    }}</td>
+                                <td class="contact-table-cell contact-actions">
+                                    <button
+                                        class="btn btn-primary contact-edit-button"
+                                        (click)="chat(contacto)">Correo</button>
+                                    <button
+                                        class="btn btn-danger contact-delete-button"
+                                        (click)="resuelto(contacto.id_contacto)">Resuelto</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </mat-expansion-panel>
+        </div>
+    </mat-expansion-panel>
+</div>

@@ -1,0 +1,48 @@
+<div class="container">
+    <div class="info">
+        <h2>Información de contacto</h2>
+        <p>Rellena el formulario o contáctanos directamente en nuestra oficina, a través de nuestro número de teléfono o
+            a través de nuestro correo electrónico</p>
+        <br><br>
+        <p><strong>📞</strong> +34 680713060</p>
+        <br>
+        <p><strong>📧</strong> traveler&#64;support.traveler.com</p>
+        <br>
+        <p><strong>📍</strong> Carrer de Monlau 6 08027, Barcelona</p>
+    </div>
+    <div class="form-container">
+        <form [formGroup]="contactoForm" (ngSubmit)="onSubmit()">
+            <label>Nombre*</label>
+            <input type="text" formControlName="nombre" required>
+
+            <label>Primer Apellido*</label>
+            <input type="text" formControlName="apellido1" required>
+
+            <label>Segundo Apellido*</label>
+            <input type="text" formControlName="apellido2" required>
+
+            <label>Correo electrónico*</label>
+            <input type="email" formControlName="correo" required>
+
+            <label>Número de teléfono*</label>
+            <input type="tel" formControlName="telefono" required>
+
+            <br>
+
+            <label for="asunto">Seleccione el motivo:</label>
+            <select id="asunto" formControlName="asunto" required>
+                <option value="" disabled selected>Seleccione una opción</option>
+                <option value="Quiero más info">Quiero más info</option>
+                <option value="Error">Error</option>
+                <option value="Aclaración">Aclaración</option>
+                <option value="Solicitar rol arrendador">Solicitar rol arrendador</option>
+                <option value="Solicitar rol actividades">Solicitar rol actividades</option>
+                <option value="Solicitar rol arrendador y actividades">Solicitar rol arrendador y actividades</option>
+            </select>
+
+            <label>Mensaje*</label>
+            <textarea formControlName="mensaje" required></textarea>
+            <button type="submit" [disabled]="!contactoForm.valid">Send Message</button>
+        </form>
+    </div>
+</div>

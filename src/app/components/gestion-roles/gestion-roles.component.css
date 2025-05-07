@@ -1,0 +1,369 @@
+/* Estilos generales */
+.container {
+    padding: 20px;
+}
+
+/* Estilos de los paneles */
+mat-expansion-panel {
+    border-radius: 8px;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease;
+}
+
+mat-expansion-panel-header {
+    background-color: #143D2C;
+    padding: 20px;
+    color: #ffffff;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+mat-panel-title h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+    color: #fff;
+}
+
+mat-panel-description {
+    color: #fff;
+    letter-spacing: 1px;
+}
+
+/* Paneles anidados */
+mat-expansion-panel mat-expansion-panel {
+    margin-top: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+mat-expansion-panel mat-expansion-panel mat-panel-title {
+    color: #fff;
+    letter-spacing: 1px;
+    font-size: 1rem;
+}
+
+/* Estilos para la gestión de roles */
+
+/* Estilos para el formulario de roles */
+.gestion-roles-form {
+    background-color: #f9fafb;
+    padding: 24px;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    margin: 20px 0;
+    position: relative;
+    overflow: hidden;
+    max-width: 600px;
+}
+
+.gestion-roles-form::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, #143D2C, #10b981);
+}
+
+.form-field {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: #143D2C;
+    font-size: 0.95rem;
+}
+
+.form-label-nombre-rol::after {
+    content: '*';
+    color: #ef4444;
+    margin-left: 4px;
+}
+
+.form-input {
+    width: 80%;
+    padding: 12px 14px;
+    border: 1px solid #dddddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    background-color: #ffffff;
+    color: #333333;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.form-input:hover {
+    border-color: #10b981;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #143D2C;
+    box-shadow: 0 0 0 3px rgba(20, 61, 44, 0.15);
+}
+
+.form-input::placeholder {
+    color: #9ca3af;
+}
+
+.form-error {
+    color: #ef4444;
+    font-size: 0.85rem;
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.form-error::before {
+    content: '⚠️';
+    margin-right: 6px;
+    font-size: 0.9rem;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.btn {
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: all 0.6s ease;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+.btn-primary {
+    background-color: #143D2C;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #0f2d20;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-crear-rol {
+    margin-top: 10px;
+    min-width: 150px;
+}
+
+/* Estilos para la tabla de roles */
+.roles-table-container {
+    overflow-x: auto;
+    margin: 16px 0;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.roles-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    font-size: 0.95rem;
+}
+
+.roles-table-head {
+    background-color: #f5f5f5;
+    border-bottom: 2px solid #143D2C;
+}
+
+.roles-table-header {
+    background-color: #f5f5f5;
+    color: #143D2C;
+    font-weight: 600;
+    padding: 16px;
+    text-align: left;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.roles-table-row-data:nth-child(even) {
+    background-color: #ffffff;
+}
+
+.roles-table-row-data:nth-child(odd) {
+    background-color: #f9fafb;
+}
+
+.roles-table-row-data:hover {
+    background-color: #edf7f0;
+    transition: background-color 0.2s ease;
+}
+
+.roles-table-cell {
+    color: #444444;
+    padding: 14px 16px;
+    border-bottom: 1px solid #eeeeee;
+    vertical-align: middle;
+}
+
+.roles-table-cell-acciones {
+    white-space: nowrap;
+    text-align: center;
+}
+
+.btn-accent {
+    background-color: #143D2C;
+    color: white;
+    margin-right: 8px;
+}
+
+.btn-accent:hover {
+    background-color: #1f5a41;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-warn {
+    background-color: #ef4444;
+    color: white;
+}
+
+.btn-warn:hover {
+    background-color: #dc2626;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-editar-rol,
+.btn-eliminar-rol {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+}
+
+.no-roles-message {
+    padding: 20px;
+    text-align: center;
+    color: #6b7280;
+    font-style: italic;
+    background-color: #f9fafb;
+    border-radius: 8px;
+    border: 1px dashed #d1d5db;
+    margin: 16px 0;
+}
+
+.no-roles-message::before {
+    content: '📋';
+    margin-right: 8px;
+    font-size: 1.2rem;
+}
+
+/* Animaciones */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.roles-table-row-data {
+    animation: slideIn 0.3s ease-out;
+}
+
+/* Mejoras responsivas */
+@media (max-width: 768px) {
+    .gestion-roles-form {
+        padding: 20px 16px;
+    }
+
+    .btn {
+        padding: 10px 16px;
+    }
+
+    .roles-table-cell,
+    .roles-table-header {
+        padding: 12px;
+    }
+
+    .btn-editar-rol,
+    .btn-eliminar-rol {
+        padding: 6px 12px;
+        font-size: 0.85rem;
+    }
+
+    .roles-table-cell-acciones {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .btn-accent {
+        margin-right: 0;
+        margin-bottom: 8px;
+    }
+}
+
+/* Estilos para el estado de edición */
+.editing-mode .form-label::after {
+    content: ' (Editando)';
+    color: #10b981;
+    font-weight: normal;
+    font-size: 0.85rem;
+}
+
+.editing-mode .btn-crear-rol {
+    background-color: #10b981;
+}
+
+.editing-mode .btn-crear-rol:hover {
+    background-color: #059669;
+}
+
+.editing-mode .gestion-roles-form::before {
+    background: linear-gradient(90deg, #10b981, #143D2C);
+}
+
+/* Efecto de enfoque para la fila que se está editando */
+.roles-table-row-editing {
+    background-color: #f0fdf4 !important;
+    border-left: 3px solid #10b981;
+}

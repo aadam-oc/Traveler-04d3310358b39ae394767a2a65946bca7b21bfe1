@@ -1,0 +1,243 @@
+<div class="container">
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <h2>Gestión de Alojamientos</h2>
+            </mat-panel-title>
+            <mat-panel-description>
+                Aquí puedes gestionar los alojamientos de la web.
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="alojamientos-list">
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Lista de Alojamientos
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Total de alojamientos: {{ alojamientosCompletos.length
+                        }}
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div class="alojamientos-table-container">
+                    <table class="table alojamientos-table">
+                        <thead class="alojamientos-table-header">
+                            <tr class="alojamientos-table-row">
+                                <th class="alojamientos-table-header-cell">ID
+                                    Alojamiento</th>
+                                <th
+                                    class="alojamientos-table-header-cell">Nombre</th>
+                                <th class="alojamientos-table-header-cell">ID
+                                    Destino</th>
+                                <th
+                                    class="alojamientos-table-header-cell">Ciudad</th>
+                                <th
+                                    class="alojamientos-table-header-cell">País</th>
+                                <th
+                                    class="alojamientos-table-header-cell">Precio
+                                    por Día</th>
+                                <th
+                                    class="alojamientos-table-header-cell">Descripción</th>
+                                <th class="alojamientos-table-header-cell">ID
+                                    Usuario</th>
+                                <th
+                                    class="alojamientos-table-header-cell">Correo</th>
+                                <th
+                                    class="alojamientos-table-header-cell">Máximo
+                                    Personas</th>
+                                <th
+                                    class="alojamientos-table-header-cell">Dirección</th>
+
+                                <th
+                                    class="alojamientos-table-header-cell">Hora
+                                    Entrada</th>
+
+                                <th
+                                    class="alojamientos-table-header-cell">Hora
+                                    Salida</th>
+                                <th
+                                    class="alojamientos-table-header-cell">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody class="alojamientos-table-body">
+                            <tr class="alojamientos-table-row"
+                                *ngFor="let alojamiento of alojamientosCompletos">
+                                <td class="alojamientos-table-cell">{{
+                                    alojamiento.id_alojamiento }}</td>
+                                <td class="alojamientos-table-cell">{{
+                                    alojamiento.nombre_alojamiento }}</td>
+                                <td class="alojamientos-table-cell">{{
+                                    alojamiento.id_destino }}</td>
+                                <td class="alojamientos-table-cell">{{
+                                    alojamiento.ciudad }}</td>
+                                <td class="alojamientos-table-cell">{{
+                                    alojamiento.pais }}</td>
+                                <td class="alojamientos-table-cell">{{
+                                    alojamiento.precio_dia }}</td>
+                                <td class="alojamientos-table-cell">{{
+                                    alojamiento.descripcion }}</td>
+                                <td class="alojamientos-table-cell">{{
+                                    alojamiento.id_usuario }}</td>
+                                <td class="alojamientos-table-cell">{{
+                                    alojamiento.correo }}</td>
+                                <td class="alojamientos-table-cell">{{
+                                    alojamiento.max_personas }}</td>
+                                <td class="alojamientos-table-cell">{{
+                                    alojamiento.direccion }}</td>
+                                <td class="alojamientos-table-cell">{{
+                                    alojamiento.hora_entrada }}</td>
+                                <td class="alojamientos-table-cell">{{
+                                    alojamiento.hora_salida }}</td>
+                                <td
+                                    class="alojamientos-table-cell alojamientos-actions">
+                                    <button
+                                        class="btn btn-primary alojamientos-edit-button"
+                                        (click)="editarAlojamiento(alojamiento)">Editar</button>
+                                    <button
+                                        class="btn btn-danger alojamientos-delete-button"
+                                        (click)="eliminarAlojamiento(alojamiento.id_alojamiento)">Eliminar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Crear o Editar Alojamiento
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="form-container">
+                    <form [formGroup]="alojamientoForm" (ngSubmit)="onSubmit()"
+                        class="form-container alojamiento-form">
+                        <div class="form-group alojamiento-form-group">
+                            <label for="nombre_alojamiento"
+                                class="form-label alojamiento-form-label">Nombre
+                                Alojamiento</label>
+                            <input id="nombre_alojamiento"
+                                formControlName="nombre_alojamiento" type="text"
+                                class="form-control form-input alojamiento-form-input"
+                                required />
+                            <div class="error-message alojamiento-error-message"
+                                *ngIf="alojamientoForm.get('nombre_alojamiento')?.invalid && alojamientoForm.get('nombre_alojamiento')?.touched">
+                                Nombre del alojamiento es requerido.
+                            </div>
+                        </div>
+
+                        <div class="form-group alojamiento-form-group">
+                            <label for="id_destino"
+                                class="form-label alojamiento-form-label">Destino</label>
+                            <select id="id_destino" formControlName="id_destino"
+                                class="form-control form-select alojamiento-form-select"
+                                required>
+                                <option value disabled selected>Seleccione un
+                                    destino</option>
+                                <option *ngFor="let destino of destinos"
+                                    [value]="destino.id_destino">{{destino.ciudad}}
+                                    - {{ destino.pais}}</option>
+                            </select>
+                            <div class="error-message alojamiento-error-message"
+                                *ngIf="alojamientoForm.get('id_destino')?.invalid && alojamientoForm.get('id_destino')?.touched">
+                                Este campo es obligatorio.
+                            </div>
+                        </div>
+
+                        <div class="form-group alojamiento-form-group">
+                            <label for="precio_dia"
+                                class="form-label alojamiento-form-label">Precio
+                                por
+                                Día
+                            </label>
+                            <input id="precio_dia" formControlName="precio_dia"
+                                type="number"
+                                class="form-control form-input alojamiento-form-input"
+                                required />
+                            <div class="error-message alojamiento-error-message"
+                                *ngIf="alojamientoForm.get('precio_dia')?.invalid && alojamientoForm.get('precio_dia')?.touched">
+                                Precio por día es requerido.
+                            </div>
+                        </div>
+
+                        <div class="form-group alojamiento-form-group">
+                            <label for="descripcion"
+                                class="form-label alojamiento-form-label">Descripción</label>
+                            <textarea id="descripcion"
+                                formControlName="descripcion"
+                                class="form-control form-input alojamiento-form-input"
+                                required></textarea>
+                            <div class="error-message alojamiento-error-message"
+                                *ngIf="alojamientoForm.get('descripcion')?.invalid && alojamientoForm.get('descripcion')?.touched">
+                                Descripción es requerida.
+                            </div>
+                        </div>
+
+                        <div class="form-group alojamiento-form-group">
+                            <label for="max_personas"
+                                class="form-label alojamiento-form-label">Máximo
+                                de
+                                Personas</label>
+                            <input id="max_personas"
+                                formControlName="max_personas"
+                                type="number"
+                                class="form-control form-input alojamiento-form-input"
+                                required />
+                            <div class="error-message alojamiento-error-message"
+                                *ngIf="alojamientoForm.get('max_personas')?.invalid && alojamientoForm.get('max_personas')?.touched">
+                                Máximo de personas es requerido.
+                            </div>
+                        </div>
+
+                        <div class="form-group alojamiento-form-group">
+                            <label for="direccion"
+                                class="form-label alojamiento-form-label">Dirección</label>
+                            <input id="direccion" formControlName="direccion"
+                                type="text"
+                                class="form-control form-input alojamiento-form-input"
+                                required />
+                            <div class="error-message alojamiento-error-message"
+                                *ngIf="alojamientoForm.get('direccion')?.invalid && alojamientoForm.get('direccion')?.touched">
+                                Dirección es requerida.
+                            </div>
+                        </div>
+
+                        <div class="form-group alojamiento-form-group">
+                            <label for="correo"
+                                class="form-label alojamiento-form-label">Hora
+                                entrada</label>
+                            <input id="hora_entrada"
+                                formControlName="hora_entrada"
+                                type="time"
+                                class="form-control form-input alojamiento-form-input"
+                                required />
+                            <div class="error-message alojamiento-error-message"
+                                *ngIf="alojamientoForm.get('hora_entrada')?.invalid && alojamientoForm.get('hora_entrada')?.touched">
+                                Hora de entrada es requerida.
+                            </div>
+                        </div>
+
+                        <div class="form-group alojamiento-form-group">
+                            <label for="hora_salida"
+                                class="form-label alojamiento-form-label">Hora
+                                salida</label>
+                            <input id="hora_salida"
+                                formControlName="hora_salida"
+                                type="time"
+                                class="form-control form-input alojamiento-form-input"
+                                required />
+                            <div class="error-message alojamiento-error-message"
+                                *ngIf="alojamientoForm.get('hora_salida')?.invalid && alojamientoForm.get('hora_salida')?.touched">
+                                Hora de salida es requerida.
+                            </div>
+                        </div>
+
+                        <button type="submit"
+                            class="btn form-button alojamiento-form-button"
+                            [disabled]="alojamientoForm.invalid">Guardar</button>
+                    </form>
+                </div>
+            </mat-expansion-panel>
+        </div>
+    </mat-expansion-panel>
+</div>

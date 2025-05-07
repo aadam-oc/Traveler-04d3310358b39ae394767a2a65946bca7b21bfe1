@@ -1,0 +1,24 @@
+<div class="comments-container">
+    <div class="comment-card" *ngFor="let comment of comments">
+        <p>{{ comment.text }}</p>
+        <div class="comment-footer">
+            <img [src]="comment.image" alt="Profile" class="profile-pic" />
+            <div>
+                <h4>{{ comment.author }}</h4>
+                <div class="likes-dislikes">
+                    <button class="like-button" [class.active]="comment.liked"
+                        (click)="likeComment(comment)">
+                        👍 {{ comment.likes }}
+                    </button>
+                    <button class="dislike-button"
+                        [class.active]="comment.disliked"
+                        (click)="dislikeComment(comment)">
+                        👎 {{ comment.dislikes }}
+                    </button>
+                </div>
+            </div>
+            <button class="reply-button"
+                (click)="navigateToPostBlog(comment)">Responder</button>
+        </div>
+    </div>
+</div>

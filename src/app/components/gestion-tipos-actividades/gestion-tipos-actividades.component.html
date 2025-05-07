@@ -1,0 +1,100 @@
+<div class="container">
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <h2>Gestión de Tipos de Actividades</h2>
+            </mat-panel-title>
+            <mat-panel-description>
+                Aquí puedes gestionar los tipos de actividades de la web.
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="tipos-actividades-list">
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Lista de Tipos de Actividades
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Total de tipos: {{ tiposActividades.length }}
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div class="tipos-actividades-table-container">
+                    <table class="table tipos-actividades-table">
+                        <thead class="tipos-actividades-table-header">
+                            <tr class="tipos-actividades-table-row">
+                                <th
+                                    class="tipos-actividades-table-header-cell">ID
+                                    Tipo</th>
+                                <th
+                                    class="tipos-actividades-table-header-cell">Nombre</th>
+                                <th
+                                    class="tipos-actividades-table-header-cell">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody class="tipos-actividades-table-body">
+                            <tr class="tipos-actividades-table-row"
+                                *ngFor="let tipo of tiposActividades | paginate: { itemsPerPage: 6, currentPage: p }">
+                                <td class="tipos-actividades-table-cell">{{
+                                    tipo.id_tipo_actividad }}</td>
+                                <td class="tipos-actividades-table-cell">{{
+                                    tipo.nombre_tipo_actividad }}</td>
+                                <td
+                                    class="tipos-actividades-table-cell tipos-actividades-actions">
+                                    <button
+                                        class="btn btn-primary tipos-actividades-edit-button"
+                                        (click)="editarTipoActividad(tipo)">Editar</button>
+                                    <button
+                                        class="btn btn-danger tipos-actividades-delete-button"
+                                        (click)="eliminarTipoActividad(tipo.id_tipo_actividad)">Eliminar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- Paginación -->
+                    <div class="paginacion">
+                        <pagination-controls (pageChange)="p = $event"
+                            previousLabel="Anterior"
+                            nextLabel="Siguiente">
+                        </pagination-controls>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Crear o Editar Tipo de Actividad
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="form-container">
+                    <form [formGroup]="formCrearTiposActividades"
+                        (ngSubmit)="onSubmit()"
+                        class="form-container tipos-actividades-form">
+                        <div class="form-group tipos-actividades-form-group">
+                            <label for="nombre_tipo_actividad"
+                                class="form-label tipos-actividades-form-label">Nombre
+                                del Tipo de Actividad</label>
+                            <input
+                                id="nombre_tipo_actividad"
+                                formControlName="nombre_tipo_actividad"
+                                type="text"
+                                class="form-control form-input tipos-actividades-form-input"
+                                required />
+                            <div
+                                class="error-message tipos-actividades-error-message"
+                                *ngIf="formCrearTiposActividades.get('nombre_tipo_actividad')?.invalid && formCrearTiposActividades.get('nombre_tipo_actividad')?.touched">
+                                Este campo es obligatorio.
+                            </div>
+                        </div>
+
+                        <button type="submit"
+                            class="btn form-button tipos-actividades-form-button"
+                            [disabled]="formCrearTiposActividades.invalid">
+                            Guardar
+                        </button>
+                    </form>
+                </div>
+            </mat-expansion-panel>
+        </div>
+    </mat-expansion-panel>
+</div>

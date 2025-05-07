@@ -1,0 +1,334 @@
+/* Estilos generales */
+.container {
+    padding: 20px;
+}
+
+/* Estilos de los paneles */
+mat-expansion-panel {
+    border-radius: 8px;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease;
+}
+
+mat-expansion-panel-header {
+    background-color: #143D2C;
+    padding: 20px;
+    color: #ffffff;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+mat-panel-title h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+    color: #fff;
+}
+
+mat-panel-description {
+    color: #fff;
+    letter-spacing: 1px;
+}
+
+/* Paneles anidados */
+mat-expansion-panel mat-expansion-panel {
+    margin-top: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+mat-expansion-panel mat-expansion-panel mat-panel-title {
+    color: #fff;
+    letter-spacing: 1px;
+    font-size: 1rem;
+}
+
+/* Estilos para la tabla de tipos de actividades */
+.tipos-actividades-list {
+    padding: 16px 0;
+}
+
+.tipos-actividades-table-container {
+    overflow-x: auto;
+    margin: 16px 0;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.tipos-actividades-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    font-size: 0.95rem;
+}
+
+.tipos-actividades-table-header {
+    background-color: #f5f5f5;
+    border-bottom: 2px solid #143D2C;
+}
+
+.tipos-actividades-table-header-cell {
+    background-color: #f5f5f5;
+    color: #143D2C;
+    font-weight: 600;
+    padding: 16px;
+    text-align: left;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.tipos-actividades-table-row:nth-child(even) {
+    background-color: #ffffff;
+}
+
+.tipos-actividades-table-row:nth-child(odd) {
+    background-color: #f9fafb;
+}
+
+.tipos-actividades-table-row:hover {
+    background-color: #edf7f0;
+    transition: background-color 0.2s ease;
+}
+
+.tipos-actividades-table-cell {
+    color: #444444;
+    padding: 14px 16px;
+    border-bottom: 1px solid #eeeeee;
+    vertical-align: middle;
+}
+
+.tipos-actividades-actions {
+    white-space: nowrap;
+    text-align: center;
+}
+
+/* Botones de acción */
+.tipos-actividades-edit-button,
+.tipos-actividades-delete-button {
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin: 0 4px;
+}
+
+.tipos-actividades-edit-button {
+    background-color: #10b981;
+    color: white;
+}
+
+.tipos-actividades-edit-button:hover {
+    background-color: #059669;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.tipos-actividades-delete-button {
+    background-color: #ef4444;
+    color: white;
+}
+
+.tipos-actividades-delete-button:hover {
+    background-color: #dc2626;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para el formulario de tipos de actividades */
+.form-container {
+    background-color: #f9fafb;
+    padding: 24px;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    margin: 20px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.form-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, #143D2C, #10b981);
+}
+
+.tipos-actividades-form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.tipos-actividades-form-group {
+    margin-bottom: 24px;
+    position: relative;
+}
+
+.tipos-actividades-form-label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: #143D2C;
+    font-size: 0.95rem;
+    transition: color 0.2s ease;
+}
+
+.tipos-actividades-form-label::after {
+    content: '*';
+    color: #ef4444;
+    margin-left: 4px;
+}
+
+.tipos-actividades-form-input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #dddddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    background-color: #ffffff;
+    color: #333333;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.tipos-actividades-form-input:hover {
+    border-color: #10b981;
+}
+
+.tipos-actividades-form-input:focus {
+    outline: none;
+    border-color: #143D2C;
+    box-shadow: 0 0 0 3px rgba(20, 61, 44, 0.15);
+}
+
+/* Estilo para campos con error */
+.tipos-actividades-form-input.ng-invalid.ng-touched {
+    border-color: #ef4444;
+    background-color: #fff5f5;
+}
+
+/* Mejora de los mensajes de error */
+.tipos-actividades-error-message {
+    color: #ef4444;
+    font-size: 0.85rem;
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.tipos-actividades-error-message::before {
+    content: '⚠️';
+    margin-right: 6px;
+    font-size: 0.9rem;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mejora del botón del formulario */
+.tipos-actividades-form-button {
+    background-color: #143D2C;
+    color: white;
+    border: none;
+    padding: 14px 28px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tipos-actividades-form-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: all 0.6s ease;
+}
+
+.tipos-actividades-form-button:hover {
+    background-color: #0f2d20;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.tipos-actividades-form-button:hover::before {
+    left: 100%;
+}
+
+.tipos-actividades-form-button:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.tipos-actividades-form-button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.tipos-actividades-form-button:disabled::before {
+    display: none;
+}
+
+.paginacion {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+/* Animación para el formulario cuando se muestra */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+mat-expansion-panel-content {
+    animation: slideDown 0.3s ease-out;
+}
+
+/* Estilo para el estado de edición */
+.editing-mode .tipos-actividades-form-button {
+    background-color: #10b981;
+}
+
+.editing-mode .tipos-actividades-form-button:hover {
+    background-color: #059669;
+}
+
+.editing-mode .form-container::before {
+    background: linear-gradient(90deg, #10b981, #143D2C);
+}

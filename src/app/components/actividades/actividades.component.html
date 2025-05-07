@@ -1,0 +1,115 @@
+<div class="layout">
+    <form [formGroup]="form" class="form-container">
+        <!-- País -->
+        <div class="form-group">
+            <label for="pais">🌍 País:</label>
+            <select formControlName="pais" id="pais">
+                <option value>-- Selecciona un país --</option>
+                <option *ngFor="let country of paises" [value]="country">{{
+                    country
+                    }}</option>
+            </select>
+        </div>
+
+        <!-- Ciudades del país seleccionado -->
+        <div *ngIf="ciudades.length > 0" class="tree-container">
+            <div class="tree-node expand">
+                <span class="tree-label">📁 {{ form.value.pais }}</span>
+                <ul class="tree-children">
+                    <li *ngFor="let city of ciudades">
+                        <label>
+                            <input type="radio" formControlName="ciudad"
+                                [value]="city" name="ciudad" />
+                            {{ city }}
+                        </label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Rango de precio -->
+        <div class="form-group">
+            <label for="priceRange">💰 Rango de Precio:</label>
+            <input type="range" formControlName="priceRange" id="priceRange"
+                min="15" max="700" step="5" />
+            <span>0€ - {{ form.value.priceRange }}€</span>
+        </div>
+    </form>
+
+    <div class="tarjetas-grid">
+        <!-- Lista de actividades filtradas -->
+        <div class="actividad expand"
+            *ngFor="let actividad of actividadesFiltradas | paginate: { itemsPerPage: 6, currentPage: p }">
+            <img class="fto-actividad" [src]="actividad.nombre_imagen_actividad"
+                alt="Actividad" />
+            <div class="contenido">
+                <div class="titulo">{{ actividad.nombre_tipo_actividad }}</div>
+                <p>{{ actividad.pais }}, {{ actividad.ciudad }}</p>
+                <p class="descripcion">Descripción: {{ actividad.descripcion }}
+                </p>
+                <div class="botones">
+                    <div class="precio">{{ actividad.precio }}€/H</div>
+                    <button class="saber-mas" (click)="abrirModal(actividad)">
+                        Saber Más
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Paginación -->
+<div class="paginacion">
+    <pagination-controls (pageChange)="p = $event"
+        previousLabel="Anterior"
+        nextLabel="Siguiente">
+    </pagination-controls>
+</div>
+
+<!-- Modal -->
+<div class="modal-overlay" *ngIf="actividadSeleccionada"
+    (click)="cerrarModal($event)">
+    <div class="modal-contenido" [class.modal-abierto]="actividadSeleccionada">
+        <button class="cerrar-modal" (click)="cerrarModal($event)">×</button>
+
+        <div class="modal-header">
+            <h2>{{ actividadSeleccionada.nombre_tipo_actividad }}</h2>
+            <div class="modal-ubicacion">
+                <span class="modal-pais">🌍 {{ actividadSeleccionada.pais
+                    }}</span>
+                <span class="modal-ciudad">📍 {{ actividadSeleccionada.ciudad
+                    }}</span>
+            </div>
+        </div>
+
+        <div class="modal-body">
+            <div class="modal-imagen-container">
+                <img [src]="actividadSeleccionada.nombre_imagen_actividad"
+                    alt="Imagen de actividad" class="modal-imagen">
+            </div>
+
+            <div class="modal-info">
+                <div class="modal-seccion">
+                    <h3>Descripción</h3>
+                    <p>{{ actividadSeleccionada.descripcion }}</p>
+                </div>
+
+                <div class="modal-seccion">
+                    <h3>Detalles</h3>
+                    <div class="modal-detalles">
+                        <div class="detalle-item">
+                            <span class="detalle-label">Precio:</span>
+                            <span class="detalle-valor precio-destacado">{{
+                                actividadSeleccionada.precio }}€/H</span>
+                        </div>
+                        <!-- Puedes añadir más detalles aquí si tienes más información en tu modelo de datos -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn-reservar">Reservar Ahora</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,61 @@
+<h1 class="titulo">¡Bienvenido, {{ nombre }}!</h1>
+
+<div class="card">
+  <img
+    class="foto-usuario"
+    [src]="foto || 'http://172.17.131.14:3000/uploads/1743518085523.png'"
+    alt="Foto del usuario" />
+
+  <div class="card-info">
+    <p class="nombre"><strong>Nombre:</strong> {{ nombre }}</p>
+    <p class="correo"><strong>Correo:</strong> {{ correo }}</p>
+    <p class="rol"><strong>Rol:</strong> {{ rol }}</p>
+    <button class="edit-btn">EDITAR PERFIL</button>
+  </div>
+</div>
+
+<br /><br />
+
+<div class="dashboard-container">
+  <a routerLink="/dashboard" class="dashboard-link">Ir al Dashboard</a>
+</div>
+
+
+<!-- Modal -->
+<div class="modal-overlay" [class.active]="modalActive">
+  <div class="modal-container" [class.active]="modalActive">
+    <div class="modal-header">
+      <h2>Editar Perfil</h2>
+      <button class="close-btn" (click)="closeModal()">×</button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="profileForm" (ngSubmit)="saveProfile()">
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input type="text" id="nombre" formControlName="nombre" class="form-control">
+        </div>
+        
+        <div class="form-group">
+          <label for="correo">Correo</label>
+          <input type="email" id="correo" formControlName="correo" class="form-control">
+        </div>
+        
+        <div class="form-group">
+          <label for="foto">Foto de Perfil</label>
+          <div class="photo-upload">
+            <img [src]="previewImage || foto || 'http://172.17.131.14:3000/uploads/1743518085523.png'" alt="Vista previa" class="preview-image">
+            <div class="upload-controls">
+              <label for="foto-input" class="upload-btn">Seleccionar Imagen</label>
+              <input type="file" id="foto-input" (change)="onFileSelected($event)" accept="image/*" class="file-input">
+            </div>
+          </div>
+        </div>
+        
+        <div class="modal-footer">
+          <button type="button" class="cancel-btn" (click)="closeModal()">Cancelar</button>
+          <button type="submit" class="save-btn" [disabled]="profileForm.invalid">Guardar Cambios</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

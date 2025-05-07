@@ -1,0 +1,239 @@
+/* Estilos generales */
+.container {
+    padding: 20px;
+}
+
+/* Estilos de los paneles */
+mat-expansion-panel {
+    border-radius: 8px;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease;
+}
+
+mat-expansion-panel-header {
+    background-color: #143D2C;
+    padding: 20px;
+    color: #ffffff;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+mat-panel-title h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+    color: #fff;
+}
+
+mat-panel-description {
+    color: #fff;
+    letter-spacing: 1px;
+}
+
+/* Paneles anidados */
+mat-expansion-panel mat-expansion-panel {
+    margin-top: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+mat-expansion-panel mat-expansion-panel mat-panel-title {
+    color: #fff;
+    letter-spacing: 1px;
+    font-size: 1rem;
+}
+
+/* Estilos para la tabla de alojamientos */
+.alojamientos-list {
+    padding: 16px 0;
+}
+
+.alojamientos-table-container {
+    overflow-x: auto;
+    /* Para hacer la tabla responsive */
+    margin: 16px 0;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.alojamientos-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    font-size: 0.9rem;
+}
+
+.alojamientos-table-header {
+    background-color: #f5f5f5;
+    border-bottom: 2px solid #143D2C;
+}
+
+.alojamientos-table-header-cell {
+    background-color: #f5f5f5;
+    color: #143D2C;
+    font-weight: 600;
+    padding: 14px 16px;
+    text-align: left;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    white-space: nowrap;
+}
+
+.alojamientos-table-row:nth-child(even) {
+    background-color: #ffffff;
+}
+
+.alojamientos-table-row:nth-child(odd) {
+    background-color: #f9fafb;
+}
+
+.alojamientos-table-row:hover {
+    background-color: #edf7f0;
+    transition: background-color 0.2s ease;
+}
+
+.alojamientos-table-cell {
+    color: #444444;
+    padding: 12px 16px;
+    border-bottom: 1px solid #eeeeee;
+    vertical-align: middle;
+}
+
+/* Columna de descripción con texto truncado */
+.alojamientos-table-cell:nth-child(7) {
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.alojamientos-actions {
+    white-space: nowrap;
+    text-align: center;
+}
+
+/* Botones de acción */
+.alojamientos-edit-button,
+.alojamientos-delete-button {
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin: 0 4px;
+}
+
+.alojamientos-edit-button {
+    background-color: #143D2C;
+    color: white;
+}
+
+.alojamientos-edit-button:hover {
+    background-color: #1f5a41;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.alojamientos-delete-button {
+    background-color: #ef4444;
+    color: white;
+}
+
+.alojamientos-delete-button:hover {
+    background-color: #dc2626;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para el formulario de alojamientos */
+.alojamiento-form {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 70px;
+    max-width: 100%;
+    background-color: #f9fafb; /* Fondo claro para destacar el formulario */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.alojamiento-form-group {
+    margin-bottom: 16px;
+}
+
+.alojamiento-form-label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #143D2C; /* Verde oscuro para el texto */
+    font-size: 0.95rem;
+}
+
+.alojamiento-form-input,
+.alojamiento-form-select {
+    width: 80%;
+    padding: 12px 14px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    background-color: #ffffff;
+    transition: all 0.2s ease;
+}
+
+.alojamiento-form-input:focus,
+.alojamiento-form-select:focus {
+    outline: none;
+    border-color: #10b981; /* Verde para el borde al enfocar */
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+}
+
+/* Estilo especial para el campo de descripción */
+textarea.alojamiento-form-input {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.alojamiento-error-message {
+    color: #ef4444; /* Rojo para los mensajes de error */
+    font-size: 0.85rem;
+    margin-top: 6px;
+}
+
+.alojamiento-form-button {
+    grid-column: 1 / -1;
+    background-color: #143D2C; /* Verde oscuro */
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 10px;
+    width: auto;
+    justify-self: center;
+    min-width: 200px;
+}
+
+.alojamiento-form-button:hover {
+    background-color: #0f2d20; /* Verde más oscuro al pasar el mouse */
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.alojamiento-form-button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Estilo para el contenedor del formulario */
+.form-container {
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}

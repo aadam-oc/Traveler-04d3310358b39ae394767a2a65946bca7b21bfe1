@@ -1,0 +1,147 @@
+<div class="container">
+    <mat-accordion multi="true"></mat-accordion>
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <h2>Gestión de Actividades</h2>
+            </mat-panel-title>
+            <mat-panel-description>
+                Aquí puedes gestionar las actividades de la web.
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-accordion multi="true"></mat-accordion>
+        <!-- Table Section -->
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Lista de Actividades
+                </mat-panel-title>
+                <mat-panel-description>
+                    Total de Actividades: {{ actividadesCompletas.length }}
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <table class="actividades-table">
+                <thead class="actividades-table-header">
+                    <tr>
+                        <th class="actividades-table-header-cell">Tipo de
+                            Actividad</th>
+                        <th class="actividades-table-header-cell">Destino</th>
+                        <th
+                            class="actividades-table-header-cell">Descripción</th>
+                        <th
+                            class="actividades-table-header-cell">Disponible</th>
+                        <th class="actividades-table-header-cell">Precio</th>
+                        <th class="actividades-table-header-cell">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody class="actividades-table-body">
+                    <tr
+                        *ngFor="let actividad of actividadesCompletas | paginate: { itemsPerPage: 6, currentPage: p }"
+                        class="actividades-table-row">
+                        <td
+                            class="actividades-table-cell">{{actividad.nombre_tipo_actividad}}</td>
+                        <td class="actividades-table-cell">{{actividad.pais}} -
+                            {{actividad.ciudad}}</td>
+                        <td
+                            class="actividades-table-cell">{{actividad.descripcion}}</td>
+                        <td
+                            class="actividades-table-cell">{{actividad.disponibilidad_actividad
+                            ? 'Sí' : 'No'}}</td>
+                        <td
+                            class="actividades-table-cell">{{actividad.precio}}€/H</td>
+                        <td class="actividades-table-cell actividades-actions">
+                            <button class="btn actividades-edit-btn"
+                                (click)="editarActividad(actividad.id_actividad)">Editar</button>
+                            <button class="btn actividades-delete-btn"
+                                (click)="eliminarActividad(actividad)">Eliminar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- Paginación -->
+            <div class="paginacion">
+                <pagination-controls (pageChange)="p = $event"
+                    previousLabel="Anterior"
+                    nextLabel="Siguiente">
+                </pagination-controls>
+            </div>
+        </mat-expansion-panel>
+
+        <!-- Form Section -->
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Crear Nueva Actividad
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <form [formGroup]="formCrearActividad" (ngSubmit)="onSubmit()"
+                class="form-container">
+                <div class="form-group">
+                    <label for="id_tipo_actividad" class="form-label">Tipo de
+                        Actividad</label>
+                    <select id="id_tipo_actividad"
+                        formControlName="id_tipo_actividad"
+                        class="form-control form-select" required>
+                        <option value disabled selected>Seleccione un tipo de
+                            actividad</option>
+                        <option *ngFor="let tipoActividad of tipoActividades"
+                            [value]="tipoActividad.id_tipo_actividad">{{tipoActividad.nombre_tipo_actividad}}</option>
+                    </select>
+                    <div class="error-message"
+                        *ngIf="formCrearActividad.get('id_tipo_actividad')?.invalid && formCrearActividad.get('id_tipo_actividad')?.touched">
+                        Este campo es obligatorio.
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="id_destino" class="form-label">Destino</label>
+                    <select id="id_destino" formControlName="id_destino"
+                        class="form-control form-select" required>
+                        <option value disabled selected>Seleccione un
+                            destino</option>
+                        <option *ngFor="let destino of destinos"
+                            [value]="destino.id_destino">{{destino.ciudad}} - {{
+                            destino.pais}}</option>
+                    </select>
+                    <div class="error-message"
+                        *ngIf="formCrearActividad.get('id_destino')?.invalid && formCrearActividad.get('id_destino')?.touched">
+                        Este campo es obligatorio.
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="descripcion"
+                        class="form-label">Descripción</label>
+                    <textarea id="descripcion" formControlName="descripcion"
+                        class="form-control form-input" required></textarea>
+                    <div class="error-message"
+                        *ngIf="formCrearActividad.get('descripcion')?.invalid && formCrearActividad.get('descripcion')?.touched">
+                        Este campo es obligatorio.
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="disponibilidad_actividad"
+                        class="form-label">Disponible</label>
+                    <input type="checkbox" id="disponibilidad_actividad"
+                        formControlName="disponibilidad_actividad"
+                        class="form-check-input" />
+                </div>
+
+                <div class="form-group">
+                    <label for="precio" class="form-label">Precio</label>
+                    <input type="number" id="precio" formControlName="precio"
+                        class="form-control form-input" required />
+                    <div class="error-message"
+                        *ngIf="formCrearActividad.get('precio')?.invalid && formCrearActividad.get('precio')?.touched">
+                        Este campo es obligatorio.
+                    </div>
+                </div>
+
+                <button type="submit" class="btn form-button"
+                    [disabled]="formCrearActividad.invalid">Crear
+                    Actividad</button>
+            </form>
+        </mat-expansion-panel>
+    </mat-expansion-panel>
+</div>

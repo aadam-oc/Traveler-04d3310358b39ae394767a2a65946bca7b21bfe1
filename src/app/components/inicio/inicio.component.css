@@ -1,0 +1,330 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.hero-container {
+    width: 100%;
+    margin-top: 20px;
+    overflow: hidden;
+  }
+  
+  /* Imagen de fondo */
+  .hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    filter: brightness(0.7); /* Oscurece ligeramente la imagen para mejorar la legibilidad */
+  }
+  
+  /* Contenido del hero */
+  .hero-content {
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    transform: translateY(-50%);
+    max-width: 600px;
+    padding: 20px;
+    z-index: 1;
+  }
+  
+  /* Título principal */
+  .welcome-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  /* Subtítulo */
+  .welcome-subtitle {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    font-weight: 500;
+    color: white;
+  }
+  
+  /* Descripción */
+  .welcome-description {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 25px;
+    opacity: 0.9;
+    color: white;
+  }
+  
+
+
+.welcome-title {
+    color: rgb(255, 255, 255);
+    font-size: 4.5rem;
+    font-weight: bold;
+}
+
+.traveller-title {
+    color: rgb(255, 255, 255);
+    font-size: 4.5rem;
+    font-weight: bold;
+}
+
+/* Contenedor de las tarjetas */
+.card-deck {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 75px;
+}
+
+/* Estilos generales de la tarjeta */
+.card {
+    width: 18rem;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+/* Estilos para la imagen superior de la tarjeta */
+.card-img-top {
+    width: 100%;
+    height: 180px;
+    background-color: #6c757d; /* Color gris como en Bootstrap */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+/* Contenedor del cuerpo de la tarjeta */
+.card-body {
+    padding: 16px;
+    background-color: #00250f;
+}
+
+/* Estilos para el título de la tarjeta */
+.card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: white;
+}
+
+/* Estilos para el texto de la tarjeta */
+.card-text {
+    font-size: 0.9rem;
+    color: #333;
+    margin-bottom: 12px;
+    color: white;
+}
+
+/* Estilos para el botón */
+.btn-primary {
+    display: inline-block;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: transparent;
+    color: white;
+    border: 2px solid white;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: white;
+    color: #00250f;
+    border-color: white;
+}
+
+
+.Tittle-destacados-1 {
+    text-align: center;
+    background-color: #00250f;
+    color: white;
+    padding: 0.02px;
+    max-width: 40%;
+    margin: 0 auto;
+    border-radius: 12px;
+}
+
+
+.Tittle-destacados-2 {
+    text-align: center;
+    background-color: #00250f;
+    color: white;
+    padding: 0.02px;
+    max-width: 40%;
+    margin: 0 auto;
+    border-radius: 12px;
+    margin-top: 75px;
+}
+
+.antes-background{
+    margin-top: 125px;
+    width: 100%;
+    height: 900px;
+}
+
+.antes-content {
+    flex: 1;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+
+}
+
+.social-icons {
+    display: flex;
+    width: 50px;
+    height: 50px;
+    margin-top: 25px;
+    gap: 25px; 
+    align-items: center; 
+}
+
+
+.actividad {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #00250f;
+    color: white;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.actividad:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.fto-actividad {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px 8px 0 0;
+    margin-bottom: 12px;
+}
+
+.contenido {
+    text-align: center;
+}
+
+.titulo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.descripcion {
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+    opacity: 0.9;
+}
+
+.precio {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.scroll-top-btn {
+    position: fixed;
+    bottom: 16px;
+    left: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #00250f; 
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 24px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: opacity 0.3s, transform 0.3s;
+    z-index: 1000;
+    padding: 0;
+}
+
+.scroll-top-btn.show {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.scroll-top-btn img {
+    width: 60%;
+    object-fit: contain;
+    filter: brightness(0) invert(1); 
+}
+
+.scroll-top-btn:hover {
+    background-color: #0056b3;
+}
+
+.custom-carousel {
+    background-color: #143d2c;
+    padding: 20px;
+    border-radius: 15px;
+    overflow: hidden;
+  }
+  
+  .carousel-image {
+    border-radius: 15px;
+    object-fit: cover;
+    height: 300px;
+  }
+  
+  .c-carousel-control {
+    color: white;
+  }
+  
+  .c-carousel-control:hover {
+    color: #10b981;
+  }

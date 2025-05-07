@@ -1,0 +1,120 @@
+<div class="layout-container">
+  <form [formGroup]="form" class="form-container">
+    <!-- País -->
+    <div class="form-group">
+      <label for="pais">🌍 País:</label>
+      <select formControlName="pais" id="pais">
+        <option value>-- Selecciona un país --</option>
+        <option *ngFor="let pais of paises" [value]="pais">{{
+          pais
+          }}</option>
+      </select>
+    </div>
+
+    <!-- Ciudades del país seleccionado -->
+    <div *ngIf="ciudades.length > 0" class="tree-container">
+      <div class="tree-node expand">
+        <span class="tree-label">📁 {{ form.value.pais }}</span>
+        <ul class="tree-children">
+          <li *ngFor="let ciudad of ciudades">
+            <label>
+              <input type="radio" formControlName="ciudad"
+                [value]="ciudad" name="ciudad" />
+              {{ ciudad }}
+            </label>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Rango de precio -->
+    <div class="form-group">
+      <label for="priceRangeAlojamientos">💰 Rango de Precio:</label>
+      <input type="range" formControlName="priceRangeAlojamientos"
+        id="priceRange"
+        min="15" max="700" step="5" />
+      <span>0€ - {{ form.value.priceRangeAlojamientos }}€</span>
+    </div>
+  </form>
+
+  <div class="content-container">
+    <div class="card-container">
+      <div class="card-deck">
+        <div class="card expand"
+          *ngFor="let alojamiento of alojamientosFiltrados  | paginate: { itemsPerPage: 6, currentPage: p }">
+          <img [src]="alojamiento.imagenes[0]" class="card-img-top"
+            alt="Alojamiento">
+          <div class="card-body">
+            <h5 class="card-title">{{ alojamiento.nombre_alojamiento }}</h5>
+            <p class="card-text">{{ alojamiento.descripcion }}</p>
+            <p class="card-text">{{ alojamiento.pais }}, {{ alojamiento.ciudad
+              }}</p>
+            <p>{{alojamiento.precio_dia}} €/dia</p>
+            <button class="btn btn-primary"
+              (click)="abrirModal(alojamiento)">Saber
+              más</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Paginación -->
+    <div class="paginacion">
+      <pagination-controls (pageChange)="p = $event"
+        previousLabel="Anterior"
+        nextLabel="Siguiente">
+      </pagination-controls>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal-overlay" *ngIf="modalAbierto && alojamientoSeleccionado"
+  (click)="cerrarModal($event)">
+  <div class="modal-contenido" [class.modal-abierto]="alojamientoSeleccionado">
+    <button class="cerrar-modal" (click)="cerrarModal($event)">×</button>
+
+    <div class="modal-header">
+      <h2>{{ alojamientoSeleccionado?.nombre_alojamiento }}</h2>
+      <div class="modal-ubicacion">
+        <span class="modal-pais">🌍 {{ alojamientoSeleccionado?.pais }}</span>
+        <span class="modal-ciudad">📍 {{ alojamientoSeleccionado?.ciudad
+          }}</span>
+      </div>
+    </div>
+
+    <div class="modal-body">
+      <div class="modal-imagen-container">
+        <img [src]="alojamientoSeleccionado?.imagenes[0]"
+          alt="Imagen del alojamiento" class="modal-imagen">
+      </div>
+
+      <div class="modal-info">
+        <div class="modal-seccion">
+          <h3>Descripción</h3>
+          <p>{{ alojamientoSeleccionado?.descripcion }}</p>
+        </div>
+
+        <div class="modal-seccion">
+          <h3>Detalles</h3>
+          <div class="modal-detalles">
+            <div class="detalle-item">
+              <span class="detalle-label">Precio:</span>
+              <span class="detalle-valor precio-destacado">{{
+                alojamientoSeleccionado?.precio_dia }}€/día</span>
+            </div>
+            <div class="detalle-item">
+              <span class="detalle-label">Máx. Personas:</span>
+              <span class="detalle-valor">{{
+                alojamientoSeleccionado?.max_personas }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn-reservar"> Reservar Ahora</button>
+    </div>
+  </div>
+</div>

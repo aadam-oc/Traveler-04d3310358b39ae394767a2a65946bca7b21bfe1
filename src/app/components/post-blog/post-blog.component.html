@@ -1,0 +1,29 @@
+
+<div class="post-blog-container">
+  <h1>Responder al Foro</h1>
+
+  <div *ngIf="selectedComment" class="comment-card selected-comment">
+    <p>{{ selectedComment.text }}</p>
+    <div class="comment-footer">
+      <img [src]="selectedComment.image" alt="Profile" class="profile-pic" />
+      <div>
+        <h4>{{ selectedComment.author }}</h4>
+        <p class="stars">{{ selectedComment.stars }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="reply-form">
+    <input [(ngModel)]="author" placeholder="Tu nombre" class="form-input" />
+    <textarea [(ngModel)]="comment" placeholder="Escribe tu respuesta..." class="form-textarea"></textarea>
+    <button (click)="publishReply()" class="submit-button">Publicar Respuesta</button>
+  </div>
+
+  <div class="replies-list">
+    <h2>Respuestas Publicadas</h2>
+    <div *ngFor="let reply of replies" class="reply-card">
+      <p><strong>{{ reply.author }}</strong></p>
+      <p>{{ reply.comment }}</p>
+    </div>
+  </div>
+</div>

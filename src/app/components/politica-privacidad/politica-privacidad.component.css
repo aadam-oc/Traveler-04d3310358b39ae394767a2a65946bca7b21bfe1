@@ -1,0 +1,15 @@
+.politica-privacidad-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+  }
+  
+  h1, h2 {
+    color: #0D0D0D;
+  }
+  
+  p {
+    color: #333;
+  }

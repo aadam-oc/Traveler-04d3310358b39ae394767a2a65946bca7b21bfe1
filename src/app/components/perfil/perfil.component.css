@@ -1,0 +1,312 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.titulo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    margin: 20px;
+    padding: 10px;
+    gap: 20px;
+}
+
+.card-info {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+.foto-usuario {
+    width: 124px;
+    height: auto;
+}
+
+.edit-btn {
+    margin-top: 10px;
+    background-color: #143D2C;
+    padding: 10px 15px;
+    border-radius: 10px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 15px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 1px;
+}
+
+.edit-bton:hover {
+    background-color: #1f5a41;
+    transform: scale(1.05);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.card-info p {
+    font-size: 16px;
+}
+
+.dashboard-container {
+    display: flex;
+    justify-content: center; /* Centra el enlace dentro del contenedor */
+}
+
+.dashboard-container a {
+    display: inline-block; /* Asegura que el fondo se ajuste al texto */
+    text-decoration: none;
+    color: #fff;
+    font-weight: 600;
+    font-size: 17px;
+    letter-spacing: 1px;
+    padding: 10px 15px; /* Espaciado interno para el fondo */
+    background-color: #143D2C; /* Fondo del enlace */
+    border-radius: 10px; /* Bordes redondeados */
+    transition: background-color 0.3s ease; /* Transición suave para hover */
+    margin-bottom: 20px;
+}
+
+.dashboard-container a:hover {
+    background-color: #1f5a41; /* Cambia el color del fondo al pasar el mouse */
+}
+
+/* Estilos para el modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+  
+  .modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .modal-container {
+    background-color: white;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    transform: translateY(-20px);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    overflow: hidden;
+  }
+  
+  .modal-container.active {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+    position: relative;
+  }
+  
+  .modal-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, #143D2C, #1f5a41);
+  }
+  
+  .modal-header h2 {
+    color: #143D2C;
+    margin: 0;
+    font-size: 1.5rem;
+  }
+  
+  .close-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #666;
+    cursor: pointer;
+    transition: color 0.2s ease;
+  }
+  
+  .close-btn:hover {
+    color: #143D2C;
+  }
+  
+  .modal-body {
+    padding: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #143D2C;
+    font-size: 0.95rem;
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+  }
+  
+  .form-control:focus {
+    outline: none;
+    border-color: #143D2C;
+    box-shadow: 0 0 0 3px rgba(20, 61, 44, 0.15);
+  }
+  
+  .photo-upload {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .preview-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #143D2C;
+  }
+  
+  .upload-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .upload-btn {
+    background-color: #143D2C;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+  }
+  
+  .upload-btn:hover {
+    background-color: #1f5a41;
+    transform: translateY(-2px);
+  }
+  
+  .file-input {
+    display: none;
+  }
+  
+  .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .cancel-btn, .save-btn {
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+  }
+  
+  .cancel-btn {
+    background-color: #f3f4f6;
+    color: #4b5563;
+  }
+  
+  .cancel-btn:hover {
+    background-color: #e5e7eb;
+  }
+  
+  .save-btn {
+    background-color: #143D2C;
+    color: white;
+  }
+  
+  .save-btn:hover {
+    background-color: #1f5a41;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .save-btn:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+  
+  /* Mejora el botón de editar perfil existente */
+  .edit-btn {
+    margin-top: 10px;
+    background-color: #143D2C;
+    padding: 10px 15px;
+    border-radius: 10px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 15px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 1px;
+  }
+  
+  .edit-btn:hover {
+    background-color: #1f5a41;
+    transform: scale(1.05);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Estilos responsivos */
+  @media (max-width: 768px) {
+    .modal-container {
+      width: 95%;
+    }
+    
+    .modal-header h2 {
+      font-size: 1.3rem;
+    }
+    
+    .preview-image {
+      width: 100px;
+      height: 100px;
+    }
+  }

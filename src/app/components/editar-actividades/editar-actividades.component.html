@@ -1,0 +1,109 @@
+<div class="editar-actividades-container">
+    <h2>Editar Actividad</h2>
+    <form [formGroup]="editaractividadForm" (ngSubmit)="onSubmit()">
+
+        <div class="form-group">
+            <label for="id_tipo_actividad">Tipo de Actividad</label>
+            <input
+                type="text"
+                id="id_tipo_actividad"
+                formControlName="id_tipo_actividad"
+                class="form-control"
+            />
+        </div>
+
+        <div class="form-group">
+            <label for="id_destino">Destino</label>
+            <input
+                type="text"
+                id="id_destino"
+                formControlName="id_destino"
+                class="form-control"
+            />
+        </div>
+
+        <div class="form-group">
+            <label for="disponibilidad_actividad">Disponibilidad</label>
+            <input
+                type="text"
+                id="disponibilidad_actividad"
+                formControlName="disponibilidad_actividad"
+                class="form-control"
+            />
+        </div>
+
+        <div class="form-group">
+            <label for="precio">Precio</label>
+            <input
+                type="number"
+                id="precio"
+                formControlName="precio"
+                class="form-control"
+            />
+        </div>
+
+        <div class="form-group">
+            <label for="descripcion">Descripción</label>
+            <textarea
+                id="descripcion"
+                formControlName="descripcion"
+                class="form-control"
+                rows="3"
+            ></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="nombre_tipo_actividad">Nombre del Tipo de Actividad</label>
+            <input
+                type="text"
+                id="nombre_tipo_actividad"
+                formControlName="nombre_tipo_actividad"
+                class="form-control"
+            />
+        </div>
+
+        <div class="form-group">
+            <label for="pais">País</label>
+            <input
+                type="text"
+                id="pais"
+                formControlName="pais"
+                class="form-control"
+            />
+        </div>
+
+        <div class="form-group">
+            <label for="ciudad">Ciudad</label>
+            <input
+                type="text"
+                id="ciudad"
+                formControlName="ciudad"
+                class="form-control"
+            />
+        </div>
+
+        <div class="form-group">
+            <label for="id_imagen_actividad">ID de Imagen</label>
+            <input
+                type="text"
+                id="id_imagen_actividad"
+                formControlName="id_imagen_actividad"
+                class="form-control"
+            />
+        </div>
+
+        <div class="form-group">
+            <label for="nombre_imagen_actividad">Nombre de la Imagen</label>
+            <input
+                type="text"
+                id="nombre_imagen_actividad"
+                formControlName="nombre_imagen_actividad"
+                class="form-control"
+            />
+        </div>
+
+        <button type="submit" class="btn btn-primary" [disabled]="!editaractividadForm.valid">
+            Guardar Cambios
+        </button>
+    </form>
+</div>
