@@ -42,7 +42,7 @@ export class GestionUsuariosComponent {
 
 
   checkAllowed() {
-    if (this.rol === 'admin' || this.rol === 'actividades' || this.rol === 'alojamientos_actividades') {
+    if (this.rol === 'admin' ) {
       this.allowed = true;
     }
   }

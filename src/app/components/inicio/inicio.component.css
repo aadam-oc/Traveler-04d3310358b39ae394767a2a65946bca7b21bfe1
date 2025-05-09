@@ -331,7 +331,7 @@ body {
 
 .carousel-track {
   display: flex;
-  width: calc(800px * 4); /* 5 originales + 5 clones */
+  width: calc(800px * 5); /* 5 originales + 5 clones */
   animation: scroll 40s linear infinite;
 }
 
