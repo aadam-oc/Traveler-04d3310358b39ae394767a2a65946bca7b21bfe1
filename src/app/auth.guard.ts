@@ -26,7 +26,7 @@ export class AuthGuard implements CanActivate {
 
     if (token) {
       // Verificar si el usuario intenta acceder al dashboard
-      if (next.routeConfig?.path === 'dashboard' && userRole !== '2' ) {
+      if (next.routeConfig?.path === 'dashboard' && userRole == '1') {
         console.warn('Acceso denegado.');
         this.router.navigate(['/']);
         return false;

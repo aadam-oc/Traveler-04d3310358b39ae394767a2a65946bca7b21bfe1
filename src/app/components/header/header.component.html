@@ -3,7 +3,7 @@
     <div class="header-container">
       <a class="logo" routerLink="/inicio">
         <img src="logo.png" alt="Traveller Logo">
-        <p class="palabralogo">Traveler</p>
+        <p class="palabralogo">TRAVELER</p>
       </a>
       <nav class="nav-menu">
         <ul>
@@ -28,8 +28,8 @@
     </div>
   </header>
 
-  <!-- Hero con imagen de fondo -->
-  <div class="hero-section" [ngClass]="{ 'home-hero': isHomePage }">
-    <h1 [class.fade-in]="animateTitle">{{ pageTitle }}</h1>
-  </div>
+<!-- Hero con imagen de fondo -->
+<div *ngIf="!isLoginOrRegister" class="hero-section" [ngClass]="{ 'home-hero': isHomePage }">
+  <h1 [class.fade-in]="animateTitle">{{ pageTitle }}</h1>
+</div>
 </div>

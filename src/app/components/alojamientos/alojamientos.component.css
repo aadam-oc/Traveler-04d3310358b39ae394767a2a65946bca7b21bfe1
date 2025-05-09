@@ -1,18 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 * {
-    font-family: 'Poppins', sans-serif;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.botones {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
 }
 
 .layout-container {
@@ -22,12 +29,14 @@ body {
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
-  gap: 2rem; /* Espacio entre filtro y contenido */
+  gap: 2rem;
+  /* Espacio entre filtro y contenido */
   padding: 20px;
 }
 
 .form-container {
-  flex: 0 0 250px; /* ancho fijo para el filtro */
+  flex: 0 0 250px;
+  /* ancho fijo para el filtro */
 }
 
 .content-container {
@@ -49,182 +58,188 @@ body {
 }
 
 .destinations {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 .destinations h2 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #123d22;
-    color: white;
-    margin-inline: 35%;
-    padding: 5px 15px;
-    border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #123d22;
+  color: white;
+  margin-inline: 35%;
+  padding: 5px 15px;
+  border-radius: 5px;
 }
 
 /* DESTINOS (ALOJAMIENTOS) */
 
 .card-container {
-    padding: 0 15%;
+  padding: 0 15%;
 }
 
 .card-deck {
-    display: grid;
-    gap: 40px;
-    margin-top: 30px;
-    margin-bottom: 30px;
-    justify-content: center;
+  display: grid;
+  gap: 40px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  justify-content: center;
 }
 
 .card {
-    background-color: #123d22;
-    /* Tono verde oscuro */
-    color: white;
-    overflow: hidden;
+  background-color: #123d22;
+  /* Tono verde oscuro */
+  color: white;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .card-img-top {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
 }
 
 .card-body {
-    padding: 15px;
+  padding: 15px;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
 }
 
 .card-title {
-    font-size: 1.25rem;
-    margin-bottom: 10px;
+  font-size: 1.25rem;
+  margin-bottom: 10px;
 }
 
 .card-text {
-    font-size: 1rem;
-    margin-bottom: 15px;
+  font-size: 1rem;
+  margin-bottom: 15px;
 }
 
 .btn-primary {
-    background-color: #0a2213;
-    border: none;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 1rem;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
+  background-color: #0a2213;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1rem;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .btn-primary:hover {
-    background-color: #092915;
+  background-color: #092915;
 }
-  
-  /* --- Estilos del carrusy: flex;
+
+/* --- Estilos del carrusy: flex;
     align-items: center;
     justify-content: center;el (izquierda) --- */
-  .carousel {
-    position: relative;
-    width: 50%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
-  
-  .carousel img {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-    max-height: 100%;
-    object-fit: cover;
-  }
-  
-  .prev,
-  .next {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-  }
-  
-  .prev {
-    left: 10px;
-  }
-  
-  .next {
-    right: 10px;
-  }
-  
-  /* --- Estilos de la info (derecha) --- */
-  .modal-info {
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background-color: #143D2C;
-    padding: 20px;
-    color: #fff;
-    height: 100%;
-  }
+.carousel {
+  position: relative;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
 
-  .titulo-modal {
-    margin-bottom: 5px;
-  }
+.carousel img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  max-height: 100%;
+  object-fit: cover;
+}
 
-  .descripcion-title {
-    margin-top: 20px;
-    font-size: 1.5rem;
-  }
+.prev,
+.next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
 
-  .precio-persona-container{
-    display: flex;
-    flex-direction: column;
-    margin-top: auto;
-  }
+.prev {
+  left: 10px;
+}
 
-  .precio-persona {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 30px;
-  }
+.next {
+  right: 10px;
+}
 
-  .max-personas {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
+/* --- Estilos de la info (derecha) --- */
+.modal-info {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #143D2C;
+  padding: 20px;
+  color: #fff;
+  height: 100%;
+}
 
-  .icono-personas {
-    width: 32px;
-    height: auto;
+.titulo-modal {
+  margin-bottom: 5px;
+}
 
-  }
-  
-  .add-cart-btn {
-    background: #28a745;
-    color: white;
-    padding: 10px;
-    border: none;
-    cursor: pointer;
-    margin-top: 15px;
-    font-weight: bold;
-  }
-  
-  .add-cart-btn:hover {
-    background: #218838;
-  }
+.descripcion-title {
+  margin-top: 20px;
+  font-size: 1.5rem;
+}
+
+.precio-persona-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: auto;
+}
+
+.precio-persona {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.max-personas {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.icono-personas {
+  width: 32px;
+  height: auto;
+
+}
+
+.add-cart-btn {
+  background: #28a745;
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+.add-cart-btn:hover {
+  background: #218838;
+}
 
 
-  /*FILTRO*/
-  /* Formulario pegado a la izquierda */
+/*FILTRO*/
+/* Formulario pegado a la izquierda */
 .form-container {
   flex: 0 0 250px;
   margin: 30px auto;
@@ -333,13 +348,13 @@ body {
 /* Animación */
 @keyframes expand {
   from {
-      opacity: 0;
-      transform: scaleY(0.95);
+    opacity: 0;
+    transform: scaleY(0.95);
   }
 
   to {
-      opacity: 1;
-      transform: scaleY(1);
+    opacity: 1;
+    transform: scaleY(1);
   }
 }
 
@@ -434,7 +449,7 @@ body {
 
 @media (min-width: 768px) {
   .modal-body {
-      flex-direction: row;
+    flex-direction: row;
   }
 }
 
@@ -445,8 +460,8 @@ body {
 
 @media (min-width: 768px) {
   .modal-imagen-container {
-      flex: 0 0 40%;
-      max-width: 40%;
+    flex: 0 0 40%;
+    max-width: 40%;
   }
 }
 

@@ -13,6 +13,7 @@ import { filter } from 'rxjs';
 export class HeaderComponent {
 
   isHomePage: boolean = false;
+  isLoginOrRegister: boolean = false;
   pageTitle: string = 'Bienvenido';
   animateTitle: boolean = true;
 
@@ -32,20 +33,17 @@ export class HeaderComponent {
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event: NavigationEnd) => {
       const currentUrl = event.urlAfterRedirects;
-      console.log('URL actual:', currentUrl); 
-  
+      console.log('URL actual:', currentUrl);
+
       this.pageTitle = this.route.root.firstChild?.snapshot.data['title'] || '';
-      this.isHomePage = currentUrl === '/'; 
-  
+      this.isHomePage = currentUrl === '/';
+      // Verifica si estamos en login o register
+      this.isLoginOrRegister = currentUrl.includes('/login') || currentUrl.includes('/register');
+
       this.animateTitle = false;
       setTimeout(() => {
         this.animateTitle = true;
       }, 10);
     });
   }
-  
-
 }
-
-
-

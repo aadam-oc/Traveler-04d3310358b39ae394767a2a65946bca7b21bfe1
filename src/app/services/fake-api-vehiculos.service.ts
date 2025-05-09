@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { VehiculosAlquiler } from '../models/vehiculos-alquiler';
-
-
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +23,10 @@ export class FakeApiVehiculosService {
     return this.http.get(`${this.apiUrl}/apicoches/vehiculos/tipo/${tipoId}`);
   }
 
+  getVehiculosDetalles(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/apicoches/vehiculos/detalles`);
+  }
+
   crearVehiculo(vehiculo: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/apicoches/vehiculos`, vehiculo);
   }
@@ -40,43 +41,43 @@ export class FakeApiVehiculosService {
 
   // DESTINOS
   getDestinos(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/destinos`);
+    return this.http.get(`${this.apiUrl}/apicoches/destinos`);
   }
 
   getDestinoPorId(id: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/destinos/${id}`);
+    return this.http.get(`${this.apiUrl}/apicoches/destinos/${id}`);
   }
 
   crearDestino(destino: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/destinos`, destino);
+    return this.http.post(`${this.apiUrl}/apicoches/destinos`, destino);
   }
 
   actualizarDestino(id: number, destino: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/destinos/${id}`, destino);
+    return this.http.put(`${this.apiUrl}/apicoches/destinos/${id}`, destino);
   }
 
   eliminarDestino(id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/destinos/${id}`);
+    return this.http.delete(`${this.apiUrl}/apicoches/destinos/${id}`);
   }
 
   // TIPOS DE VEHÍCULOS
   getTiposVehiculo(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/tipoVehiculos`);
+    return this.http.get(`${this.apiUrl}/apicoches/tipoVehiculos`);
   }
 
   getTipoVehiculoPorId(id: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/tipoVehiculos/${id}`);
+    return this.http.get(`${this.apiUrl}/apicoches/tipoVehiculos/${id}`);
   }
 
   crearTipoVehiculo(tipoVehiculo: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/tipoVehiculos`, tipoVehiculo);
+    return this.http.post(`${this.apiUrl}/apicoches/tipoVehiculos`, tipoVehiculo);
   }
 
   actualizarTipoVehiculo(id: number, tipoVehiculo: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/tipoVehiculos/${id}`, tipoVehiculo);
+    return this.http.put(`${this.apiUrl}/apicoches/tipoVehiculos/${id}`, tipoVehiculo);
   }
 
   eliminarTipoVehiculo(id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/tipoVehiculos/${id}`);
+    return this.http.delete(`${this.apiUrl}/apicoches/tipoVehiculos/${id}`);
   }
 }

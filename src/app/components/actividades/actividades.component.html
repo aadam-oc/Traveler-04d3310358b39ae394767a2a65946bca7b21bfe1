@@ -45,8 +45,6 @@
             <div class="contenido">
                 <div class="titulo">{{ actividad.nombre_tipo_actividad }}</div>
                 <p>{{ actividad.pais }}, {{ actividad.ciudad }}</p>
-                <p class="descripcion">Descripción: {{ actividad.descripcion }}
-                </p>
                 <div class="botones">
                     <div class="precio">{{ actividad.precio }}€/H</div>
                     <button class="saber-mas" (click)="abrirModal(actividad)">

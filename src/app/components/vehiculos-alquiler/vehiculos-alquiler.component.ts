@@ -18,7 +18,7 @@ export class VehiculosAlquilerComponent implements OnInit {
   constructor(private vehiculosService: FakeApiVehiculosService) {}
 
   ngOnInit(): void {
-    this.vehiculosService.getVehiculos()
+    this.vehiculosService.getVehiculosDetalles()
       .pipe(
         catchError(error => {
           console.error('Error al obtener los vehículos:', error);
@@ -30,3 +30,4 @@ export class VehiculosAlquilerComponent implements OnInit {
       });
   }
 }
+

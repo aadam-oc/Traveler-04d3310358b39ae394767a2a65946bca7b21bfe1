@@ -7,20 +7,25 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 
 @Component({
   selector: 'app-perfil',
+  standalone: true,
   imports: [RouterLink, CommonModule, ReactiveFormsModule],
   templateUrl: './perfil.component.html',
-  styleUrl: './perfil.component.css'
+  styleUrls: ['./perfil.component.css']
 })
-export class PerfilComponent {
+export class PerfilComponent implements OnInit {
 
-  nombre: string = 'Usuario'; // si tienes un nombre real, ajusta esto
+  nombre: string = 'Usuario';
   correo: string = '';
+  apellido1: string = '';
+  apellido2: string = '';
+  telefono1: string = '';
+  telefono2: string = '';
   foto: string = '';
   rol: string = '1';
 
-  // Variables para el modal
   modalActive: boolean = false;
-  profileForm!: FormGroup;
+  editarUsuarioForm!: FormGroup;
+  id_usuario: number = Number(localStorage.getItem('id_usuario')) || 0;
   previewImage: string | null = null;
   selectedFile: File | null = null;
 
@@ -33,58 +38,54 @@ export class PerfilComponent {
   ngOnInit() {
     this.correo = localStorage.getItem('correo') || '';
     this.nombre = localStorage.getItem('nombre') || 'Usuario';
-    this.foto = localStorage.getItem('foto') || ''; // si guardas foto también
-    this.rol = localStorage.getItem('id_rol') || '1'; // Ajusta el valor por defecto según tu lógica
+    this.foto = localStorage.getItem('foto') || '';
+    this.rol = localStorage.getItem('id_rol') || '1';
 
-    // Inicializar el formulario
-    this.initForm();
+    this.initEditarForm();
+    this.getUsuario();
 
-    this.apiService.getImagenUsuario(localStorage.getItem('id_usuario')).subscribe(
+    this.apiService.getImagenUsuario(String(this.id_usuario)).subscribe(
       (data: any) => {
-        console.log('Imagen de usuario:', data);
-        this.foto = data.imagen.nombre_imagen_usuario || ''; // Ajusta según la estructura de tu respuesta
-        localStorage.setItem('foto', this.foto); // Guarda la foto en localStorage si es necesario
-      }
+        this.foto = data.imagen?.nombre_imagen_usuario || '';
+        localStorage.setItem('foto', this.foto);
+      },
+      error => console.error('Error al obtener imagen de usuario', error)
     );
-
-    console.log('📦 Datos cargados desde localStorage:');
-    console.log('Correo:', this.correo);
-    console.log('Nombre:', this.nombre);
-    console.log('Foto:', this.foto);
   }
 
-
-  // Inicializar el formulario con los valores actuales
-  initForm() {
-    this.profileForm = this.fb.group({
-      nombre: [this.nombre, [Validators.required]],
-      correo: [this.correo, [Validators.required, Validators.email]],
-      foto: [this.foto]
+  initEditarForm() {
+    this.editarUsuarioForm = this.fb.group({
+      correo: ['', [Validators.required, Validators.email]],
+      contrasena: ['', Validators.required],
+      id_rol: ['', Validators.required],
+      nombre: ['', Validators.required],
+      apellido1: ['', Validators.required],
+      apellido2: ['', Validators.required],
+      telefono1: ['', Validators.required],
+      telefono2: [''],
     });
   }
 
-  // Abrir el modal
-  openModal() {
-    this.modalActive = true;
-    document.body.style.overflow = 'hidden'; // Prevenir scroll en el fondo
+  getUsuario() {
+    this.apiService.getUsuariosCompletosById(this.id_usuario).subscribe(
+      (response: any) => {
+        const usuario = response.usuario;
+        this.editarUsuarioForm.patchValue(usuario);
+
+        // Guardar valores para mostrarlos en la tarjeta
+        this.apellido1 = usuario.apellido1;
+        this.apellido2 = usuario.apellido2;
+        this.telefono1 = usuario.telefono1;
+        this.telefono2 = usuario.telefono2;
+      },
+      error => console.error('Error al obtener usuario', error)
+    );
   }
 
-  // Cerrar el modal
-  closeModal() {
-    this.modalActive = false;
-    document.body.style.overflow = ''; // Restaurar scroll
-    this.previewImage = null;
-    this.selectedFile = null;
-    this.initForm(); // Reiniciar el formulario con los valores originales
-  }
-
-  // Manejar la selección de archivo
   onFileSelected(event: any) {
     const file = event.target.files[0];
     if (file) {
       this.selectedFile = file;
-
-      // Crear una vista previa de la imagen
       const reader = new FileReader();
       reader.onload = (e: any) => {
         this.previewImage = e.target.result;
@@ -93,16 +94,72 @@ export class PerfilComponent {
     }
   }
 
-  // Guardar los cambios del perfil
-  saveProfile() {
-    if (this.profileForm.valid) {
-      const formData = new FormData();
-      formData.append('nombre', this.profileForm.value.nombre);
-      formData.append('correo', this.profileForm.value.correo);
-
-      if (this.selectedFile) {
-        formData.append('foto', this.selectedFile);
-      }
+  openModal() {
+    this.modalActive = true;
+    document.body.style.overflow = 'hidden';
   }
-}
+
+  closeModal() {
+    this.modalActive = false;
+    document.body.style.overflow = '';
+    this.previewImage = null;
+    this.selectedFile = null;
+    this.getUsuario(); // recarga valores reales
+  }
+
+  onSubmitEditar() {
+    if (this.editarUsuarioForm.valid) {
+      const formValues = this.editarUsuarioForm.value;
+      const formData = new FormData();
+
+      // Solo enviar la contraseña si no está vacía
+      if (formValues.contrasena) {
+        formData.append('contrasena', formValues.contrasena);
+      }
+
+      // Asegurar que id_rol es un número
+      formData.append('id_rol', String(formValues.id_rol || this.rol));
+
+      // Agregar los demás campos
+      formData.append('correo', formValues.correo);
+      formData.append('nombre', formValues.nombre);
+      formData.append('apellido1', formValues.apellido1);
+      formData.append('apellido2', formValues.apellido2 || '');
+      formData.append('telefono1', formValues.telefono1);
+      formData.append('telefono2', formValues.telefono2 || '');
+      formData.append('id_usuario', String(this.id_usuario));
+
+      // Agregar la imagen si existe
+      if (this.selectedFile) {
+        formData.append('foto', this.selectedFile, this.selectedFile.name);
+      }
+
+      this.apiService.putUsuarioCompleto(this.id_usuario, formData).subscribe(
+        (response: any) => {
+          alert('Perfil actualizado correctamente');
+
+          // Actualizar localStorage con los nuevos datos
+          if (response.usuario) {
+            localStorage.setItem('nombre', response.usuario.nombre);
+            localStorage.setItem('correo', response.usuario.correo);
+            localStorage.setItem('id_rol', response.usuario.id_rol);
+            if (response.usuario.imagen) {
+              localStorage.setItem('foto', response.usuario.imagen);
+              this.foto = response.usuario.imagen;
+            }
+          }
+
+          this.modalActive = false;
+          this.getUsuario(); // Refrescar datos
+        },
+        (error) => {
+          console.error('Error al actualizar perfil:', error);
+          alert(`Error al actualizar el perfil: ${error.error?.message || error.message}`);
+        }
+      );
+    } else {
+      console.error('Formulario inválido');
+      alert('Por favor complete todos los campos requeridos correctamente');
+    }
+  }
 }

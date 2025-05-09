@@ -1,19 +1,20 @@
-
 <div *ngIf="vehiculos.length > 0; else sinVehiculos" class="cards-container">
     <div *ngFor="let vehiculo of vehiculos" class="vehicle-card">
-        <!-- Puedes reemplazar el src por la ruta de la imagen del vehículo si está disponible -->
-        <img class="vehicle-image" src="assets/images/placeholder.jpg" alt="Imagen del vehículo">
-        <div class="vehicle-info">
-            <p class="vehicle-name">
-                ID: {{ vehiculo.id_vehiculo }} - {{ vehiculo.tipo_vehiculo }}
-            </p>
-            <p class="vehicle-price">
-                Destino: {{ vehiculo.id_destino }}
-            </p>
-        </div>
+      <!-- Imagen del vehículo -->
+      <img class="vehicle-image" [src]="vehiculo.imagen" alt="Imagen del vehículo">
+      <div class="vehicle-info">
+        <!-- Nombre del vehículo -->
+        <p class="vehicle-name">
+          {{ vehiculo.nombre_vehiculo }}
+        </p>
+        <!-- Tipo de vehículo -->
+        <p class="vehicle-type">
+          Tipo: {{ vehiculo.nombre_tipo_vehiculo }}
+        </p>
+      </div>
     </div>
-</div>
-
-<ng-template #sinVehiculos>
+  </div>
+  
+  <ng-template #sinVehiculos>
     <p>No hay vehículos disponibles.</p>
-</ng-template>
+  </ng-template>

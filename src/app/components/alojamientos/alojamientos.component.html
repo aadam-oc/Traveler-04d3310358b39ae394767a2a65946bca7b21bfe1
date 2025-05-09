@@ -41,18 +41,18 @@
     <div class="card-container">
       <div class="card-deck">
         <div class="card expand"
-          *ngFor="let alojamiento of alojamientosFiltrados  | paginate: { itemsPerPage: 6, currentPage: p }">
+          *ngFor="let alojamiento of alojamientosFiltrados  | paginate: { itemsPerPage: 4, currentPage: p }">
           <img [src]="alojamiento.imagenes[0]" class="card-img-top"
             alt="Alojamiento">
           <div class="card-body">
             <h5 class="card-title">{{ alojamiento.nombre_alojamiento }}</h5>
             <p class="card-text">{{ alojamiento.descripcion }}</p>
-            <p class="card-text">{{ alojamiento.pais }}, {{ alojamiento.ciudad
-              }}</p>
-            <p>{{alojamiento.precio_dia}} €/dia</p>
-            <button class="btn btn-primary"
-              (click)="abrirModal(alojamiento)">Saber
-              más</button>
+            <p class="card-text">{{ alojamiento.pais }}, {{ alojamiento.ciudad }}</p>
+            <div class="botones">
+              <p>{{alojamiento.precio_dia}} €/dia</p>
+              <button class="btn btn-primary"
+                (click)="abrirModal(alojamiento)">Saber más</button>
+            </div>
           </div>
         </div>
       </div>

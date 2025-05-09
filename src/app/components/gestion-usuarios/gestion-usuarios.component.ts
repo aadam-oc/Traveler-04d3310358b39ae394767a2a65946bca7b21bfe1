@@ -74,6 +74,7 @@ export class GestionUsuariosComponent {
 
     if (this.formCrearUsuarioSimple.valid) {
       const nuevoUsuario: Usuario = this.formCrearUsuarioSimple.value;
+
       this.apiService.postUsuario(nuevoUsuario).subscribe(
         response => {
           console.log('Usuario creado:', response);
