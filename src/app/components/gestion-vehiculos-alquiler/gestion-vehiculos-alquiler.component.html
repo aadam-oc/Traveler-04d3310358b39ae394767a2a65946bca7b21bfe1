@@ -1,0 +1,76 @@
+<div class="container" *ngIf="true">
+    <mat-accordion multi="true">
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <h2>Gestión de Vehículos de Alquiler</h2>
+                </mat-panel-title>
+                <mat-panel-description>
+                    Aquí puedes gestionar los vehículos de alquiler.
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <!-- Formulario para agregar un nuevo vehículo -->
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Agregar Nuevo Vehículo
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Total de Vehículos: {{ vehiculos.length }}
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <form class="gestion-vehiculos-form" (ngSubmit)="agregarVehiculo()">
+                    <div class="form-field form-field-id-vehiculo">
+                        <label class="form-label form-label-id-vehiculo">ID del Vehículo</label>
+                        <input class="form-input form-input-id-vehiculo" [(ngModel)]="nuevoVehiculo.id_vehiculo" name="idVehiculo" placeholder="Ingrese el ID del vehículo" required />
+                    </div>
+                    <div class="form-field form-field-tipo-vehiculo">
+                        <label class="form-label form-label-tipo-vehiculo">Tipo de Vehículo</label>
+                        <input class="form-input form-input-tipo-vehiculo" [(ngModel)]="nuevoVehiculo.tipo_vehiculo" name="tipoVehiculo" placeholder="Ingrese el tipo de vehículo" required />
+                    </div>
+                    <div class="form-field form-field-id-destino">
+                        <label class="form-label form-label-id-destino">ID del Destino</label>
+                        <input class="form-input form-input-id-destino" [(ngModel)]="nuevoVehiculo.id_destino" name="idDestino" placeholder="Ingrese el ID del destino" required />
+                    </div>
+                    <button class="btn btn-primary btn-agregar-vehiculo" type="submit">Agregar Vehículo</button>
+                </form>
+            </mat-expansion-panel>
+
+            <!-- Tabla de vehículos -->
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Lista de Vehículos
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="vehiculos-table-container" *ngIf="vehiculos.length > 0; else noVehiculos">
+                    <table class="vehiculos-table vehiculos-table-gestion">
+                        <thead class="vehiculos-table-head">
+                            <tr class="vehiculos-table-row vehiculos-table-row-header">
+                                <th class="vehiculos-table-header vehiculos-table-header-id">ID</th>
+                                <th class="vehiculos-table-header vehiculos-table-header-tipo">Tipo</th>
+                                <th class="vehiculos-table-header vehiculos-table-header-destino">Destino</th>
+                                <th class="vehiculos-table-header vehiculos-table-header-acciones">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody class="vehiculos-table-body">
+                            <tr class="vehiculos-table-row vehiculos-table-row-data" *ngFor="let vehiculo of vehiculos">
+                                <td class="vehiculos-table-cell vehiculos-table-cell-id">{{ vehiculo.id_vehiculo }}</td>
+                                <td class="vehiculos-table-cell vehiculos-table-cell-tipo">{{ vehiculo.nombre_tipo_vehiculo }}</td>
+                                <td class="vehiculos-table-cell vehiculos-table-cell-destino">{{ vehiculo.id_destino }}</td>
+                                <td class="vehiculos-table-cell vehiculos-table-cell-acciones">
+                                    <button class="btn btn-accent btn-editar-vehiculo" (click)="onEdit(vehiculo)">Editar</button>
+                                    <button class="btn btn-warn btn-eliminar-vehiculo" (click)="onDelete(vehiculo)">Eliminar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <ng-template #noVehiculos>
+                    <p class="no-vehiculos-message no-vehiculos-message-empty">No hay vehículos disponibles.</p>
+                </ng-template>
+            </mat-expansion-panel>
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>

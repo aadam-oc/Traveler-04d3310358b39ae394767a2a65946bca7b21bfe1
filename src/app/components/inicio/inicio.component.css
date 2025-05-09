@@ -321,6 +321,7 @@ body {
 
 .carousel {
   width: 800px;
+  margin-bottom: 20px !important;
   height: 500px;
   overflow: hidden;
   border-radius: 16px;
@@ -331,7 +332,7 @@ body {
 
 .carousel-track {
   display: flex;
-  width: calc(800px * 5); /* 5 originales + 5 clones */
+  width: calc(800px * 10);
   animation: scroll 40s linear infinite;
 }
 
@@ -348,5 +349,5 @@ body {
 
 @keyframes scroll {
   0% { transform: translateX(0); }
-  100% { transform: translateX(-4000px); } /* 800px * 5 imágenes */
+  100% { transform: translateX(-4000px); } 
 }

@@ -8,6 +8,7 @@ import { Destinos } from '../../models/destinos';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ImagenesAlojamientos } from '../../models/imagenes-alojamientos';
 
+
 @Component({
   selector: 'app-alojamientos',
   imports: [CommonModule, NgxPaginationModule, ReactiveFormsModule, FormsModule],
@@ -35,7 +36,6 @@ export class AlojamientosComponent {
 
   constructor(private apiService: ApiService, private router: Router, private fb: FormBuilder) { }
 
-
   getImagenesAlojamientos(id_alojamiento: number): ImagenesAlojamientos[] {
     let imagenesAlojamientos: ImagenesAlojamientos[] = [];
 
@@ -51,6 +51,9 @@ export class AlojamientosComponent {
     return imagenesAlojamientos;
   }
 
+irAFormularioReserva() {
+  this.router.navigate(['/reserva']);
+}
 
   ngOnInit() {
     // Inicializar Formulario

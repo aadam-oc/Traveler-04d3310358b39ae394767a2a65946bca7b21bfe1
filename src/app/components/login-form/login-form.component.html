@@ -13,7 +13,7 @@
       <input type="password" id="password" formControlName="password" placeholder="Contraseña" />
       <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
         <small *ngIf="loginForm.get('password')?.errors?.['required']">Contraseña es obligatoria.</small>
-        <small *ngIf="loginForm.get('password')?.errors?.['minlength']">Debe tener al menos 8 caracteres.</small>
+        <small *ngIf="loginForm.get('password')?.errors?.['minlength']">Debe tener al menos 2 caracteres.</small>
       </div>
     </div>
     <button type="submit" class="btn-register" [disabled]="loginForm.invalid">Iniciar Sesión</button>

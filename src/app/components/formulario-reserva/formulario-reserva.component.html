@@ -1,0 +1,23 @@
+<form [formGroup]="form" class="booking-form">
+  <h2>Introduce tus datos</h2>
+
+  <label>Nombre*</label>
+  <input type="text" formControlName="nombre" />
+
+  <label>Apellidos*</label>
+  <input type="text" formControlName="apellidos" />
+
+  <label>Email*</label>
+  <input type="email" formControlName="email" />
+
+  <label>Teléfono*</label>
+  <input type="tel" formControlName="telefono" />
+
+  <label>País*</label>
+  <select formControlName="pais">
+    <option value="">-- Selecciona un país --</option>
+    <option *ngFor="let pais of paises" [value]="pais">{{ pais }}</option>
+  </select>
+
+  <button type="submit" class="btn btn-primary">Datos de pago</button>
+</form>

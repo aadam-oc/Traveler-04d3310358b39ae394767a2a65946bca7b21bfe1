@@ -86,6 +86,7 @@ export class GestionUsuariosComponent {
       this.apiService.postUsuario(nuevoUsuario).subscribe(
         response => {
           console.log('Usuario creado:', response);
+          this.formCrearUsuarioSimple.reset();
           this.getUsuarios();
         },
         error => {
@@ -103,6 +104,7 @@ export class GestionUsuariosComponent {
       this.apiService.postUsuarioCompleto(nuevoUsuario).subscribe(
         response => {
           console.log('Usuario creado:', response);
+          this.formCrearUsuarioCompleto.reset();
           this.getUsuarios();
         },
         error => {

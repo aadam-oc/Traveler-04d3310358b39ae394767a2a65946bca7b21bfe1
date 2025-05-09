@@ -15,13 +15,13 @@ export class EditarUsuarioComponent {
 
   constructor(private router: Router, private fb: FormBuilder, private apiService: ApiService) {
     this.editarUsuarioForm = this.fb.group({
-      correo: ['', [Validators.required, Validators.email]],
-      contrasena: ['', Validators.required],
-      id_rol: ['', Validators.required],
-      nombre: ['', Validators.required],
-      apellido1: ['', Validators.required],
-      apellido2: ['', Validators.required],
-      telefono1: ['', Validators.required],
+      correo: [''],
+      contrasena: [''],
+      id_rol: [''],
+      nombre: [''],
+      apellido1: [''],
+      apellido2: [''],
+      telefono1: [''],
       telefono2: [''],
     });
   }
@@ -67,7 +67,7 @@ export class EditarUsuarioComponent {
         response => {
           console.log('Usuario actualizado:', response);
           alert('Usuario actualizado correctamente');
-          this.router.navigate(['/gestionUsuarios']);
+          this.router.navigate(['/dashboard']);
         },
         error => {
           console.error('Error al actualizar el usuario:', error);

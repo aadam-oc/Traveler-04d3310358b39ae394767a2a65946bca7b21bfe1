@@ -24,7 +24,8 @@ import { GestionDestinosComponent } from './components/gestion-destinos/gestion-
 import { GestionUsuariosComponent } from './components/gestion-usuarios/gestion-usuarios.component';
 import { GestionRolesComponent } from './components/gestion-roles/gestion-roles.component';
 import { EditarAlojamientoComponent } from './components/editar-alojamiento/editar-alojamiento.component';
-
+import { GestionVehiculosAlquilerComponent } from './components/gestion-vehiculos-alquiler/gestion-vehiculos-alquiler.component';
+import {FormularioReservaComponent} from './components/formulario-reserva/formulario-reserva.component';
 
 
 export const appRoutes: Routes = [
@@ -52,6 +53,7 @@ export const appRoutes: Routes = [
   { path: 'gestionUsuarios', component: GestionUsuariosComponent, data: {title: 'GESTIÓN USUARIOS'}, canActivate: [AuthGuard]},
   { path: 'gestionRoles', component: GestionRolesComponent, data: {title: 'GESTIÓN ROLES'}, canActivate: [AuthGuard]},
   { path: 'editarAlojamiento/:id', component: EditarAlojamientoComponent, data: {title: 'EDITAR ALOJAMIENTO'}, canActivate: [AuthGuard]},
+  { path: 'formularioReserva/:id', component: FormularioReservaComponent, data: {title: 'FORMULARIO RESERVA'}, canActivate: [AuthGuard]},
   { path: '**', redirectTo: '' } 
 ];
 

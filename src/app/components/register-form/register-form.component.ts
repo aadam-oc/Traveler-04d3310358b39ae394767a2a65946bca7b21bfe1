@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-register-form',
@@ -14,7 +16,7 @@ export class RegisterFormComponent {
   title = 'Form-Registro';
   registerForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private router: Router, private apiService: ApiService) {
     this.registerForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
@@ -36,6 +38,9 @@ export class RegisterFormComponent {
       };
       console.log('Datos del formulario:', userData);
       this.registerEvent.emit(userData); // Enviar datos al padre (HeroComponent)
+      //hace el login
+      
+      this.router.navigate(['/home']);
     } else {
       console.error('Formulario inválido');
     }
