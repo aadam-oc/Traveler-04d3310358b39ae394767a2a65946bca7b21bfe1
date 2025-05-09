@@ -18,12 +18,20 @@ export class GestionRolesComponent {
 
   roles: Roles[] = [];
   formCrearRol: FormGroup;
+  rol = localStorage.getItem('nombre_rol');
+  allowed = false;
 
 
   constructor(private router: Router, private apiService: ApiService, private http: HttpClient, private fb: FormBuilder) {
     this.formCrearRol = this.fb.group({
       nombre_rol: ['', Validators.required]
     });
+  }
+
+  checkAllowed() {
+    if (this.rol === 'admin') {
+      this.allowed = true;
+    }
   }
 
   getRoles() {
@@ -81,6 +89,8 @@ export class GestionRolesComponent {
 
   ngOnInit() {
     this.getRoles();
+        this.checkAllowed();
+
   }
 
 }

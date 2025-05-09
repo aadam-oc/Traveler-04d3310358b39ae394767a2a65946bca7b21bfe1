@@ -19,7 +19,8 @@ export class GestionActividadesComponent {
 
   //Paginación
   p: number = 1;
-  
+  rol = localStorage.getItem('nombre_rol');
+  allowed = false;
   tipoActividades: TipoActividad[] = [];
   actividades: Actividad[] = [];
   actividadesCompletas: Actividad[] = [];
@@ -39,7 +40,12 @@ export class GestionActividadesComponent {
     });
   }
 
-
+  checkAllowed() {
+    if (this.rol === 'admin' || this.rol === 'actividades' || this.rol === 'alojamientos_actividades') {
+      this.allowed = true;
+    }
+  }
+  
   getTipoActividades() {
     this.apiService.getTiposActividades().subscribe(
       (response: { tipo_actividad: TipoActividad[] }) => {
@@ -123,6 +129,7 @@ export class GestionActividadesComponent {
 
 
   ngOnInit() {
+    this.checkAllowed();
     this.getAllActividades();
     this.getDestinos();
     this.getTipoActividades();

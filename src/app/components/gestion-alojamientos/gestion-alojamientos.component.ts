@@ -9,7 +9,7 @@ import { Destinos } from '../../models/destinos';
 
 @Component({
   selector: 'app-gestion-alojamientos',
-  imports: [ CommonModule, FormsModule, ReactiveFormsModule, MatExpansionModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, MatExpansionModule],
   templateUrl: './gestion-alojamientos.component.html',
   styleUrl: './gestion-alojamientos.component.css',
 })
@@ -18,6 +18,8 @@ export class GestionAlojamientosComponent {
   alojamientosCompletos: Alojamientos[] = [];
   alojamientoForm: FormGroup;
   destinos: Destinos[] = [];
+  rol = localStorage.getItem('nombre_rol');
+  allowed = false;
 
   constructor(private apiService: ApiService, private router: Router, private fb: FormBuilder) {
     this.alojamientoForm = this.fb.group({
@@ -33,7 +35,13 @@ export class GestionAlojamientosComponent {
       hora_salida: ['', Validators.required]
     });
   }
-  
+
+  checkAllowed() {
+    if (this.rol === 'admin' || this.rol === 'alojamientos' || this.rol === 'alojamientos_actividades') {
+      this.allowed = true;
+    }
+  }
+
   getAlojamientos() {
     this.apiService.getAlojamientos().subscribe(
       (data: Alojamientos[]) => {
@@ -70,7 +78,7 @@ export class GestionAlojamientosComponent {
     );
   }
 
-getDestinos() {
+  getDestinos() {
     this.apiService.getDestinos().subscribe(
       (response: { destinos: Destinos[] }) => {
         this.destinos = response.destinos;
@@ -91,14 +99,14 @@ getDestinos() {
         response => {
           console.log('Alojamiento eliminado:', response);
           this.getAlojamientos();
-          this.getAlojamientosCompletos(); 
+          this.getAlojamientosCompletos();
         },
         error => {
           console.error('Error deleting alojamiento:', error);
         }
       );
     }
-    
+
   }
 
 
@@ -108,14 +116,14 @@ getDestinos() {
 
   onSubmit() {
     if (this.alojamientoForm.valid) {
-      localStorage.setItem('id_usuario', '1'); 
+      localStorage.setItem('id_usuario', '1');
       const formData = {
         id_alojamiento: this.alojamientoForm.value.id_alojamiento,
         nombre_alojamiento: this.alojamientoForm.value.nombre_alojamiento,
         id_destino: this.alojamientoForm.value.id_destino,
         precio_dia: this.alojamientoForm.value.precio_dia,
         descripcion: this.alojamientoForm.value.descripcion,
-        id_usuario: Number(localStorage.getItem('id_usuario')), 
+        id_usuario: Number(localStorage.getItem('id_usuario')),
         max_personas: this.alojamientoForm.value.max_personas,
         direccion: this.alojamientoForm.value.direccion,
         hora_entrada: this.alojamientoForm.value.hora_entrada,
@@ -146,5 +154,7 @@ getDestinos() {
     this.getAlojamientosCompletos();
     this.getAlojamientos();
     this.getDestinos();
+    this.checkAllowed();
+
   }
 }

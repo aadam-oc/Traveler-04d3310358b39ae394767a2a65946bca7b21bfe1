@@ -19,6 +19,8 @@ export class GestionUsuariosComponent {
   users: any[] = [];
   formCrearUsuarioSimple: FormGroup;
   formCrearUsuarioCompleto: FormGroup;
+  rol = localStorage.getItem('nombre_rol');
+  allowed = false;
 
   constructor(private router: Router, private apiService: ApiService, private http: HttpClient, private fb: FormBuilder) {
     this.formCrearUsuarioSimple = this.fb.group({
@@ -38,6 +40,12 @@ export class GestionUsuariosComponent {
     });
   }
 
+
+  checkAllowed() {
+    if (this.rol === 'admin' || this.rol === 'actividades' || this.rol === 'alojamientos_actividades') {
+      this.allowed = true;
+    }
+  }
 
   getUsuarios() {
     this.apiService.getUsuariosCompletos().subscribe(
@@ -108,5 +116,7 @@ export class GestionUsuariosComponent {
 
   ngOnInit() {
     this.getUsuarios();
+        this.checkAllowed();
+
   }
 }

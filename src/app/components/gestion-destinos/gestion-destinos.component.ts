@@ -21,6 +21,8 @@ export class GestionDestinosComponent {
 
   destinos: Destinos[] = [];
   form: FormGroup;
+  rol = localStorage.getItem('nombre_rol');
+  allowed = false;
 
   constructor(
     private apiService: ApiService,
@@ -35,7 +37,11 @@ export class GestionDestinosComponent {
     });
   }
 
-
+checkAllowed() {
+    if (this.rol === 'admin' ) {
+      this.allowed = true;
+    }
+  }
 
   getDestinos() {
     this.apiService.getDestinos().subscribe(
@@ -72,6 +78,9 @@ export class GestionDestinosComponent {
 
   ngOnInit() {
     this.getDestinos();
+        this.checkAllowed();
+
+
   }
 
 

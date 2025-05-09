@@ -14,16 +14,25 @@ import { ChatComponent } from '../chat/chat.component';
   styleUrl: './gestion-contacto.component.css',
 })
 export class GestionContactoComponent {
-  
-    contactos: Contacto[] = [];
-  
-    constructor(private dialog: MatDialog, private apiService: ApiService, private router: Router) {}
+
+  contactos: Contacto[] = [];
+  rol = localStorage.getItem('nombre_rol');
+  allowed = false;
+
+  constructor(private dialog: MatDialog, private apiService: ApiService, private router: Router) { }
 
   chat(contacto: Contacto) {
     this.dialog.open(ChatComponent, {
       data: { contacto },
       width: '500px',
     });
+  }
+
+
+  checkAllowed() {
+    if (this.rol === 'admin') {
+      this.allowed = true;
+    }
   }
 
   resuelto(id: any) {
@@ -56,7 +65,9 @@ export class GestionContactoComponent {
     });
   }
   ngOnInit() {
+    this.checkAllowed();
     this.getAllContactos();
+
   }
 
 }

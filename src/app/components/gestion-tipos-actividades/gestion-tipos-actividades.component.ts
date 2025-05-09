@@ -19,6 +19,8 @@ export class GestionTiposActividadesComponent {
 
   //Paginación
   p: number = 1;
+  rol = localStorage.getItem('nombre_rol');
+  allowed = false;
 
   formCrearTiposActividades: FormGroup;
   tiposActividades: TipoActividad[] = [];
@@ -26,6 +28,12 @@ export class GestionTiposActividadesComponent {
     this.formCrearTiposActividades = this.formBuilder.group({
       nombre_tipo_actividad: ['', Validators.required]
     });
+  }
+
+  checkAllowed() {
+    if (this.rol === 'admin' ) {
+      this.allowed = true;
+    }
   }
 
   getTipoActividades() {
@@ -74,6 +82,8 @@ export class GestionTiposActividadesComponent {
 
   ngOnInit() {
     this.getTipoActividades();
+        this.checkAllowed();
+
   }
 
 }
