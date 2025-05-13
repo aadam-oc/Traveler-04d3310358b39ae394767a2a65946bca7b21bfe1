@@ -50,10 +50,9 @@ export class AlojamientosComponent {
 
     return imagenesAlojamientos;
   }
-
 irAFormularioReserva() {
-  this.router.navigate(['/reserva']);
-}
+    this.router.navigate(['/reserva']);
+  }
 
   ngOnInit() {
     // Inicializar Formulario

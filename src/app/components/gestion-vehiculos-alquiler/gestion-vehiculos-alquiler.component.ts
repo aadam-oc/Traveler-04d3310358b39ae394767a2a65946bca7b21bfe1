@@ -5,35 +5,61 @@ import { Router } from '@angular/router';
 import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { GestionVehiculosAlquilerComponent } from './components/gestion-vehiculos-alquiler/gestion-vehiculos-alquiler.component';
+import { OnInit } from '@angular/core';
+import { FakeApiVehiculosService } from '../../services/fake-api-vehiculos.service';
+import { RouterLink } from '@angular/router';
+import { query } from '@angular/animations';
+
+// Removed invalid import: 'form' is not exported from//import { form } from '@angular/forms';
 
 
 
 @Component({
   selector: 'app-gestion-vehiculos-alquiler',
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, MatExpansionModule],
   templateUrl: './gestion-vehiculos-alquiler.component.html',
   styleUrls: ['./gestion-vehiculos-alquiler.component.css']
 })
 export class GestionVehiculosAlquilerComponent implements OnInit {
+  imagenPreview: string | null = null; // Property to store the image preview
   vehiculos: any[] = [];
   nuevoVehiculo = {
     id_vehiculo: null,
-    tipo_vehiculo: null,
-    id_destino: null
+    nombre_vehiculo: null, // Agregado para manejar el nombre del vehículo
+    nombre_tipo_vehiculo: null, // Agregado para manejar el alias del tipo de vehículo
+    id_destino: null,
+    imagen: null // Agregado para manejar la imagen del vehículo
   };
+  form!: FormGroup;
 
-  private apiUrl = 'http://172.17.40.7:3001/apicoches';
-
-  constructor(private http: HttpClient) {}
+  constructor(private fb: FormBuilder, private vehiculosService: FakeApiVehiculosService, private router: Router) { }
 
   ngOnInit() {
-    this.obtenerVehiculos();
+    this.form = this.fb.group({
+      id_vehiculo: [null],
+      nombre_vehiculo: [null, Validators.required],
+      tipo_vehiculo: [null, Validators.required],
+      imagen: [null]
+    });
+
+    this.obtenerVehiculos(); // Cargar la lista de vehículos
   }
 
+  onFileSelected(event: Event): void {
+        const input = event.target as HTMLInputElement;
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = () => {
+                this.imagenPreview = reader.result as string;
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
   obtenerVehiculos() {
-    this.http.get<any[]>(`${this.apiUrl}/vehiculos/detalles`).subscribe(
+    this.vehiculosService.getVehiculosDetalles().subscribe(
       (data) => {
-        this.vehiculos = data;
+        this.vehiculos = data; // Asignar los datos obtenidos al array
       },
       (error) => {
         console.error('Error al obtener los vehículos:', error);
@@ -42,15 +68,68 @@ export class GestionVehiculosAlquilerComponent implements OnInit {
   }
 
   agregarVehiculo() {
-    this.http.post(`${this.apiUrl}/vehiculos`, this.nuevoVehiculo).subscribe(
-      () => {
-        alert('Vehículo agregado correctamente');
-        this.obtenerVehiculos(); // Actualizar la lista de vehículos
-        this.nuevoVehiculo = { id_vehiculo: null, tipo_vehiculo: null, id_destino: null }; // Resetear el formulario
-      },
-      (error) => {
-        console.error('Error al agregar el vehículo:', error);
+    if (this.form.valid) {
+      const vehiculo = this.form.value;
+
+      if (vehiculo.id_vehiculo) {
+        // Actualizar vehículo existente
+        this.vehiculosService.actualizarVehiculo(vehiculo.id_vehiculo, vehiculo).subscribe(
+          () => {
+            alert('Vehículo actualizado correctamente');
+            this.obtenerVehiculos(); // Actualizar la lista de vehículos
+            this.resetForm(); // Resetear el formulario
+          },
+          (error) => {
+            console.error('Error al actualizar el vehículo:', error);
+          }
+        );
+      } else {
+        // Agregar nuevo vehículo
+        this.vehiculosService.crearVehiculo(vehiculo).subscribe(
+          () => {
+            alert('Vehículo agregado correctamente');
+            this.obtenerVehiculos(); // Actualizar la lista de vehículos
+            this.resetForm(); // Resetear el formulario
+          },
+          (error) => {
+            console.error('Error al agregar el vehículo:', error);
+          }
+        );
       }
-    );
+    } else {
+      alert('Por favor, completa todos los campos obligatorios.');
+    }
+  }
+
+  onDelete(vehiculo: any) {
+    if (confirm(`¿Estás seguro de que deseas eliminar el vehículo con ID ${vehiculo.id_vehiculo}?`)) {
+      this.vehiculosService.eliminarVehiculo(vehiculo.id_vehiculo).subscribe(
+        () => {
+          alert('Vehículo eliminado correctamente');
+          this.obtenerVehiculos(); // Actualizar la lista de vehículos
+        },
+        (error) => {
+          console.error('Error al eliminar el vehículo:', error);
+        }
+      );
+    }
+  }
+
+  onEdit(vehiculo: any) {
+    console.log('Editar vehículo:', vehiculo);
+    this.router.navigate(['/editar-vehiculo', vehiculo.id_vehiculo]);
+  }
+
+  resetForm() {
+    this.form.reset(); // Resetea todos los campos del formulario
+    this.imagenPreview = null; // Limpia la vista previa de la imagen
+    this.nuevoVehiculo = {
+      id_vehiculo: null,
+      nombre_vehiculo: null,
+      nombre_tipo_vehiculo: null,
+      id_destino: null,
+      imagen: null
+    };
   }
 }
+

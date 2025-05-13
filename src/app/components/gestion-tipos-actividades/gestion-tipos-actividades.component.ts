@@ -24,7 +24,7 @@ export class GestionTiposActividadesComponent {
 
   formCrearTiposActividades: FormGroup;
   tiposActividades: TipoActividad[] = [];
-  constructor(private apiService: ApiService, private formBuilder: FormBuilder) {
+  constructor(private apiService: ApiService, private formBuilder: FormBuilder, private router: Router) {
     this.formCrearTiposActividades = this.formBuilder.group({
       nombre_tipo_actividad: ['', Validators.required]
     });
@@ -47,9 +47,9 @@ export class GestionTiposActividadesComponent {
     );
   }
 
-  editarTipoActividad(tipoActividad: TipoActividad) {
-    alert('Todavia no se puede editar');
-  }
+  editarTipoActividad(id_tipo_actividad: number) {
+  this.router.navigate([`/editarTiposActividades`, id_tipo_actividad]);
+}
 
   eliminarTipoActividad(id_tipo_actividad: number) {
     if (confirm(`¿Estás seguro de que deseas eliminar el tipo de actividad con ID ${id_tipo_actividad}?`)) {

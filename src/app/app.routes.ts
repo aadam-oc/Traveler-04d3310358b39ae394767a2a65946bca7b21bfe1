@@ -1,4 +1,6 @@
 import { Routes } from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { HeroComponent } from './components/hero/hero.component';
 import { HeroLoginComponent } from './components/hero-login/hero-login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -26,6 +28,8 @@ import { GestionRolesComponent } from './components/gestion-roles/gestion-roles.
 import { EditarAlojamientoComponent } from './components/editar-alojamiento/editar-alojamiento.component';
 import { GestionVehiculosAlquilerComponent } from './components/gestion-vehiculos-alquiler/gestion-vehiculos-alquiler.component';
 import {FormularioReservaComponent} from './components/formulario-reserva/formulario-reserva.component';
+import { EditarTiposActividadesComponent } from './components/editar-tipos-actividades/editar-tipos-actividades.component';
+import { EditarVehiculoComponent } from './components/editar-vehiculo/editar-vehiculo.component';
 
 
 export const appRoutes: Routes = [
@@ -53,7 +57,9 @@ export const appRoutes: Routes = [
   { path: 'gestionUsuarios', component: GestionUsuariosComponent, data: {title: 'GESTIÓN USUARIOS'}, canActivate: [AuthGuard]},
   { path: 'gestionRoles', component: GestionRolesComponent, data: {title: 'GESTIÓN ROLES'}, canActivate: [AuthGuard]},
   { path: 'editarAlojamiento/:id', component: EditarAlojamientoComponent, data: {title: 'EDITAR ALOJAMIENTO'}, canActivate: [AuthGuard]},
-  { path: 'formularioReserva/:id', component: FormularioReservaComponent, data: {title: 'FORMULARIO RESERVA'}, canActivate: [AuthGuard]},
+  { path: 'reserva', component: FormularioReservaComponent, data: {title: 'FORMULARIO RESERVA'}, canActivate: [AuthGuard]},
+  { path: 'editarTiposActividades/:id', component: EditarTiposActividadesComponent, data: {title: 'EDITAR TIPO ACTIVIDAD'}, canActivate: [AuthGuard]},
+  { path: 'editarVehiculo/:id', component: EditarVehiculoComponent, data: {title: 'EDITAR VEHÍCULO'}, canActivate: [AuthGuard]},
   { path: '**', redirectTo: '' } 
 ];
 

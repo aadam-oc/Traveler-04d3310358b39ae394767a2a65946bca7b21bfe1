@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 import { Actividad } from '../../models/actividad';
 @Component({
   selector: 'app-editar-actividades',
-  imports: [ CommonModule, ReactiveFormsModule, FormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule],
   templateUrl: './editar-actividades.component.html',
   styleUrl: './editar-actividades.component.css'
 })
@@ -37,9 +37,9 @@ export class EditarActividadesComponent {
     return this.id_actividad;
   }
 
-  
+
   getActividades() {
-    
+
 
     this.apiService.getActividadesJoinById(this.getIdActividad()).subscribe((response: any) => {
       this.editaractividadForm.patchValue({
@@ -54,7 +54,7 @@ export class EditarActividadesComponent {
         id_imagen_actividad: response.actividades[0].id_imagen_actividad,
         nombre_imagen_actividad: response.actividades[0].nombre_imagen_actividad
       });
-      
+
     }
     );
 

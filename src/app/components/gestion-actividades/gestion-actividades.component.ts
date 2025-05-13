@@ -76,7 +76,6 @@ export class GestionActividadesComponent {
 
   editarActividad(id_actividad: number) {
     this.router.navigate(['/editarActividad'], { queryParams: { id_actividad } });
-
   }
 
   eliminarActividad(actividad: Actividad) {

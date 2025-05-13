@@ -1,1 +1,114 @@
-<p>editar-alojamiento works!</p>
+<div class="container mt-4">
+  <h2>Editar Alojamiento</h2>
+  <form [formGroup]="editaralojamientoForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="id_destino">Destino</label>
+      <select
+        id="id_destino"
+        class="form-control"
+        formControlName="id_destino"
+      >
+        <option value="" disabled>Seleccione un destino</option>
+        <option *ngFor="let destino of destinos" [value]="destino.id_destino">
+          {{ destino.ciudad }} - {{ destino.pais }}
+        </option>
+      </select>
+      <div *ngIf="editaralojamientoForm.get('id_destino')?.invalid && editaralojamientoForm.get('id_destino')?.touched" class="text-danger">
+        El destino es obligatorio.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="nombre_alojamiento">Nombre del Alojamiento</label>
+      <input
+        type="text"
+        id="nombre_alojamiento"
+        class="form-control"
+        formControlName="nombre_alojamiento"
+      />
+      <div *ngIf="editaralojamientoForm.get('nombre_alojamiento')?.invalid && editaralojamientoForm.get('nombre_alojamiento')?.touched" class="text-danger">
+        El nombre del alojamiento es obligatorio.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="precio_dia">Precio por Día</label>
+      <input
+        type="number"
+        id="precio_dia"
+        class="form-control"
+        formControlName="precio_dia"
+      />
+      <div *ngIf="editaralojamientoForm.get('precio_dia')?.invalid && editaralojamientoForm.get('precio_dia')?.touched" class="text-danger">
+        El precio por día es obligatorio.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="descripcion">Descripción</label>
+      <textarea
+        id="descripcion"
+        class="form-control"
+        formControlName="descripcion"
+      ></textarea>
+      <div *ngIf="editaralojamientoForm.get('descripcion')?.invalid && editaralojamientoForm.get('descripcion')?.touched" class="text-danger">
+        La descripción es obligatoria.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="max_personas">Máximo de Personas</label>
+      <input
+        type="number"
+        id="max_personas"
+        class="form-control"
+        formControlName="max_personas"
+      />
+      <div *ngIf="editaralojamientoForm.get('max_personas')?.invalid && editaralojamientoForm.get('max_personas')?.touched" class="text-danger">
+        El número máximo de personas es obligatorio.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="direccion">Dirección</label>
+      <input
+        type="text"
+        id="direccion"
+        class="form-control"
+        formControlName="direccion"
+      />
+      <div *ngIf="editaralojamientoForm.get('direccion')?.invalid && editaralojamientoForm.get('direccion')?.touched" class="text-danger">
+        La dirección es obligatoria.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="hora_entrada">Hora de Entrada</label>
+      <input
+        type="time"
+        id="hora_entrada"
+        class="form-control"
+        formControlName="hora_entrada"
+      />
+      <div *ngIf="editaralojamientoForm.get('hora_entrada')?.invalid && editaralojamientoForm.get('hora_entrada')?.touched" class="text-danger">
+        La hora de entrada es obligatoria.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="hora_salida">Hora de Salida</label>
+      <input
+        type="time"
+        id="hora_salida"
+        class="form-control"
+        formControlName="hora_salida"
+      />
+      <div *ngIf="editaralojamientoForm.get('hora_salida')?.invalid && editaralojamientoForm.get('hora_salida')?.touched" class="text-danger">
+        La hora de salida es obligatoria.
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="editaralojamientoForm.invalid">Guardar Cambios</button>
+    <button type="button" class="btn btn-secondary" (click)="navigateToAlojamientos()">Cancelar</button>
+  </form>
+</div>

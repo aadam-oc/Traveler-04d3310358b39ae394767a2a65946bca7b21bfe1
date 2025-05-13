@@ -9,6 +9,7 @@ import { GestionTiposActividadesComponent } from "../gestion-tipos-actividades/g
 import { GestionRolesComponent } from "../gestion-roles/gestion-roles.component"
 import { GestionDestinosComponent } from "../gestion-destinos/gestion-destinos.component"
 import { GestionContactoComponent } from "../gestion-contacto/gestion-contacto.component"
+import { GestionVehiculosAlquilerComponent } from "../gestion-vehiculos-alquiler/gestion-vehiculos-alquiler.component"
 import { RouterLink } from "@angular/router"
 
 @Component({
@@ -23,7 +24,7 @@ import { RouterLink } from "@angular/router"
     GestionTiposActividadesComponent,
     GestionRolesComponent,
     GestionContactoComponent,
-    
+    GestionVehiculosAlquilerComponent
   ],
   templateUrl: "./dashboard.component.html",
   styleUrls: ["./dashboard.component.css"],

@@ -1,10 +1,11 @@
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { FormularioReservaComponent } from './formulario-reserva.component';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 @Component({
   selector: 'app-formulario-reserva',
-  imports: [],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './formulario-reserva.component.html',
   styleUrl: './formulario-reserva.component.css'
 })
@@ -22,4 +23,6 @@ constructor(private fb: FormBuilder) {
   });
 }
 }
+
+
 

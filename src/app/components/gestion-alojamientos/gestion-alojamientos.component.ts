@@ -89,9 +89,9 @@ export class GestionAlojamientosComponent {
     );
   }
 
-  editarAlojamiento(id_alojamiento: Alojamientos) {
-    this.router.navigate(['/editarAlojamiento'], { queryParams: { id_alojamiento } });
-  }
+  editarAlojamiento(id_alojamiento: number) {
+  this.router.navigate([`/editarAlojamiento`, id_alojamiento]);
+}
 
   eliminarAlojamiento(id_alojamiento: number) {
     if (confirm(`¿Estás seguro de que deseas eliminar el alojamiento con ID ${id_alojamiento}?`)) {

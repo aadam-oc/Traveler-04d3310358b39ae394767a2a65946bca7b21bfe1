@@ -200,6 +200,10 @@ getAlojamientosCompletos(): Observable<any> {
   return this.http.get(`${this.apiUrl}/traveler/alojamientos_completo`);
 }
 
+getAlojamientoJoinById(id_alojamiento: number): Observable<any> {
+  return this.http.get(`${this.apiUrl}/traveler/alojamientos_completo/${id_alojamiento}`);
+}
+
 //alojamiento por id
 getAlojamientoById(id: number): Observable<any> {
   return this.http.get(`${this.apiUrl}/traveler/alojamientos/${id}`);
@@ -224,6 +228,15 @@ putAlojamiento(id: number, alojamiento: any): Observable<any> {
     Authorization: `Bearer ${token}`
   };
   return this.http.put(`${this.apiUrl}/traveler/alojamientos/${id}`, alojamiento, { headers });
+}
+
+putAlojamientoCompleto(id: number, alojamiento: any): Observable<any> {
+  const token = localStorage.getItem('authToken');
+  console.log('TOKEN ENVIADO:', token);
+  const headers = {
+    Authorization: `Bearer ${token}`
+  };
+  return this.http.put(`${this.apiUrl}/traveler/alojamientos_completo/${id}`, alojamiento, { headers });
 }
 
 //eliminar alojamiento

@@ -1,0 +1,21 @@
+<div class="container mt-4">
+  <h2>Editar Tipo de Actividad</h2>
+  <form [formGroup]="editarTipoActividadForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="nombre_tipo_actividad">Nombre del Tipo de Actividad</label>
+      <input
+        type="text"
+        id="nombre_tipo_actividad"
+        class="form-control"
+        formControlName="nombre_tipo_actividad"
+        placeholder="Ingrese el nombre del tipo de actividad"
+      />
+      <div *ngIf="editarTipoActividadForm.get('nombre_tipo_actividad')?.invalid && editarTipoActividadForm.get('nombre_tipo_actividad')?.touched" class="text-danger">
+        El nombre del tipo de actividad es obligatorio.
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="editarTipoActividadForm.invalid">Guardar Cambios</button>
+    <button type="button" class="btn btn-secondary" (click)="navigateToTiposActividades()">Cancelar</button>
+  </form>
+</div>
