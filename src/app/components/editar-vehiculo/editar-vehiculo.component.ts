@@ -40,7 +40,7 @@ export class EditarVehiculoComponent implements OnInit {
   }
 
   cargarVehiculo() {
-    this.vehiculosService.getVehiculoPorId(this.vehiculoId).subscribe(
+    this.vehiculosService.getVehiculosDetallesById(this.vehiculoId).subscribe(
       (vehiculo) => {
         this.form.patchValue({
           id_vehiculo: vehiculo.id_vehiculo,
@@ -48,6 +48,7 @@ export class EditarVehiculoComponent implements OnInit {
           tipo_vehiculo: vehiculo.nombre_tipo_vehiculo,
           imagen: null
         });
+        console.log('Datos del vehículo cargados:', vehiculo);
         this.imagenPreview = vehiculo.imagen;
       },
       (error) => {
@@ -71,10 +72,7 @@ export class EditarVehiculoComponent implements OnInit {
     }
   }
 
-  onSubmit(): void {
-    console.log('Form submitted:', this.form.value);
-  }
-
+  
   static imports = [ReactiveFormsModule];
 
   guardarCambios() {
@@ -82,6 +80,7 @@ export class EditarVehiculoComponent implements OnInit {
       const formData = new FormData();
       formData.append('nombre_vehiculo', this.form.get('nombre_vehiculo')?.value);
       formData.append('tipo_vehiculo', this.form.get('tipo_vehiculo')?.value);
+      formData.append('id_destino', this.form.get('id_destino')?.value);
       if (this.form.get('imagen')?.value) {
         formData.append('imagen', this.form.get('imagen')?.value);
       }
@@ -98,7 +97,16 @@ export class EditarVehiculoComponent implements OnInit {
     }
   }
 
+  gestionDeErrores(error: any) {
+    console.error('Error al actualizar el vehículo:', error);
+  }
+
   cancelar() {
     this.router.navigate(['/']);
   }
+  onSubmit(): void {
+    this.guardarCambios();
+    console.log('Form submitted:', this.form.value);
+  }
+
 }

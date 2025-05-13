@@ -11,9 +11,16 @@ import { Item } from '../models/item.model'; // Importa la interfaz
 export class ApiService {
   
   private apiUrl = environment.apiUrl;
+  private apiImagenesUrl = environment.apiImagenesUrl;
 
   constructor(private http: HttpClient) {}
 
+//Subida de imagenes
+  subirImagen(file: File): Observable<{ imageUrl: string }> {
+    const formData = new FormData();
+    formData.append('image', file);
+    return this.http.post<{ imageUrl: string }>(`${this.apiImagenesUrl}`, formData);
+  }
 //Autorizacion
   //register
   registerUser(user: any): Observable<any> {

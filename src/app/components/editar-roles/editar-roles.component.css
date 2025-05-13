@@ -1,0 +1,235 @@
+/* Estilos generales */
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 32px;
+    background-color: #dbdbdb;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+    border-top: 4px solid #143D2C;
+}
+
+h2 {
+    color: #143D2C;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #143D2C;
+    position: relative;
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 60px;
+    height: 2px;
+    background-color: #143D2C;
+    border-radius: 3px;
+}
+
+/* Estilos de los grupos de formulario */
+.form-group {
+    margin-bottom: 30px;
+    position: relative;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: #143D2C;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+    letter-spacing: 0.3px;
+}
+
+.form-control {
+    width: 80%;
+    padding: 14px 18px;
+    border: 1px solid #143D2C;
+    border-radius: 8px;
+    font-size: 16px;
+    color: #1e293b;
+    background-color: #f8fafc;
+    transition: all 0.3s ease;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #143D2C;
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+    background-color: #ffffff;
+}
+
+.form-control:hover:not(:focus) {
+    border-color: #94a3b8;
+}
+
+/* Placeholder personalizado */
+.form-control::placeholder {
+    color: #94a3b8;
+    opacity: 0.7;
+}
+
+/* Mensajes de error */
+.text-danger {
+    color: #dc2626;
+    font-size: 13px;
+    margin-top: 8px;
+    display: block;
+    font-weight: 500;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Estilos para campos inválidos */
+.form-control.ng-invalid.ng-touched {
+    border-color: #dc2626;
+    background-color: #fef2f2;
+}
+
+.form-control.ng-invalid.ng-touched:focus {
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+/* Estilos para campos válidos */
+.form-control.ng-valid.ng-touched {
+    border-color: #10b981;
+}
+
+/* Estilos para los botones */
+button {
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    margin-right: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    letter-spacing: 0.3px;
+}
+
+button[type="submit"] {
+    background-color: #143D2C;
+    color: white;
+}
+
+button[type="submit"]:hover:not(:disabled) {
+    background-color: #1f5a41;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
+}
+
+button[type="submit"]:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+button[type="submit"]:disabled {
+    background-color: #1f5a41c4;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+button[type="button"] {
+    background-color: #f1f5f9;
+    color: #475569;
+    border: 1px solid #e2e8f0;
+}
+
+button[type="button"]:hover {
+    background-color: #e2e8f0;
+    color: #1e293b;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+button[type="button"]:active {
+    background-color: #cbd5e1;
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Diseño responsive */
+@media (max-width: 768px) {
+    .container {
+        padding: 24px;
+        margin: 0 15px;
+        border-radius: 10px;
+    }
+
+    h2 {
+        font-size: 24px;
+        margin-bottom: 24px;
+    }
+
+    .form-control {
+        padding: 12px 16px;
+    }
+
+    button {
+        padding: 12px 24px;
+        font-size: 15px;
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+}
+
+/* Animación sutil al cargar el formulario */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.container {
+    animation: fadeInUp 0.4s ease-out;
+}
+
+/* Efecto de enfoque en el label cuando el input está enfocado */
+.form-group:focus-within label {
+    color: #143D2C;
+}
+
+/* Efecto de pulso en el botón de guardar */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.4);
+    }
+
+    70% {
+        box-shadow: 0 0 0 10px rgba(79, 70, 229, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(79, 70, 229, 0);
+    }
+}
+
+button[type="submit"]:not(:disabled):hover {
+    animation: pulse 1.5s infinite;
+}

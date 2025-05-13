@@ -28,6 +28,9 @@ export class GestionActividadesComponent {
   formCrearActividad: FormGroup;
   selectedActividad: Actividad | null = null;
   isEditing: boolean = false;
+  imagenSeleccionada: boolean = false;
+  imagenUrl: string = '';
+  imagenPreview: string | ArrayBuffer | null = null;
 
   constructor(private apiService: ApiService, private router: Router, private formBuilder: FormBuilder) {
     this.formCrearActividad = this.formBuilder.group({
@@ -38,6 +41,19 @@ export class GestionActividadesComponent {
       disponibilidad_actividad: [null],
       precio: [null, Validators.required],
     });
+  }
+
+  onFileSelected(event: any): void {
+    const file: File = event.target.files[0];
+
+    if (file) {
+      this.imagenSeleccionada = true;
+
+      this.apiService.subirImagen(file).subscribe(response => {
+        this.imagenUrl = response.imageUrl;
+        this.imagenSeleccionada = false;
+      });
+    }
   }
 
   checkAllowed() {

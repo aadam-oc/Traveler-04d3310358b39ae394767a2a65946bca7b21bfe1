@@ -27,6 +27,10 @@ export class FakeApiVehiculosService {
     return this.http.get(`${this.apiUrl}/apicoches/vehiculos/detalles`);
   }
 
+  getVehiculosDetallesById(id: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/apicoches/vehiculos/detalles/${id}`);
+  }
+
   crearVehiculo(vehiculo: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/apicoches/vehiculos`, vehiculo);
   }
