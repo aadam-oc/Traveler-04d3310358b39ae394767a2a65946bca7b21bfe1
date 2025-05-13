@@ -27,40 +27,44 @@ import { GestionUsuariosComponent } from './components/gestion-usuarios/gestion-
 import { GestionRolesComponent } from './components/gestion-roles/gestion-roles.component';
 import { EditarAlojamientoComponent } from './components/editar-alojamiento/editar-alojamiento.component';
 import { GestionVehiculosAlquilerComponent } from './components/gestion-vehiculos-alquiler/gestion-vehiculos-alquiler.component';
-import {FormularioReservaComponent} from './components/formulario-reserva/formulario-reserva.component';
+import { FormularioReservaComponent } from './components/formulario-reserva/formulario-reserva.component';
 import { EditarTiposActividadesComponent } from './components/editar-tipos-actividades/editar-tipos-actividades.component';
 import { EditarVehiculoComponent } from './components/editar-vehiculo/editar-vehiculo.component';
+import { EditarRolesComponent } from './components/editar-roles/editar-roles.component';
+import { EditarDestinosComponent } from './components/editar-destinos/editar-destinos.component';
 
 
 export const appRoutes: Routes = [
   { path: '', component: InicioComponent },
-  { path: 'login', component: HeroLoginComponent, data: {title: 'INICIO DE SESIÓN'} },
-  { path: 'register', component: HeroComponent, data: {title: 'REGISTRO'} },
-  { path: 'dashboard', component: DashboardComponent, data: {title: 'DASHBOARD'} , canActivate: [AuthGuard]},
-  { path: 'actividades', component: ActividadesComponent, data: {title: 'ACTIVIDADES'}},
-  { path: 'destinos', component: DestinosComponent, data: {title: 'DESTINOS'}},
-  { path: 'alojamientos', component: AlojamientosComponent, data: {title: 'ALOJAMIENTOS'}},
-  { path: 'vuelos', component: VuelosComponent, data: {title: 'VUELOS'}},
-  { path: 'vehiculos-alquiler', component: VehiculosAlquilerComponent, data: {title: 'VEHÍCULOS ALQUILER'}},
-  { path: 'foro', component: ForoComponent, data: {title: 'FORO'}},
-  { path: 'contacto', component: ContactoComponent, data: {title: 'CONTACTO'}},
-  { path: 'perfil', component: PerfilComponent, data: {title: 'PERFIL'}, canActivate: [AuthGuard]},
-  { path: 'post-blog', component: PostBlogComponent},
-  { path: 'politica-privacidad', component: PoliticaPrivacidadComponent, data: {title: 'POLÍTICA DE PRIVACIDAD'}},
-  { path: 'faq', component: FaqComponent, data: {title: 'FAQ'}},
-  { path: 'editarUsuario', component: EditarUsuarioComponent, data: {title: 'EDITAR USUARIO'}, canActivate: [AuthGuard]},
-  { path: 'editarActividad', component: EditarActividadesComponent, data: {title: 'EDITAR ACTIVIDADES'}, canActivate: [AuthGuard]},
-  { path: 'gestionAlojamientos', component: GestionAlojamientosComponent, data: {title: 'GESTIÓN ALOJAMIENTOS'}, canActivate: [AuthGuard] },
-  { path: 'gestionActividades', component: GestionActividadesComponent, data: {title: 'GESTIÓN ACTIVIDADES'}, canActivate: [AuthGuard]},
-  { path: 'gestionTiposActividades', component: GestionTiposActividadesComponent, data: {title: 'GESTIÓN TIPOS ACTIVIDADES'}, canActivate: [AuthGuard]},
-  { path: 'gestionDestinos', component: GestionDestinosComponent, data: {title: 'GESTIÓN DESTINOS'}, canActivate: [AuthGuard]},
-  { path: 'gestionUsuarios', component: GestionUsuariosComponent, data: {title: 'GESTIÓN USUARIOS'}, canActivate: [AuthGuard]},
-  { path: 'gestionRoles', component: GestionRolesComponent, data: {title: 'GESTIÓN ROLES'}, canActivate: [AuthGuard]},
-  { path: 'editarAlojamiento/:id', component: EditarAlojamientoComponent, data: {title: 'EDITAR ALOJAMIENTO'}, canActivate: [AuthGuard]},
-  { path: 'reserva', component: FormularioReservaComponent, data: {title: 'FORMULARIO RESERVA'}, canActivate: [AuthGuard]},
-  { path: 'editarTiposActividades/:id', component: EditarTiposActividadesComponent, data: {title: 'EDITAR TIPO ACTIVIDAD'}, canActivate: [AuthGuard]},
-  { path: 'editarVehiculo/:id', component: EditarVehiculoComponent, data: {title: 'EDITAR VEHÍCULO'}, canActivate: [AuthGuard]},
-  { path: '**', redirectTo: '' } 
+  { path: 'login', component: HeroLoginComponent, data: { title: 'INICIO DE SESIÓN' } },
+  { path: 'register', component: HeroComponent, data: { title: 'REGISTRO' } },
+  { path: 'dashboard', component: DashboardComponent, data: { title: 'DASHBOARD' }, canActivate: [AuthGuard] },
+  { path: 'actividades', component: ActividadesComponent, data: { title: 'ACTIVIDADES' } },
+  { path: 'destinos', component: DestinosComponent, data: { title: 'DESTINOS' } },
+  { path: 'alojamientos', component: AlojamientosComponent, data: { title: 'ALOJAMIENTOS' } },
+  { path: 'vuelos', component: VuelosComponent, data: { title: 'VUELOS' } },
+  { path: 'vehiculos-alquiler', component: VehiculosAlquilerComponent, data: { title: 'VEHÍCULOS ALQUILER' } },
+  { path: 'foro', component: ForoComponent, data: { title: 'FORO' } },
+  { path: 'contacto', component: ContactoComponent, data: { title: 'CONTACTO' } },
+  { path: 'perfil', component: PerfilComponent, data: { title: 'PERFIL' }, canActivate: [AuthGuard] },
+  { path: 'post-blog', component: PostBlogComponent },
+  { path: 'politica-privacidad', component: PoliticaPrivacidadComponent, data: { title: 'POLÍTICA DE PRIVACIDAD' } },
+  { path: 'faq', component: FaqComponent, data: { title: 'FAQ' } },
+  { path: 'editarUsuario', component: EditarUsuarioComponent, data: { title: 'EDITAR USUARIO' }, canActivate: [AuthGuard] },
+  { path: 'editarActividad', component: EditarActividadesComponent, data: { title: 'EDITAR ACTIVIDADES' }, canActivate: [AuthGuard] },
+  { path: 'gestionAlojamientos', component: GestionAlojamientosComponent, data: { title: 'GESTIÓN ALOJAMIENTOS' }, canActivate: [AuthGuard] },
+  { path: 'gestionActividades', component: GestionActividadesComponent, data: { title: 'GESTIÓN ACTIVIDADES' }, canActivate: [AuthGuard] },
+  { path: 'gestionTiposActividades', component: GestionTiposActividadesComponent, data: { title: 'GESTIÓN TIPOS ACTIVIDADES' }, canActivate: [AuthGuard] },
+  { path: 'gestionDestinos', component: GestionDestinosComponent, data: { title: 'GESTIÓN DESTINOS' }, canActivate: [AuthGuard] },
+  { path: 'gestionUsuarios', component: GestionUsuariosComponent, data: { title: 'GESTIÓN USUARIOS' }, canActivate: [AuthGuard] },
+  { path: 'gestionRoles', component: GestionRolesComponent, data: { title: 'GESTIÓN ROLES' }, canActivate: [AuthGuard] },
+  { path: 'editarAlojamiento/:id', component: EditarAlojamientoComponent, data: { title: 'EDITAR ALOJAMIENTO' }, canActivate: [AuthGuard] },
+  { path: 'reserva', component: FormularioReservaComponent, data: { title: 'FORMULARIO RESERVA' }, canActivate: [AuthGuard] },
+  { path: 'editarTiposActividades/:id', component: EditarTiposActividadesComponent, data: { title: 'EDITAR TIPO ACTIVIDAD' }, canActivate: [AuthGuard] },
+  { path: 'editarVehiculo/:id', component: EditarVehiculoComponent, data: { title: 'EDITAR VEHÍCULO' }, canActivate: [AuthGuard] },
+  { path: 'editarRol/:id', component: EditarRolesComponent, data: { title: 'EDITAR ROL' }, canActivate: [AuthGuard] },
+  { path: 'editarDestinos/:id', component: EditarDestinosComponent, data: { title: 'EDITAR DESTINO' }, canActivate: [AuthGuard] },
+  { path: '**', redirectTo: '' }
 ];
 
 

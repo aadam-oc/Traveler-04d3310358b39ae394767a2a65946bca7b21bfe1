@@ -1,0 +1,35 @@
+<div class="container mt-4">
+  <h2>Editar Destino</h2>
+  <form [formGroup]="editarDestinoForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="pais">País</label>
+      <input
+        type="text"
+        id="pais"
+        class="form-control"
+        formControlName="pais"
+        [placeholder]="editarDestinoForm.get('pais')?.value || 'Ingrese el país'"
+      />
+      <div *ngIf="editarDestinoForm.get('pais')?.invalid && editarDestinoForm.get('pais')?.touched" class="text-danger">
+        El país es obligatorio.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="ciudad">Ciudad</label>
+      <input
+        type="text"
+        id="ciudad"
+        class="form-control"
+        formControlName="ciudad"
+        [placeholder]="editarDestinoForm.get('ciudad')?.value || 'Ingrese la ciudad'"
+      />
+      <div *ngIf="editarDestinoForm.get('ciudad')?.invalid && editarDestinoForm.get('ciudad')?.touched" class="text-danger">
+        La ciudad es obligatoria.
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="editarDestinoForm.invalid">Guardar Cambios</button>
+    <button type="button" class="btn btn-secondary" (click)="navigateToDashboard()">Cancelar</button>
+  </form>
+</div>

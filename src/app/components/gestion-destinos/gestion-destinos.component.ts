@@ -64,9 +64,9 @@ checkAllowed() {
     }
   }
 
-  onEdit(destino: Destinos) {
-    this.form.patchValue(destino);
-  }
+  onEdit(id_destino: number) {
+    this.router.navigate([`/editarDestinos`, id_destino]);
+}
 
   onDelete(destino: Destinos) {
     if (confirm('¿Estás seguro de que deseas eliminar este destino?')) {

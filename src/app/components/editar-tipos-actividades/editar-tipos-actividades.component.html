@@ -8,7 +8,7 @@
         id="nombre_tipo_actividad"
         class="form-control"
         formControlName="nombre_tipo_actividad"
-        placeholder="Ingrese el nombre del tipo de actividad"
+        [placeholder]="editarTipoActividadForm.get('nombre_tipo_actividad')?.value || 'Ingrese el nombre del tipo de actividad'"
       />
       <div *ngIf="editarTipoActividadForm.get('nombre_tipo_actividad')?.invalid && editarTipoActividadForm.get('nombre_tipo_actividad')?.touched" class="text-danger">
         El nombre del tipo de actividad es obligatorio.

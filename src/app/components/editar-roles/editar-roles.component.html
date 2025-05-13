@@ -1,0 +1,21 @@
+<div class="container mt-4">
+  <h2>Editar Rol</h2>
+  <form [formGroup]="editarRolForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="nombre_rol">Nombre del Rol</label>
+      <input
+        type="text"
+        id="nombre_rol"
+        class="form-control"
+        formControlName="nombre_rol"
+        [placeholder]="editarRolForm.get('nombre_rol')?.value || 'Ingrese el nombre del rol'"
+      />
+      <div *ngIf="editarRolForm.get('nombre_rol')?.invalid && editarRolForm.get('nombre_rol')?.touched" class="text-danger">
+        El nombre del rol es obligatorio.
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="editarRolForm.invalid">Guardar Cambios</button>
+    <button type="button" class="btn btn-secondary" (click)="navigateToRoles()">Cancelar</button>
+  </form>
+</div>

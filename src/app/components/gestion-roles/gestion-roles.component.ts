@@ -45,9 +45,9 @@ export class GestionRolesComponent {
     );
   }
 
-  onEdit(rol: Roles) {
-    alert('Todavia no se puede editar');
-  }
+  onEdit(id_rol: number) {
+    this.router.navigate([`/editarRol`, id_rol]);
+}
 
   onDelete(rol: Roles) {
     if (confirm(`¿Estás seguro de que deseas eliminar el rol ${rol.nombre_rol}?`)) {

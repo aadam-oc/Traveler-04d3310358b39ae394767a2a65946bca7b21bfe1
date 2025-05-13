@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FakeApiVehiculosService } from '../../services/fake-api-vehiculos.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-editar-vehiculo',
   templateUrl: './editar-vehiculo.component.html',
   styleUrl: './editar-vehiculo.component.css',
   standalone: true,
-  imports: []
+  imports: [CommonModule, ReactiveFormsModule, FormsModule]
 })
 export class EditarVehiculoComponent implements OnInit {
   form!: FormGroup;
@@ -29,6 +31,9 @@ export class EditarVehiculoComponent implements OnInit {
       tipo_vehiculo: ['', Validators.required],
       imagen: [null]
     });
+
+    const id = this.route.snapshot.paramMap.get('id');
+    console.log('ID recibido:', id);
 
     this.vehiculoId = Number(this.route.snapshot.paramMap.get('id'));
     this.cargarVehiculo();
@@ -65,6 +70,12 @@ export class EditarVehiculoComponent implements OnInit {
       reader.readAsDataURL(file);
     }
   }
+
+  onSubmit(): void {
+    console.log('Form submitted:', this.form.value);
+  }
+
+  static imports = [ReactiveFormsModule];
 
   guardarCambios() {
     if (this.form.valid) {

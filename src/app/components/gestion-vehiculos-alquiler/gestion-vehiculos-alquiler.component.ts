@@ -115,9 +115,8 @@ export class GestionVehiculosAlquilerComponent implements OnInit {
     }
   }
 
-  onEdit(vehiculo: any) {
-    console.log('Editar vehículo:', vehiculo);
-    this.router.navigate(['/editar-vehiculo', vehiculo.id_vehiculo]);
+  onEdit(id_vehiculo: any) {
+    this.router.navigate(['/editarVehiculo/:id', { id: id_vehiculo }]);
   }
 
   resetForm() {

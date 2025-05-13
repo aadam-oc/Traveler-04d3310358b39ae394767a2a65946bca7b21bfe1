@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
-imports: [CommonModule, ReactiveFormsModule, FormsModule],  selector: 'app-editar-tipos-actividades',
+  imports: [CommonModule, ReactiveFormsModule, FormsModule], selector: 'app-editar-tipos-actividades',
   templateUrl: './editar-tipos-actividades.component.html',
   styleUrl: './editar-tipos-actividades.component.css'
 })
@@ -46,10 +46,12 @@ export class EditarTiposActividadesComponent {
   // Cargar los datos del tipo de actividad en el formulario
   getTipoActividad() {
     this.apiService.getTipoActividadById(this.id_tipo_actividad).subscribe(
-      (response: TipoActividad) => {
+      (response: any) => {
+        const tipoActividad = response.tipo_actividad; // Accede al objeto tipo_actividad
         this.editarTipoActividadForm.patchValue({
-          nombre_tipo_actividad: response.nombre_tipo_actividad
+          nombre_tipo_actividad: tipoActividad.nombre_tipo_actividad
         });
+        console.log('Datos del tipo de actividad cargados:', tipoActividad);
       },
       error => {
         console.error('Error al obtener el tipo de actividad:', error);
