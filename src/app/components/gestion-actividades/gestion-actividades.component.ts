@@ -31,6 +31,7 @@ export class GestionActividadesComponent {
   imagenSeleccionada: boolean = false;
   imagenUrl: string = '';
   imagenPreview: string | ArrayBuffer | null = null;
+  id_actividad_subida: number = 0;
 
   constructor(private apiService: ApiService, private router: Router, private formBuilder: FormBuilder) {
     this.formCrearActividad = this.formBuilder.group({
@@ -52,7 +53,23 @@ export class GestionActividadesComponent {
       this.apiService.subirImagen(file).subscribe(response => {
         this.imagenUrl = response.imageUrl;
         this.imagenSeleccionada = false;
+        console.log('Imagen subida:', this.imagenUrl);
       });
+    }
+  }
+
+  postImagen(id_actividad: number) {
+    if (this.imagenUrl) {
+      this.apiService.subirRutaImagenActividades(this.imagenUrl, id_actividad).subscribe(
+        (response) => {
+          console.log('Imagen subida:', response);
+        },
+        (error) => {
+          console.error('Error al subir la imagen:', error);
+        }
+      );
+    } else {
+      console.log('No se ha seleccionado ninguna imagen.');
     }
   }
 
@@ -61,7 +78,7 @@ export class GestionActividadesComponent {
       this.allowed = true;
     }
   }
-  
+
   getTipoActividades() {
     this.apiService.getTiposActividades().subscribe(
       (response: { tipo_actividad: TipoActividad[] }) => {
@@ -129,9 +146,11 @@ export class GestionActividadesComponent {
       this.apiService.postActividad(nuevaActividad).subscribe(
         (response: Actividad) => {
           console.log('Actividad creada:', response);
-          this.actividades.push(response); // Agregar la nueva actividad a la lista
-          this.formCrearActividad.reset(); // Limpiar el formulario después de enviar
-          this.getAllActividades(); // Actualizar la lista de actividades
+
+          this.formCrearActividad.reset();
+          this.getAllActividades();
+          // Llama aquí a postImagen con el id correcto
+          this.postImagen(response.id_actividad);
         },
         error => {
           console.error('Error al crear la actividad:', error);

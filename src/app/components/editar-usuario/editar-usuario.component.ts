@@ -66,7 +66,6 @@ export class EditarUsuarioComponent {
       this.apiService.putUsuarioCompleto(this.id_usuario, usuario).subscribe(
         response => {
           console.log('Usuario actualizado:', response);
-          alert('Usuario actualizado correctamente');
           this.router.navigate(['/dashboard']);
         },
         error => {

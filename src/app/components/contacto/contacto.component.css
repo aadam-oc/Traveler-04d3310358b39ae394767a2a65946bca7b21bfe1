@@ -8,77 +8,292 @@
 }
 
 body {
-    background-color: #f8f8f8;
+    background-color: #f8fafc;
+    color: #334155;
 }
 
 .container {
     display: flex;
+    flex-direction: column;
     background: white;
-    width: 80%;
-    max-width: 80%;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+    width: 95%;
+    max-width: 1400px;
+    /* Aumentado de 1200px */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
     overflow: hidden;
-    padding: 20px;
-    margin: 20px auto;
-    margin-bottom: 15px;
+    margin: 40px auto;
 }
 
+@media (min-width: 768px) {
+    .container {
+        flex-direction: row;
+    }
+}
+
+/* Sección de información - Reducida para dar más espacio al formulario */
 .info {
-    background: #123d22;
-    border-radius: 10px;
+    background: linear-gradient(135deg, #143D2C 0%, #0d3d22 100%);
     color: white;
-    padding: 20px;
-    flex: 1;
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+}
+
+@media (min-width: 768px) {
+    .info {
+        flex: 0 0 30%;
+        /* Reducido de 1 a 30% */
+    }
+
+    .form-container {
+        flex: 0 0 70%;
+        /* Aumentado para dar más espacio al formulario */
+    }
+}
+
+.info::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='rgba(255,255,255,0.05)' fill-rule='evenodd'/%3E%3C/svg%3E");
+    opacity: 0.3;
 }
 
 .info h2 {
-    margin-top: 0;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    position: relative;
 }
 
-.form-container {
-    padding: 20px;
-    flex: 2;
+.info h2::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    width: 50px;
+    height: 3px;
+    background-color: #4ade80;
+    border-radius: 2px;
 }
 
-form {
-    display: flex;
-    flex-direction: column;
+.info p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    position: relative;
+    z-index: 1;
 }
 
-label {
-    margin-top: 10px;
-    font-weight: bold;
-}
-
-input,
-textarea {
-    padding: 8px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-textarea {
-    height: 100px;
-}
-
-.radio-group {
-    display: flex;
+.info p strong {
+    display: inline-flex;
     align-items: center;
-    gap: 10px;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    margin-right: 10px;
 }
 
+/* Contenedor del formulario */
+.form-container {
+    padding: 40px;
+    flex: 1;
+}
+
+/* Estilos del formulario */
+form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+@media (min-width: 768px) {
+    form {
+        grid-template-columns: repeat(3, 1fr);
+        /* Cambiado de 2 a 3 columnas */
+        gap: 25px;
+        /* Aumentado el espacio entre campos */
+    }
+
+    /* Ajustamos qué campos ocupan todo el ancho */
+    form> :nth-child(6),
+    /* Asunto */
+    form> :nth-child(7),
+    /* Mensaje */
+    form> :nth-child(8) {
+        /* Botón */
+        grid-column: span 3;
+    }
+}
+
+/* Etiquetas */
+label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #475569;
+    margin-bottom: 6px;
+    transition: color 0.3s ease;
+}
+
+/* Indicador de campo requerido */
+label::after {
+    content: '*';
+    color: #ef4444;
+    margin-left: 4px;
+}
+
+/* Campos de entrada */
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 15px;
+    color: #334155;
+    background-color: #f8fafc;
+    transition: all 0.3s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: #155e39;
+    box-shadow: 0 0 0 3px rgba(21, 94, 57, 0.1);
+    background-color: #ffffff;
+}
+
+input:hover:not(:focus),
+select:hover:not(:focus),
+textarea:hover:not(:focus) {
+    border-color: #cbd5e1;
+}
+
+/* Estilo para select */
+select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 40px;
+}
+
+/* Estilo para textarea */
+textarea {
+    height: 150px;
+    resize: vertical;
+}
+
+/* Estilo para el botón */
 button {
-    margin-top: 15px;
-    padding: 10px;
-    background: #123d22;
+    padding: 14px 28px;
+    background: #143D2C;
     color: white;
     border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 16px;
     cursor: pointer;
-    border-radius: 4px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(21, 94, 57, 0.1);
+    width: auto;
+    /* Cambiado de 100% a auto */
+    max-width: 250px;
+    /* Limitamos el ancho máximo */
+    justify-self: start;
+    /* Alineamos a la izquierda */
 }
 
-button:hover {
-    background: #0f2d18;
+button:hover:not(:disabled) {
+    background: #1f5a41;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(21, 94, 57, 0.15);
+}
+
+button:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+button:disabled {
+    background-color: #94a3b8;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Animación al cargar */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.container {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* Estilos para campos inválidos */
+input.ng-invalid.ng-touched,
+select.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched {
+    border-color: #ef4444;
+    background-color: #fef2f2;
+}
+
+input.ng-invalid.ng-touched:focus,
+select.ng-invalid.ng-touched:focus,
+textarea.ng-invalid.ng-touched:focus {
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+/* Efecto de enfoque en la etiqueta cuando el input está enfocado */
+form>div:focus-within label {
+    color: #155e39;
+}
+
+/* Ajustes adicionales para pantallas medianas */
+@media (min-width: 992px) and (max-width: 1199px) {
+    form {
+        grid-template-columns: repeat(2, 1fr);
+        /* 2 columnas en pantallas medianas */
+    }
+
+    form> :nth-child(6),
+    form> :nth-child(7),
+    form> :nth-child(8) {
+        grid-column: span 2;
+    }
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 767px) {
+    .container {
+        width: 100%;
+        border-radius: 0;
+        margin: 0;
+    }
+
+    .info,
+    .form-container {
+        padding: 30px;
+    }
+
+    form {
+        gap: 15px;
+    }
 }

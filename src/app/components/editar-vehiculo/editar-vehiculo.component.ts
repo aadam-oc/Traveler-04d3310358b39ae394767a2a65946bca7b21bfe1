@@ -89,11 +89,10 @@ export class EditarVehiculoComponent implements OnInit {
 
       this.vehiculosService.actualizarVehiculo(this.vehiculoId, formData).subscribe(
         () => {
-          alert('Vehículo actualizado correctamente');
           this.router.navigate(['/']);
         },
         (error) => {
-          alert('Error al actualizar el vehículo', error);
+          alert('Error al actualizar el vehículo');
         }
       );
     }

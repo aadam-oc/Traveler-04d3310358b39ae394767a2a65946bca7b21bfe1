@@ -141,7 +141,3 @@ header {
 .fade-in {
     animation: fadeIn 1s ease-in-out;
 }
-
-.palabralogo {
-    font-family: sans-serif;
-}

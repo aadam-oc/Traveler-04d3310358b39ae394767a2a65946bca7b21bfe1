@@ -2,20 +2,23 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
   <div>
     <label for="id_vehiculo">ID Vehículo</label>
-    <input id="id_vehiculo" type="text" formControlName="id_vehiculo" [disabled]="true">
+    <input id="id_vehiculo" type="text" formControlName="id_vehiculo"
+      [disabled]="true">
   </div>
   <div>
     <label for="nombre_vehiculo">Nombre Vehículo</label>
-    <input id="nombre_vehiculo" type="text" formControlName="nombre_vehiculo" required>
+    <input id="nombre_vehiculo" type="text" formControlName="nombre_vehiculo"
+      required>
   </div>
   <div>
     <label for="tipo_vehiculo">Tipo Vehículo</label>
-    <input id="tipo_vehiculo" type="text" formControlName="tipo_vehiculo" required>
+    <input id="tipo_vehiculo" type="text" formControlName="tipo_vehiculo"
+      required>
   </div>
-<div>
+  <div>
     <label for="id_destino">ID Destino</label>
     <input id="id_destino" type="number" formControlName="id_destino" required>
-</div>
+  </div>
   <div>
     <label for="imagen">Imagen</label>
     <input id="imagen" type="file" (change)="onFileSelected($event)">

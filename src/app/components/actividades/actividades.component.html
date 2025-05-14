@@ -38,21 +38,21 @@
 
     <div class="tarjetas-grid">
         <!-- Lista de actividades filtradas -->
-        <div class="actividad expand"
-            *ngFor="let actividad of actividadesFiltradas | paginate: { itemsPerPage: 6, currentPage: p }">
-            <img class="fto-actividad" [src]="actividad.nombre_imagen_actividad"
-                alt="Actividad" />
-            <div class="contenido">
-                <div class="titulo">{{ actividad.nombre_tipo_actividad }}</div>
-                <p>{{ actividad.pais }}, {{ actividad.ciudad }}</p>
-                <div class="botones">
-                    <div class="precio">{{ actividad.precio }}€/H</div>
-                    <button class="saber-mas" (click)="abrirModal(actividad)">
-                        Saber Más
-                    </button>
+        <ng-container *ngFor="let actividad of actividadesFiltradasDisponibles | paginate: { itemsPerPage: 6, currentPage: p }">
+            <div class="actividad expand">
+                <img class="fto-actividad" [src]="actividad.nombre_imagen_actividad" alt="Actividad" />
+                <div class="contenido">
+                    <div class="titulo">{{ actividad.nombre_tipo_actividad }}</div>
+                    <p>{{ actividad.pais }}, {{ actividad.ciudad }}</p>
+                    <div class="botones">
+                        <div class="precio">{{ actividad.precio }}€/H</div>
+                        <button class="saber-mas" (click)="abrirModal(actividad)">
+                            Saber Más
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
+        </ng-container>
     </div>
 </div>
 
@@ -86,6 +86,7 @@
                     alt="Imagen de actividad" class="modal-imagen">
             </div>
 
+            <div class="modal-info">
             <div class="modal-info">
                 <div class="modal-seccion">
                     <h3>Descripción</h3>

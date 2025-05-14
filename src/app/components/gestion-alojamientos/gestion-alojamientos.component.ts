@@ -21,6 +21,11 @@ export class GestionAlojamientosComponent {
   rol = localStorage.getItem('nombre_rol');
   allowed = false;
 
+  alojamientoImagenSeleccionada: boolean = false;
+  alojamientoImagenUrl: string = '';
+  alojamientoImagenPreview: string | ArrayBuffer | null = null;
+  id_alojamiento_subida: number = 0;
+
   constructor(private apiService: ApiService, private router: Router, private fb: FormBuilder) {
     this.alojamientoForm = this.fb.group({
       id_alojamiento: [null],
@@ -109,10 +114,34 @@ export class GestionAlojamientosComponent {
 
   }
 
+  onFileSelectedAlojamiento(event: any): void {
+    const file: File = event.target.files[0];
+    if (file) {
+      this.alojamientoImagenSeleccionada = true;
+      this.apiService.subirImagen(file).subscribe(response => {
+        this.alojamientoImagenUrl = response.imageUrl;
+        this.alojamientoImagenSeleccionada = false;
+        this.alojamientoImagenPreview = response.imageUrl;
+        console.log('Imagen subida alojamiento:', this.alojamientoImagenUrl);
+      });
+    }
+  }
 
-
-
-
+  postImagenAlojamiento(id_alojamiento: number) {
+    if (this.alojamientoImagenUrl) {
+      this.apiService.subirRutaImagenAlojamientos(this.alojamientoImagenUrl, id_alojamiento).subscribe(
+        (response) => {
+          console.log('Imagen subida:', response);
+        },
+        (error) => {
+          console.error('Error al asociar la imagen al alojamiento:', error);
+        }
+      );
+    } else {
+      console.log('No se ha seleccionado ninguna imagen para el alojamiento.');
+    }
+   console.log('Imagen asociada al alojamiento:', this.alojamientoImagenUrl);
+  }
 
   onSubmit() {
     if (this.alojamientoForm.valid) {
@@ -129,14 +158,18 @@ export class GestionAlojamientosComponent {
         hora_entrada: this.alojamientoForm.value.hora_entrada,
         hora_salida: this.alojamientoForm.value.hora_salida
       };
-      console.log('Form data:', formData); // Log the form data to the console
+      console.log('Form data:', formData);
 
       this.apiService.postAlojamiento(formData).subscribe(
         response => {
           console.log('Alojamiento creado:', response);
-          this.getAlojamientos(); // Refresh the list after creating a new alojamiento
-          this.getAlojamientosCompletos(); // Refresh the list after creating a new alojamiento
-          this.alojamientoForm.reset(); // Reset the form after submission
+          this.getAlojamientos();
+          this.getAlojamientosCompletos();
+          this.alojamientoForm.reset();
+          // Asociar imagen si hay, usando el id de la respuesta
+          
+            this.postImagenAlojamiento(response.id_alojamiento);
+          
         },
         error => {
           console.error('Error creating alojamiento:', error);
@@ -146,9 +179,6 @@ export class GestionAlojamientosComponent {
       console.error('Form is invalid');
     }
   }
-
-
-
 
   ngOnInit() {
     this.getAlojamientosCompletos();

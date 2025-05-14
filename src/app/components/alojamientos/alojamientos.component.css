@@ -19,7 +19,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 10px;
+  margin-top: auto;
 }
 
 .layout-container {
@@ -35,16 +35,18 @@ body {
 }
 
 .form-container {
-  flex: 0 0 250px;
+  flex: 0 0 300px;
   /* ancho fijo para el filtro */
 }
 
 .content-container {
   flex: 1;
+  min-width: 0;
 }
 
 .card-container {
   padding: 0;
+  width: 100%;
 }
 
 .card-deck {
@@ -52,9 +54,11 @@ body {
 }
 
 .paginacion {
-  display: flex;
+display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 40px;
 }
 
 .destinations {
@@ -73,31 +77,28 @@ body {
 }
 
 /* DESTINOS (ALOJAMIENTOS) */
-
-.card-container {
-  padding: 0 15%;
-}
-
 .card-deck {
   display: grid;
-  gap: 40px;
-  margin-top: 30px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 20px;
   margin-bottom: 30px;
-  justify-content: center;
 }
 
 .card {
   background-color: #123d22;
-  /* Tono verde oscuro */
   color: white;
   overflow: hidden;
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .card-img-top {
   width: 100%;
-  height: 200px;
+  height: auto;
   object-fit: cover;
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
@@ -105,8 +106,9 @@ body {
 
 .card-body {
   padding: 15px;
-  border-bottom-left-radius: 12px;
-  border-bottom-right-radius: 12px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .card-title {
@@ -115,18 +117,23 @@ body {
 }
 
 .card-text {
-  font-size: 1rem;
-  margin-bottom: 15px;
+font-size: 0.9rem;
+  margin-bottom: 10px;
+  /* Limitar descripción a 3 líneas */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .btn-primary {
   background-color: #0a2213;
   border: none;
-  padding: 10px 20px;
+  padding: 8px 15px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 1rem;
+  font-size: 0.9rem;
   color: white;
   border-radius: 5px;
   cursor: pointer;
@@ -134,47 +141,6 @@ body {
 
 .btn-primary:hover {
   background-color: #092915;
-}
-
-/* --- Estilos del carrusy: flex;
-    align-items: center;
-    justify-content: center;el (izquierda) --- */
-.carousel {
-  position: relative;
-  width: 50%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-
-.carousel img {
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-  max-height: 100%;
-  object-fit: cover;
-}
-
-.prev,
-.next {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.5);
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  cursor: pointer;
-}
-
-.prev {
-  left: 10px;
-}
-
-.next {
-  right: 10px;
 }
 
 /* --- Estilos de la info (derecha) --- */
@@ -241,13 +207,17 @@ body {
 /*FILTRO*/
 /* Formulario pegado a la izquierda */
 .form-container {
-  flex: 0 0 250px;
-  margin: 30px auto;
+  flex: 0 0 300px;
+  position: sticky;
+  top: 20px;
+  align-self: flex-start;
+  margin-top: 0;
   background: #143d2c63;
   padding: 1.5rem;
   border-radius: 1rem;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-  font-family: 'Segoe UI', sans-serif;
+  height: fit-content;
+  margin: 20px;
 }
 
 /* Agrupación de cada campo */
@@ -276,7 +246,7 @@ body {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  width: 90%;
+  width: 100%;
   height: 10px;
   background: #e5e7eb;
   border-radius: 5px;

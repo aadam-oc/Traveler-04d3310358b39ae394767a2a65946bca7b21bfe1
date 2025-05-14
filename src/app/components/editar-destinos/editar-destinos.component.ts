@@ -71,7 +71,6 @@ export class EditarDestinosComponent implements OnInit {
       this.apiService.putDestino(this.id_destino, formData).subscribe(
         response => {
           console.log('Destino actualizado:', response);
-          alert('Destino actualizado con éxito');
           this.router.navigate(['/gestionDestinos']);
         },
         error => {

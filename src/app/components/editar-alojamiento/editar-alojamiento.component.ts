@@ -16,6 +16,7 @@ export class EditarAlojamientoComponent {
   editaralojamientoForm: FormGroup;
   id_alojamiento: number = 0;
   destinos: Destinos[] = []; // Lista de destinos
+  id_usuario: number = 0;
 
   constructor(private router: Router, private route: ActivatedRoute, private fb: FormBuilder, private apiService: ApiService) {
     this.editaralojamientoForm = this.fb.group({
@@ -74,6 +75,7 @@ export class EditarAlojamientoComponent {
         hora_entrada: alojamiento.hora_entrada,
         hora_salida: alojamiento.hora_salida
       });
+      this.id_usuario = alojamiento.id_usuario; // Asigna el id_usuario
     },
     error => {
       console.error('Error al obtener el alojamiento:', error);
@@ -85,13 +87,12 @@ export class EditarAlojamientoComponent {
   // Enviar los datos actualizados al backend
   onSubmit() {
     if (this.editaralojamientoForm.valid) {
-      const formData = this.editaralojamientoForm.value;
+      const formData = { ...this.editaralojamientoForm.value, id_usuario: this.id_usuario };
       console.log('Formulario enviado:', formData);
       this.apiService.putAlojamientoCompleto(this.id_alojamiento, formData).subscribe(
         response => {
           console.log('Alojamiento actualizado:', response);
-          alert('Alojamiento actualizado con éxito');
-          this.router.navigate(['/alojamientos']);
+          this.router.navigate(['/dashboard']);
         },
         error => {
           console.error('Error al actualizar el alojamiento:', error);

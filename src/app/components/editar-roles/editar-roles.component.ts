@@ -66,7 +66,6 @@ navigateToRoles(){
       this.apiService.putRol(this.id_rol, formData).subscribe(
         response => {
           console.log('Rol actualizado:', response);
-          alert('Rol actualizado con éxito');
           this.router.navigate(['/dashboard']);
         },
         error => {

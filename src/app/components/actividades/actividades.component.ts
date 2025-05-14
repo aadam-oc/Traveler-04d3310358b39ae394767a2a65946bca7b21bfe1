@@ -21,6 +21,7 @@ export class ActividadesComponent implements OnInit {
   actividadesFiltradas: Actividad[] = [];
   paises: string[] = [];
   ciudades: string[] = [];
+  actividadesDisponibles: Actividad[] = [];
 
   // Propiedad para el modal
   actividadSeleccionada: Actividad | null = null;
@@ -28,6 +29,7 @@ export class ActividadesComponent implements OnInit {
   constructor(private apiService: ApiService, private fb: FormBuilder) { }
 
   ngOnInit() {
+
     this.form = this.fb.group({
       pais: [''],
       ciudad: [''],
@@ -94,5 +96,9 @@ export class ActividadesComponent implements OnInit {
       // Restaurar scroll del body
       document.body.style.overflow = 'auto';
     }
+  }
+
+  get actividadesFiltradasDisponibles() {
+    return this.actividadesFiltradas.filter(a => a.disponibilidad_actividad);
   }
 }

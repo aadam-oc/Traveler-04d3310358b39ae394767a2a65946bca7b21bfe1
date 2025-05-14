@@ -1,12 +1,16 @@
 <div class="vuelos-container">
-  <div *ngIf="vuelos.length > 0; else sinVuelos" class="vuelos-list">
-      <div *ngFor="let vuelo of vuelos" class="vuelo-card">
-          <h3>Vuelo ID: {{ vuelo.id_vuelo }}</h3>
-          <p><strong>Origen:</strong> {{ vuelo.id_origen }}</p>
-          <p><strong>Destino:</strong> {{ vuelo.id_destino }}</p>
-      </div>
-  </div>
-  <ng-template #sinVuelos>
-      <p class="no-vuelos">No hay vuelos disponibles.</p>
-  </ng-template>
+    <div *ngIf="vuelos.length > 0; else sinVuelos" class="vuelos-list">
+        <div *ngFor="let vuelo of vuelos" class="vuelo-card">
+            <img [src]="vuelo.imagen_url" alt="Imagen del vuelo" class="vuelo-imagen">
+            <div class="vuelo-info">
+                <h3 class="vuelo-name">{{ vuelo.origen_ciudad }} → {{ vuelo.destino_ciudad }}</h3>
+                <p class="vuelo-details">{{ vuelo.origen_pais }} - {{ vuelo.destino_pais }}</p>
+                <p><strong>Día:</strong> {{ vuelo.dia | date:'dd/MM/yyyy' }}</p>
+                <p><strong>Hora:</strong> {{ vuelo.hora }}</p>
+            </div>
+        </div>
+    </div>
+    <ng-template #sinVuelos>
+        <p class="no-vuelos">No hay vuelos disponibles.</p>
+    </ng-template>
 </div>

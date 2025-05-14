@@ -3,13 +3,11 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Vuelos } from '../models/vuelos';
 
-
-
 @Injectable({
   providedIn: 'root'
 })
 export class FakeApiVuelosService {
-  private apiUrl = 'http://172.17.40.7:3000'; // Ajusta según tu endpoint
+  private apiUrl = 'http://172.17.40.7:3000'; // URL de tu API
 
   constructor(private http: HttpClient) {}
 

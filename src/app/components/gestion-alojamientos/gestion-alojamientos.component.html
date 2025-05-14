@@ -231,10 +231,45 @@
                                 Hora de salida es requerida.
                             </div>
                         </div>
+                        <!-- Imagen -->
+                        <div>
+                            <label for="alojamiento_imagen">Imagen del
+                                alojamiento</label>
+                            <div class="imagen-upload-container">
+                                <div class="imagen-upload-text">
+                                    <label for="alojamiento_imagen"
+                                        class="imagen-upload-label">
+                                        Subir imagen
+                                        <input id="alojamiento_imagen"
+                                            type="file" class="sr-only"
+                                            (change)="onFileSelectedAlojamiento($event)">
+                                    </label>
+                                    <span>o arrastra y suelta</span>
+                                </div>
+                                <p class="imagen-upload-note">PNG, JPG, GIF
+                                    hasta 10MB</p>
+                            </div>
+                            <div
+                                *ngIf="!alojamientoImagenUrl && alojamientoImagenSeleccionada"
+                                class="imagen-subiendo">
+                                Subiendo imagen, por favor espera...
+                            </div>
+                        </div>
+
+                        <!-- Vista previa -->
+                        <div *ngIf="alojamientoImagenUrl"
+                            class="vista-previa-container">
+                            <p class="vista-previa-titulo">Vista previa:</p>
+                            <div class="vista-previa-imagen">
+                                <img [src]="alojamientoImagenUrl"
+                                    alt="Vista previa">
+                            </div>
+                        </div>
 
                         <button type="submit"
                             class="btn form-button alojamiento-form-button"
-                            [disabled]="alojamientoForm.invalid">Guardar</button>
+                            [disabled]="alojamientoForm.invalid">Guardar
+                        </button>
                     </form>
                 </div>
             </mat-expansion-panel>

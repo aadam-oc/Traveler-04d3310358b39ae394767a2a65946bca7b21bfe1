@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FakeApiVuelosService } from '../../services/fake-api-vuelos.service';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { Vuelos } from '../../models/vuelos';
 
 @Component({
   selector: 'app-vuelos',
@@ -13,8 +14,10 @@ import { of } from 'rxjs';
   styleUrls: ['./vuelos.component.css'],
   providers: [FakeApiVuelosService]
 })
+
+
 export class VuelosComponent implements OnInit {
-  vuelos: any[] = [];
+  vuelos: Vuelos[] = []; // Usamos la interfaz Vuelos para tipar los datos
 
   constructor(private fakeApiVuelosService: FakeApiVuelosService) {}
 
@@ -23,11 +26,12 @@ export class VuelosComponent implements OnInit {
       .pipe(
         catchError(error => {
           console.error('Error al obtener los vuelos:', error);
-          return of([]);
+          return of([]); // Devuelve un array vacío en caso de error
         })
       )
-      .subscribe((data: any) => {
-        this.vuelos = data;
+      .subscribe((data: Vuelos[]) => {
+        this.vuelos = data; // Asigna los datos recibidos a la propiedad vuelos 
+        console.log('Vuelos obtenidos:', this.vuelos);
       });
   }
 }
