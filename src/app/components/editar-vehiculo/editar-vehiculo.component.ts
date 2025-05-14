@@ -29,6 +29,7 @@ export class EditarVehiculoComponent implements OnInit {
       id_vehiculo: [{ value: '', disabled: true }],
       nombre_vehiculo: ['', Validators.required],
       tipo_vehiculo: ['', Validators.required],
+      id_destino: ['', Validators.required], // <-- Añade esta línea
       imagen: [null]
     });
 
@@ -46,6 +47,7 @@ export class EditarVehiculoComponent implements OnInit {
           id_vehiculo: vehiculo.id_vehiculo,
           nombre_vehiculo: vehiculo.nombre_vehiculo,
           tipo_vehiculo: vehiculo.nombre_tipo_vehiculo,
+          id_destino: vehiculo.id_destino, // <-- Añade esta línea
           imagen: null
         });
         console.log('Datos del vehículo cargados:', vehiculo);
@@ -77,7 +79,7 @@ export class EditarVehiculoComponent implements OnInit {
 
   guardarCambios() {
     if (this.form.valid) {
-      const formData = new FormData();
+      const formData: FormData = new FormData();
       formData.append('nombre_vehiculo', this.form.get('nombre_vehiculo')?.value);
       formData.append('tipo_vehiculo', this.form.get('tipo_vehiculo')?.value);
       formData.append('id_destino', this.form.get('id_destino')?.value);
@@ -91,14 +93,10 @@ export class EditarVehiculoComponent implements OnInit {
           this.router.navigate(['/']);
         },
         (error) => {
-          alert('Error al actualizar el vehículo');
+          alert('Error al actualizar el vehículo', error);
         }
       );
     }
-  }
-
-  gestionDeErrores(error: any) {
-    console.error('Error al actualizar el vehículo:', error);
   }
 
   cancelar() {
