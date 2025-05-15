@@ -9,7 +9,7 @@
             reserva de forma fácil y segura, y disfruta de un viaje inolvidable.
             ¡Tu próxima gran aventura comienza con traveler!
         </p>
-        <a href="javascript:void(0);" class="btn btn-primary"
+        <a href="javascript:void(0);" class="explorar"
             (click)="scrollToSection()">EXPLORAR</a>
         <div class="social-icons">
             <a href="#"><img
@@ -59,38 +59,21 @@
 </div>
 
 <div class="Tittle-destacados-1" id="destacados">
-    <h2>VUELOS DESTACADOS</h2>
+    <h2>ALOJAMIENTOS DESTACADOS</h2>
 </div>
 
 <div class="card-deck">
-    <div class="card" style="width: 18rem;">
-        <img src="http://172.17.131.14:3000/uploads/1742224263781.jpg"
-            class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card
-                title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-    </div>
-    <div class="card" style="width: 18rem;">
-        <img src="http://172.17.131.14:3000/uploads/1742224263781.jpg"
-            class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card
-                title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-    </div>
-    <div class="card" style="width: 18rem;">
-        <img src="http://172.17.131.14:3000/uploads/1742224263781.jpg"
-            class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card
-                title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+    <div class="actividad expand" *ngFor="let alojamiento of alojamientosFiltrados">
+        <img [src]="alojamiento.imagenes[0]" class="fto-actividad"
+            alt="Alojamiento">
+        <div class="contenido">
+            <div class="titulo">{{ alojamiento.nombre_alojamiento }}</div>
+            <p class="descripcion">{{ alojamiento.descripcion }}</p>
+            <p class="descripcion">{{ alojamiento.pais }}, {{ alojamiento.ciudad }}</p>
+            <div class="botones">
+                <div class="precio">{{ alojamiento.precio_dia }}€/H</div>
+                <button class="btn btn-primary">Ver actividad</button>
+            </div>
         </div>
     </div>
 </div>
@@ -111,7 +94,7 @@
             </p>
             <div class="botones">
                 <div class="precio">{{ actividad.precio }}€/H</div>
-                <a href="#" class="btn btn-primary">Ver actividad</a>
+                <button class="btn btn-primary">Ver actividad</button>
             </div>
         </div>
     </div>
@@ -126,11 +109,3 @@
     </button>
 
 </div>
-
-<br><br>
-<!--<div class="antesFooter">
-    <img src="http://172.17.131.14:3000/uploads/1742225011984.jpeg" alt="Fondo" class="antes-background" />
-    <div class="antes-content">
-        <h2 class="welcome-title">WELCOME TO TRAVELER</h2>
-      </div>
-</div>-->

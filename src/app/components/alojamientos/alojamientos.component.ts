@@ -50,7 +50,8 @@ export class AlojamientosComponent {
 
     return imagenesAlojamientos;
   }
-irAFormularioReserva() {
+  
+  irAFormularioReserva() {
     this.router.navigate(['/reserva']);
   }
 
@@ -61,12 +62,12 @@ irAFormularioReserva() {
       ciudad: [''],
       priceRangeAlojamientos: [700]
     });
-  
+
     // Suscribirse a los cambios del formulario si quieres filtrar automáticamente
     this.form.valueChanges.subscribe(() => {
       this.filtrarAlojamientos();
     });
-  
+
     this.apiService.getAlojamientosCompletos().subscribe(
       (data: any) => {
         // Obtener los alojamientos
@@ -84,20 +85,20 @@ irAFormularioReserva() {
           correo: alojamiento.correo,
           imagenes: [] // Inicializar como un array vacío
         }));
-  
+
         this.alojamientosFiltrados = [...this.alojamientos];
-  
+
         // Obtener los países únicos
         this.paises = [...new Set(this.alojamientos.map(a => a.pais))];  // Obtener países únicos
         console.log('Paises disponibles:', this.paises);  // Ver los países disponibles
-  
+
         // Obtener imágenes para cada alojamiento
         this.alojamientos.forEach((alojamiento) => {
           this.apiService.getImagenesAlojamientos(alojamiento.id_alojamiento).subscribe(data => {
             alojamiento.imagenes = data.imagenes; // Asignar las imágenes al alojamiento
           });
         });
-  
+
         console.log('Alojamientos completos:', this.alojamientos);
       },
       (error: any) => {
@@ -105,22 +106,22 @@ irAFormularioReserva() {
       }
     );
   }
-  
+
 
   filtrarAlojamientos() {
     const { pais, ciudad, priceRangeAlojamientos } = this.form.value;
-  
+
     console.log('Filtros actuales:', pais, ciudad, priceRangeAlojamientos);
-  
+
     // Filtrar alojamientos según los filtros seleccionados
     this.alojamientosFiltrados = this.alojamientos.filter(a =>
       (!pais || a.pais === pais) &&
       (!ciudad || a.ciudad === ciudad) &&
       a.precio_dia <= priceRangeAlojamientos
     );
-  
+
     console.log('Alojamientos filtrados:', this.alojamientosFiltrados);
-  
+
     // Si se selecciona un país, actualizar las ciudades disponibles
     if (pais) {
       const ciudadesDelPais = this.alojamientos
@@ -132,13 +133,13 @@ irAFormularioReserva() {
       this.ciudades = []; // Si no hay país seleccionado, vaciar las ciudades
       console.log('No hay país seleccionado, ciudades vacías');
     }
-  
+
     // Resetear ciudad si ya no aplica
     if (this.form.value.ciudad && !this.ciudades.includes(this.form.value.ciudad)) {
       this.form.patchValue({ ciudad: '' }, { emitEvent: false });
       console.log('Ciudad resetada, ya no está en las ciudades disponibles');
     }
-  } 
+  }
 
   abrirModal(alojamiento: any) {
     this.alojamientoSeleccionado = alojamiento;
@@ -146,17 +147,17 @@ irAFormularioReserva() {
     this.modalAbierto = true;
   }
 
- // Métodos para el modal
+  // Métodos para el modal
 
-cerrarModal(event: MouseEvent) {
-  // Solo cerrar si se hace clic en el overlay o en el botón de cerrar
-  if (
-    (event.target as HTMLElement).classList.contains('modal-overlay') ||
-    (event.target as HTMLElement).classList.contains('cerrar-modal')
-  ) {
-    this.alojamientoSeleccionado = null;
-    // Restaurar scroll del body
-    document.body.style.overflow = 'auto';
+  cerrarModal(event: MouseEvent) {
+    // Solo cerrar si se hace clic en el overlay o en el botón de cerrar
+    if (
+      (event.target as HTMLElement).classList.contains('modal-overlay') ||
+      (event.target as HTMLElement).classList.contains('cerrar-modal')
+    ) {
+      this.alojamientoSeleccionado = null;
+      // Restaurar scroll del body
+      document.body.style.overflow = 'auto';
+    }
   }
-}
 }

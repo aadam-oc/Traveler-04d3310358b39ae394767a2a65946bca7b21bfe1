@@ -47,7 +47,8 @@
           <div class="card-body">
             <h5 class="card-title">{{ alojamiento.nombre_alojamiento }}</h5>
             <p class="card-text">{{ alojamiento.descripcion }}</p>
-            <p class="card-text">{{ alojamiento.pais }}, {{ alojamiento.ciudad }}</p>
+            <p class="card-text">{{ alojamiento.pais }}, {{ alojamiento.ciudad
+              }}</p>
             <div class="botones">
               <p>{{alojamiento.precio_dia}} €/dia</p>
               <button class="btn btn-primary"
@@ -112,8 +113,9 @@
         </div>
       </div>
     </div>
-<div class="modal-footer">
-  <button class="btn-reservar" (click)="irAFormularioReserva()">Reservar Ahora</button>
-</div>
+    <div class="modal-footer">
+      <button class="btn-reservar" (click)="irAFormularioReserva()">Reservar
+        Ahora</button>
+    </div>
   </div>
 </div>

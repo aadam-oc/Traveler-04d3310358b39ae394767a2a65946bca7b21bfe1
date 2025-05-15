@@ -1,23 +1,42 @@
-<form [formGroup]="form" class="booking-form">
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="booking-form">
   <h2>Introduce tus datos</h2>
+  <p class="form-info">¡Ya casi estás! Solo tienes que rellenar los campos marcados con <span class="required">*</span></p>
 
-  <label>Nombre*</label>
-  <input type="text" formControlName="nombre" />
+  <div class="form-group">
+    <label for="nombre">Nombre <span class="required">*</span></label>
+    <input id="nombre" type="text" formControlName="nombre" placeholder="Introduce tu nombre" />
+  </div>
 
-  <label>Apellidos*</label>
-  <input type="text" formControlName="apellidos" />
+  <div class="form-group">
+    <label for="apellidos">Apellidos <span class="required">*</span></label>
+    <input id="apellidos" type="text" formControlName="apellidos" placeholder="Introduce tus apellidos" />
+  </div>
 
-  <label>Email*</label>
-  <input type="email" formControlName="email" />
+  <div class="form-group">
+    <label for="email">E-mail <span class="required">*</span></label>
+    <input id="email" type="email" formControlName="email" placeholder="Introduce tu correo electrónico" />
+    <small>El e-mail de confirmación se enviará a esta dirección</small>
+  </div>
 
-  <label>Teléfono*</label>
-  <input type="tel" formControlName="telefono" />
+    <div class="form-group">
+  <label for="fechaEntrada">Fecha de entrada <span class="required">*</span></label>
+  <input id="fechaEntrada" type="date" formControlName="fechaEntrada" />
+</div>
 
-  <label>País*</label>
-  <select formControlName="pais">
-    <option value="">-- Selecciona un país --</option>
-    <option *ngFor="let pais of paises" [value]="pais">{{ pais }}</option>
-  </select>
+<div class="form-group">
+  <label for="fechaSalida">Fecha de salida <span class="required">*</span></label>
+  <input id="fechaSalida" type="date" formControlName="fechaSalida" />
+</div>
 
-  <button type="submit" class="btn btn-primary">Datos de pago</button>
+
+  <div class="form-group">
+    <label for="telefono">Número de teléfono <span class="required">*</span></label>
+    <input id="telefono" type="tel" formControlName="telefono" placeholder="Introduce tu número de teléfono" />
+    <small>El alojamiento lo necesita para validar tu reserva</small>
+  </div>
+
+   <input type="hidden" formControlName="fechaReserva" />
+
+  <button type="submit" class="btn btn-primary">Reservar</button>
+
 </form>

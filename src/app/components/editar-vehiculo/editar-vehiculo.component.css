@@ -134,11 +134,11 @@ div img:hover {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* Contenedor de la vista previa */
+/* Contenedor de la vista previa 
 div *ngIf {
     display: inline-block;
     position: relative;
-}
+}*/
 
 /* Estilos del botón */
 button {
