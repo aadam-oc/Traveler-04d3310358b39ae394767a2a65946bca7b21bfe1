@@ -22,9 +22,9 @@ export class FormularioReservaComponent {
         apellidos: ['', Validators.required],
         email: ['', [Validators.required, Validators.email]],
         telefono: ['', Validators.required],
-        fechaEntrada: ['', Validators.required],
-        fechaSalida: ['', Validators.required],
-        fechaReserva: [new Date().toISOString().split('T')[0], Validators.required], // Fecha actual
+        fecha_entrada_alojamiento: ['', Validators.required],
+        fecha_salida_alojamiento: ['', Validators.required],
+        fechaReserva: [new Date().toISOString().split('T')[0], Validators.required], 
       },
       { validators: this.fechaSalidaPosterior() }
     );
@@ -32,33 +32,73 @@ export class FormularioReservaComponent {
 
   fechaSalidaPosterior() {
     return (formGroup: AbstractControl) => {
-      const fechaEntrada = formGroup.get('fechaEntrada')?.value;
-      const fechaSalida = formGroup.get('fechaSalida')?.value;
+      const fechaEntrada = formGroup.get('fecha_entrada_alojamiento')?.value;
+      const fechaSalida = formGroup.get('fecha_salida_alojamiento')?.value;
 
       if (fechaEntrada && fechaSalida && fechaSalida <= fechaEntrada) {
-        formGroup.get('fechaSalida')?.setErrors({ fechaInvalida: true });
+        formGroup.get('fecha_salida_alojamiento')?.setErrors({ fechaInvalida: true });
       } else {
-        formGroup.get('fechaSalida')?.setErrors(null);
+        formGroup.get('fecha_salida_alojamiento')?.setErrors(null);
       }
     };
   }
 
- onSubmit() {
-    if (this.form.valid) {
-      const formData = this.form.value;
-      this.apiService.postReserva(formData).subscribe(
-        (response) => {
-          console.log('Reserva guardada:', response);
-          alert('Reserva Completada');
-          this.router.navigate(['/inicio']); // Redirige a la página de inicio
-        },
-        (error) => {
-          console.error('Error al guardar la reserva:', error);
-          alert('Hubo un error al realizar la reserva. Inténtalo de nuevo.');
-        }
-      );
-    } else {
-      alert('Por favor, completa todos los campos requeridos.');
-    }
+  getAlojamiento() {
+    const id_alojamiento = Number(localStorage.getItem('id_alojamiento'));
+    this.apiService.getAlojamientoById(id_alojamiento).subscribe(
+      (response) => {
+        console.log(response);
+      },
+      (error) => {
+        console.error('Error al obtener el alojamiento:', error);
+      }
+    );
   }
+
+  getFechaEntradaConHora(): string | null {
+    const fecha = this.form.get('fecha_entrada_alojamiento')?.value;
+    if (!fecha) return null;
+    return `${fecha}T12:00:00`;
+  }
+
+  getFechaSalidaConHora(): string | null {
+    const fecha = this.form.get('fecha_salida_alojamiento')?.value;
+    if (!fecha) return null;
+    return `${fecha}T15:00:00`;
+  }
+
+ onSubmit() {
+  if (this.form.valid) {
+    const formData = this.form.value;
+    const fechaReserva = formData.fechaReserva || new Date().toISOString().split('T')[0];
+    const id_alojamiento = Number(localStorage.getItem('id_alojamiento'));
+    const id_usuario = Number(localStorage.getItem('id_usuario'));
+
+    const reserva = {
+      id_alojamiento: id_alojamiento,
+      id_usuario: id_usuario,
+      fecha_reserva_alojamiento: formData.fechaReserva,
+      fecha_entrada_alojamiento: formData.fecha_entrada_alojamiento,
+      fecha_salida_alojamiento: formData.fecha_salida_alojamiento,
+      hora_entrada_alojamiento: '12:00:00', 
+      hora_salida_alojamiento: '15:00:00',  
+      nombre: formData.nombre,
+      apellidos: formData.apellidos,
+      email: formData.email,
+      telefono: formData.telefono
+    };
+    console.log(reserva);
+    this.apiService.postReserva(reserva).subscribe(
+      (response) => {
+        alert('Reserva Completada');
+        this.router.navigate(['/inicio']);
+      },
+      (error) => {
+        alert('Hubo un error al realizar la reserva. Inténtalo de nuevo.');
+      }
+    );
+  } else {
+    alert('Por favor, completa todos los campos requeridos.');
+  }
+}
 }

@@ -15,8 +15,8 @@
                         Lista de Alojamientos
                     </mat-panel-title>
                     <mat-panel-description>
-                        Total de alojamientos: {{ alojamientosCompletos.length
-                        }}
+                        Total de alojamientos:
+                        {{ rol === 'admin' ? alojamientosCompletos.length : alojamientosUsuario.length }}
                     </mat-panel-description>
                 </mat-expansion-panel-header>
                 <div class="alojamientos-table-container">
@@ -61,7 +61,7 @@
                         </thead>
                         <tbody class="alojamientos-table-body">
                             <tr class="alojamientos-table-row"
-                                *ngFor="let alojamiento of alojamientosCompletos">
+                                *ngFor="let alojamiento of (rol === 'admin' ? alojamientosCompletos : alojamientosUsuario)">
                                 <td class="alojamientos-table-cell">{{
                                     alojamiento.id_alojamiento }}</td>
                                 <td class="alojamientos-table-cell">{{
@@ -99,6 +99,7 @@
                                 </td>
                             </tr>
                         </tbody>
+                        
                     </table>
                 </div>
             </mat-expansion-panel>

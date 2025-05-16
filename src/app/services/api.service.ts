@@ -550,7 +550,7 @@ export class ApiService {
     };
     return this.http.get(`${this.apiUrl}/traveler/imagenes_usuarios/${id_usuario}`, { headers });
   }
-  
+
   //Reserva Alojamientos
   postReserva(reserva: any): Observable<any> {
     const token = localStorage.getItem('authToken'); // Si necesitas autenticación
@@ -560,7 +560,19 @@ export class ApiService {
     };
     return this.http.post(`${this.apiUrl}/traveler/reservas_alojamientos`, reserva, { headers });
   }
+
+  // Reserva Actividades  
+  postReservaActividad(reserva: any): Observable<any> {
+    const token = localStorage.getItem('authToken');
+    const headers = {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    };
+    return this.http.post(`${this.apiUrl}/traveler/reservas_actividades`, reserva, { headers });
+  }
 }
+
+
 
 
 

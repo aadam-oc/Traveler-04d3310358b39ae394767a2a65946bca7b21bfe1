@@ -26,6 +26,9 @@ export class GestionAlojamientosComponent {
   alojamientoImagenPreview: string | ArrayBuffer | null = null;
   id_alojamiento_subida: number = 0;
 
+  alojamientosUsuario: Alojamientos[] = [];
+  id_usuario: number = Number(localStorage.getItem('id_usuario'));
+
   constructor(private apiService: ApiService, private router: Router, private fb: FormBuilder) {
     this.alojamientoForm = this.fb.group({
       id_alojamiento: [null],
@@ -75,7 +78,12 @@ export class GestionAlojamientosComponent {
           hora_entrada: alojamiento.hora_entrada,
           hora_salida: alojamiento.hora_salida
         }));
-        //console.log('Alojamientos completos:', this.alojamientosCompletos);
+        // Filtrar solo los alojamientos del usuario si no es admin
+        if (this.rol === 'alojamientos' || this.rol === 'alojamientos_actividades') {
+          this.alojamientosUsuario = this.alojamientosCompletos.filter(
+            a => a.id_usuario == this.id_usuario
+          );
+        }
       },
       (error: any) => {
         console.error('Error fetching alojamientos completos:', error);

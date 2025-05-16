@@ -51,10 +51,6 @@ export class AlojamientosComponent {
     return imagenesAlojamientos;
   }
   
-  irAFormularioReserva() {
-    this.router.navigate(['/reserva']);
-  }
-
   ngOnInit() {
     // Inicializar Formulario
     this.form = this.fb.group({
@@ -146,6 +142,11 @@ export class AlojamientosComponent {
     this.imagenActual = 0; // Reiniciar el carrusel
     this.modalAbierto = true;
   }
+
+  irAFormularioReserva(id_alojamiento: number) {
+  localStorage.setItem('id_alojamiento', id_alojamiento.toString());
+  this.router.navigate(['/reserva']);
+}
 
   // Métodos para el modal
 

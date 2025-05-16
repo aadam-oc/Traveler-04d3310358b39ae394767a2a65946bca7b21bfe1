@@ -1,0 +1,8 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <input formControlName="nombre" placeholder="Nombre" required>
+  <input formControlName="apellidos" placeholder="Apellidos" required>
+  <input formControlName="email" placeholder="Email" required>
+  <input formControlName="telefono" placeholder="Teléfono" required>
+  <input type="date" formControlName="fecha_actividad" required>
+<button class="btn-reservar" type="submit">Reservar Ahora</button>
+</form>

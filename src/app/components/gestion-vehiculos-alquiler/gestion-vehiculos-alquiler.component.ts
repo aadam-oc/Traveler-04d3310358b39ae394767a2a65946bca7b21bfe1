@@ -31,10 +31,17 @@ export class GestionVehiculosAlquilerComponent implements OnInit {
     imagen: null // Agregado para manejar la imagen del vehículo
   };
   form!: FormGroup;
+  allowed = false;
+  rol = localStorage.getItem('nombre_rol');
 
   constructor(private fb: FormBuilder, private vehiculosService: FakeApiVehiculosService, private router: Router) { }
-
+checkAllowed() {
+    if (this.rol === 'admin' ) {
+      this.allowed = true;
+    }
+  }
   ngOnInit() {
+    this.checkAllowed(); 
     this.form = this.fb.group({
       id_vehiculo: [null],
       nombre_vehiculo: [null, Validators.required],

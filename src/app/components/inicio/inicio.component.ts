@@ -125,8 +125,8 @@ export class InicioComponent {
       (error: any) => {
         console.error('Error fetching alojamientos completos:', error);
       }
-      this.alojamientosFiltrados = this.alojamientos.slice(0, 3);
     );
+    this.alojamientosFiltrados = this.alojamientos.slice(0, 3);
   }
 
   scrollToSection(): void {

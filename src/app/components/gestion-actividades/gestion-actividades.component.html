@@ -17,14 +17,16 @@
                     Lista de Actividades
                 </mat-panel-title>
                 <mat-panel-description>
-                    Total de Actividades: {{ actividadesCompletas.length }}
-                </mat-panel-description>
+    Total de Actividades:
+    {{ rol === 'admin' ? actividadesCompletas.length : actividadesUsuario.length }}
+</mat-panel-description>
             </mat-expansion-panel-header>
             <table class="actividades-table">
                 <thead class="actividades-table-header">
                     <tr>
                         <th class="actividades-table-header-cell">Tipo de
                             Actividad</th>
+                        <th class="actividades-table-header-cell">ID usuario</th>
                         <th class="actividades-table-header-cell">Destino</th>
                         <th
                             class="actividades-table-header-cell">Descripción</th>
@@ -34,12 +36,14 @@
                         <th class="actividades-table-header-cell">Acciones</th>
                     </tr>
                 </thead>
-                <tbody class="actividades-table-body">
+                <tbody class="actividades-table-body" *ngIf="rol == 'admin'">
                     <tr
                         *ngFor="let actividad of actividadesCompletas | paginate: { itemsPerPage: 6, currentPage: p }"
                         class="actividades-table-row">
                         <td
                             class="actividades-table-cell">{{actividad.nombre_tipo_actividad}}</td>
+                        <td class="actividades-table-cell">{{actividad.id_usuario_actividad}} -
+                            {{actividad.ciudad}}</td>
                         <td class="actividades-table-cell">{{actividad.pais}} -
                             {{actividad.ciudad}}</td>
                         <td
@@ -56,6 +60,24 @@
                                 (click)="eliminarActividad(actividad)">Eliminar</button>
                         </td>
                     </tr>
+                </tbody>
+                <tbody class="actividades-table-body" *ngIf="rol == 'alojamientos_actividades' || rol == 'actividades'">
+                    <tr
+                        *ngFor="let actividad of (actividadesUsuario | paginate: { itemsPerPage: 6, currentPage: p })"
+                        class="actividades-table-row">
+                        <td class="actividades-table-cell">{{actividad.nombre_tipo_actividad}}</td>
+                        <td class="actividades-table-cell">{{actividad.id_usuario_actividad}}</td>
+                        <td class="actividades-table-cell">{{actividad.pais}} - {{actividad.ciudad}}</td>
+                        <td class="actividades-table-cell">{{actividad.descripcion}}</td>
+                        <td class="actividades-table-cell">{{actividad.disponibilidad_actividad ? 'Sí' : 'No'}}</td>
+                        <td class="actividades-table-cell">{{actividad.precio}}€/H</td>
+                        <td class="actividades-table-cell actividades-actions">
+                            <button class="btn actividades-edit-btn"
+                                (click)="editarActividad(actividad.id_actividad)">Editar</button>
+                            <button class="btn actividades-delete-btn"
+                                (click)="eliminarActividad(actividad)">Eliminar</button>
+                        </td>
+                   </tr>
                 </tbody>
             </table>
             <!-- Paginación -->

@@ -27,6 +27,7 @@ import { GestionUsuariosComponent } from './components/gestion-usuarios/gestion-
 import { GestionRolesComponent } from './components/gestion-roles/gestion-roles.component';
 import { EditarAlojamientoComponent } from './components/editar-alojamiento/editar-alojamiento.component';
 import { GestionVehiculosAlquilerComponent } from './components/gestion-vehiculos-alquiler/gestion-vehiculos-alquiler.component';
+import { FormularioReservaActividadComponent } from './components/formulario-reserva-actividad/formulario-reserva-actividad.component';
 import { FormularioReservaComponent } from './components/formulario-reserva/formulario-reserva.component';
 import { EditarTiposActividadesComponent } from './components/editar-tipos-actividades/editar-tipos-actividades.component';
 import { EditarVehiculoComponent } from './components/editar-vehiculo/editar-vehiculo.component';
@@ -64,6 +65,7 @@ export const appRoutes: Routes = [
   { path: 'editarVehiculo/:id', component: EditarVehiculoComponent, data: { title: 'EDITAR VEHÍCULO' }, canActivate: [AuthGuard] },
   { path: 'editarRol/:id', component: EditarRolesComponent, data: { title: 'EDITAR ROL' }, canActivate: [AuthGuard] },
   { path: 'editarDestinos/:id', component: EditarDestinosComponent, data: { title: 'EDITAR DESTINO' }, canActivate: [AuthGuard] },
+  { path: 'reservaActividad/:id', component: FormularioReservaActividadComponent, data: { title: 'FORMULARIO RESERVA ACTIVIDAD' }, canActivate: [AuthGuard] },
   { path: '**', redirectTo: '' }
 ];
 

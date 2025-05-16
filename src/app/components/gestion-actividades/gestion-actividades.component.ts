@@ -20,6 +20,7 @@ export class GestionActividadesComponent {
   //Paginación
   p: number = 1;
   rol = localStorage.getItem('nombre_rol');
+  id_usuario: number = Number(localStorage.getItem('id_usuario'));
   allowed = false;
   tipoActividades: TipoActividad[] = [];
   actividades: Actividad[] = [];
@@ -32,6 +33,7 @@ export class GestionActividadesComponent {
   imagenUrl: string = '';
   imagenPreview: string | ArrayBuffer | null = null;
   id_actividad_subida: number = 0;
+  actividadesUsuario: Actividad[] = [];
 
   constructor(private apiService: ApiService, private router: Router, private formBuilder: FormBuilder) {
     this.formCrearActividad = this.formBuilder.group({
@@ -104,6 +106,12 @@ export class GestionActividadesComponent {
   getAllActividades() {
     this.apiService.getActividadCompleta().subscribe((response: any) => {
       this.actividadesCompletas = response.actividades;
+      // Filtrar solo las actividades del usuario si no es admin
+      if (this.rol === 'alojamientos_actividades' || this.rol === 'actividades') {
+        this.actividadesUsuario = this.actividadesCompletas.filter(
+          act => act.id_usuario_actividad == this.id_usuario
+        );
+      }
     });
   }
 
