@@ -42,7 +42,7 @@ getIdActividad() {
         console.log('ID Actividad obtenido:', this.id_actividad);
       } else {
         console.error('ID Actividad no encontrado, redirigiendo al home');
-        this.router.navigate(['/home']); 
+        this.router.navigate(['/inicio']); 
       }
     });
   }

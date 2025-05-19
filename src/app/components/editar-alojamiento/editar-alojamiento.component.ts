@@ -42,7 +42,7 @@ export class EditarAlojamientoComponent {
         this.id_alojamiento = +params['id']; // Convierte a número
       } else {
         console.error('ID Alojamiento no encontrado, redirigiendo al home');
-        this.router.navigate(['/home']); // Redirige al home si no hay ID
+        this.router.navigate(['/inicio']); // Redirige al home si no hay ID
       }
     });
     return this.id_alojamiento;
@@ -79,7 +79,7 @@ export class EditarAlojamientoComponent {
     },
     error => {
       console.error('Error al obtener el alojamiento:', error);
-      this.router.navigate(['/home']); // Redirige al home si hay un error
+      this.router.navigate(['/inicio']); // Redirige al home si hay un error
     }
   );
 }

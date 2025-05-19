@@ -1,5 +1,6 @@
 <h1 class="titulo">¡Bienvenido, {{ nombre }}!</h1>
 
+<!-- INFO PERFIL -->
 <div class="card">
   <img
     class="foto-usuario"
@@ -8,7 +9,8 @@
 
   <div class="card-info">
     <p class="nombre"><strong>Nombre:</strong> {{ nombre }}</p>
-    <p class="apellido"><strong>Apellidos:</strong> {{ apellido1 }} {{ apellido2 }}</p>
+    <p class="apellido"><strong>Apellidos:</strong> {{ apellido1 }} {{ apellido2
+      }}</p>
     <p class="correo"><strong>Correo:</strong> {{ correo }}</p>
     <p class="telefono"><strong>Teléfono 1:</strong> {{ telefono1 }}</p>
     <p class="telefono"><strong>Teléfono 2:</strong> {{ telefono2 ||
@@ -16,53 +18,57 @@
 
     <button class="edit-btn" (click)="openModal()">EDITAR PERFIL</button>
   </div>
+</div>
 
-  <div class="card reservas-card">
-  <div class="card-info">
-    <h2>Mis Reservas</h2>
-    <ng-container *ngIf="tieneReservas(); else sinReservas">
-      <div *ngIf="reservasAlojamiento.length > 0">
-        <h3>Reserva de Alojamiento</h3>
-        <ul>
-          <li *ngFor="let r of reservasAlojamiento">
-            {{ r.nombre_alojamiento }} - {{ r.fecha_entrada }} a {{ r.fecha_salida }}
-          </li>
-        </ul>
-      </div>
-      <div *ngIf="reservasActividades.length > 0">
-        <h3>Actividades</h3>
-        <ul>
-          <li *ngFor="let r of reservasActividades">
-            {{ r.nombre_actividad }} - {{ r.fecha_actividad }} {{ r.hora_actividad }}
-          </li>
-        </ul>
-      </div>
-      <div *ngIf="reservasVehiculos.length > 0">
-        <h3>Vehículos de Alquiler</h3>
-        <ul>
-          <li *ngFor="let r of reservasVehiculos">
-            {{ r.nombre_vehiculo }} - {{ r.fecha_inicio }} a {{ r.fecha_fin }}
-          </li>
-        </ul>
-      </div>
-      <div *ngIf="reservasVuelos.length > 0">
-        <h3>Vuelos</h3>
-        <ul>
-          <li *ngFor="let r of reservasVuelos">
-            {{ r.origen }} → {{ r.destino }} - {{ r.fecha_vuelo }}
-          </li>
-        </ul>
-      </div>
-    </ng-container>
-    <ng-template #sinReservas>
-      <p>(No tienes ninguna Reserva)</p>
-    </ng-template>
+<!-- RESERVAS -->
+<div class="card reservas-card">
+    <div class="card-info">
+      <h2>Mis Reservas</h2>
+      <ng-container *ngIf="tieneReservas(); else sinReservas">
+        <div *ngIf="reservasAlojamiento.length > 0">
+          <h3>Reserva de Alojamiento</h3>
+          <ul>
+            <li *ngFor="let r of reservasAlojamiento">
+              {{ r.nombre_alojamiento }} - {{ r.fecha_entrada_alojamiento }} a
+              {{ r.fecha_salida_alojamiento }}
+            </li>
+          </ul>
+        </div>
+        <div *ngIf="reservasActividades.length > 0">
+          <h3>Actividades</h3>
+          <ul>
+            <li *ngFor="let r of reservasActividades">
+              {{ r.nombre_actividad }} - {{ r.fecha_actividad }} {{
+              r.hora_actividad }}
+            </li>
+          </ul>
+        </div>
+        <div *ngIf="reservasVehiculos.length > 0">
+          <h3>Vehículos de Alquiler</h3>
+          <ul>
+            <li *ngFor="let r of reservasVehiculos">
+              {{ r.nombre_vehiculo }} - {{ r.fecha_inicio }} a {{ r.fecha_fin }}
+            </li>
+          </ul>
+        </div>
+        <div *ngIf="reservasVuelos.length > 0">
+          <h3>Vuelos</h3>
+          <ul>
+            <li *ngFor="let r of reservasVuelos">
+              {{ r.origen }} → {{ r.destino }} - {{ r.fecha_vuelo }}
+            </li>
+          </ul>
+        </div>
+      </ng-container>
+      <ng-template #sinReservas>
+        <p>(No tienes ninguna Reserva)</p>
+      </ng-template>
+    </div>
   </div>
-</div>
-</div>
 
 <br /><br />
 
+<!-- DASHBOARD -->
 <div class="dashboard-container">
   <a routerLink="/dashboard" class="dashboard-link">Ir al Dashboard</a>
 </div>

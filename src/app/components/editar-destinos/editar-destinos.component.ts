@@ -36,7 +36,7 @@ export class EditarDestinosComponent implements OnInit {
         console.log('ID Destino obtenido:', this.id_destino);
       } else {
         console.error('ID Destino no encontrado, redirigiendo al home');
-        this.router.navigate(['/home']); // Redirige al home si no hay ID
+        this.router.navigate(['/inicio']); // Redirige al home si no hay ID
       }
     });
   }
@@ -54,7 +54,7 @@ export class EditarDestinosComponent implements OnInit {
       },
       error => {
         console.error('Error al obtener el destino:', error);
-        this.router.navigate(['/home']); // Redirige al home si hay un error
+        this.router.navigate(['/inicio']); // Redirige al home si hay un error
       }
     );
   }

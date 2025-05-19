@@ -19,17 +19,17 @@
   </form>
 
   <!-- CARDS -->
-  <div *ngIf="vehiculosFiltrados.length > 0; else sinVehiculos" class="cards-container">
-    <div *ngFor="let vehiculo of vehiculosFiltrados" class="vehicle-card">
+  <div *ngIf="vehiculosFiltrados.length > 0; else sinVehiculos" class="tarjetas-grid">
+    <div *ngFor="let vehiculo of vehiculosFiltrados" class="vehiculo">
       <!-- Imagen del vehículo -->
-      <img class="vehicle-image" [src]="vehiculo.imagen" alt="Imagen del vehículo">
-      <div class="vehicle-info">
+      <img class="fto-vehiculo" [src]="vehiculo.imagen" alt="Imagen del vehículo">
+      <div class="contenido">
         <!-- Nombre del vehículo -->
-        <p class="vehicle-name">{{ vehiculo.nombre_vehiculo }}</p>
+        <p class="titulo">{{ vehiculo.nombre_vehiculo }}</p>
         <!-- Tipo de vehículo -->
-        <p class="vehicle-type">Tipo: {{ vehiculo.nombre_tipo_vehiculo }}</p>
+        <p class="descripcion">Tipo: {{ vehiculo.nombre_tipo_vehiculo }}</p>
         <!-- Precio -->
-        <div class="vehicle-price">{{ vehiculo.precio }}€/día</div>
+        <div class="precio">{{ vehiculo.precio }}€/día</div>
         <!-- Botón -->
         <button class="saber-mas" (click)="verMas(vehiculo)">Ver más</button>
       </div>

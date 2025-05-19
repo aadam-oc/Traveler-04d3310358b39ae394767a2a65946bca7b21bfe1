@@ -24,12 +24,18 @@ export class PerfilComponent implements OnInit {
   foto: string = '';
   rol: string = '1';
 
+  reservas: boolean = false;
+
   modalActive: boolean = false;
   editarUsuarioForm!: FormGroup;
   id_usuario: number = Number(localStorage.getItem('id_usuario')) || 0;
   previewImage: string | null = null;
   selectedFile: File | null = null;
 
+  reservasAlojamiento: any[] = [];
+  reservasActividades: any[] = [];
+  reservasVehiculos: any[] = [];
+  reservasVuelos: any[] = [];
   constructor(
     private router: Router,
     private apiService: ApiService,
@@ -52,6 +58,49 @@ export class PerfilComponent implements OnInit {
       },
       error => console.error('Error al obtener imagen de usuario', error)
     );
+
+    const id_usuario = Number(localStorage.getItem('id_usuario'));
+    console.log('ID de usuario:', id_usuario);
+
+    this.apiService.getReservasAlojamientoUsuario(id_usuario).subscribe({
+  next: data => {
+    this.reservasAlojamiento = data;
+    console.log('Reservas de alojamiento:', this.reservasAlojamiento);
+  },
+  error: err => {
+    console.error('Error reservas alojamiento:', err);
+  }
+});
+
+this.apiService.getReservasActividadesUsuario(id_usuario).subscribe({
+  next: data => {
+    this.reservasActividades = data;
+    console.log('Reservas de actividades:', this.reservasActividades);
+  },
+  error: err => {
+    console.error('Error reservas actividades:', err);
+  }
+});
+
+this.apiService.getReservasVuelosUsuario(id_usuario).subscribe({
+  next: data => {
+    this.reservasVuelos = data;
+    console.log('Reservas de vuelos:', this.reservasVuelos);
+  },
+  error: err => {
+    console.error('Error reservas vuelos:', err);
+  }
+});
+
+this.apiService.getReservasVehiculosUsuario(id_usuario).subscribe({
+  next: data => {
+    this.reservasVehiculos = data;
+    console.log('Reservas de vehículos:', this.reservasVehiculos);
+  },
+  error: err => {
+    console.error('Error reservas vehículos:', err);
+  }
+});
   }
 
   initEditarForm() {
@@ -108,28 +157,9 @@ export class PerfilComponent implements OnInit {
     this.getUsuario(); // recarga valores reales
   }
 
-reservasAlojamiento: any[] = [];
-reservasActividades: any[] = [];
-reservasVehiculos: any[] = [];
-reservasVuelos: any[] = [];
 
-gOnInit() {
-  const id_usuario = Number(localStorage.getItem('id_usuario'));
-  this.apiService.getReservasAlojamientoUsuario(id_usuario).subscribe(data => {
-    this.reservasAlojamiento = data;
-  });
-  this.apiService.getReservasActividadesUsuario(id_usuario).subscribe(data => {
-    this.reservasActividades = data;
-  });
-  this.apiService.getReservasVehiculosUsuario(id_usuario).subscribe(data => {
-    this.reservasVehiculos = data;
-  });
-  this.apiService.getReservasVuelosUsuario(id_usuario).subscribe(data => {
-    this.reservasVuelos = data;
-  });
-}
 
-tieneReservas(): boolean {
+  tieneReservas(): boolean {
   return (
     this.reservasAlojamiento.length > 0 ||
     this.reservasActividades.length > 0 ||

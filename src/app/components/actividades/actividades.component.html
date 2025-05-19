@@ -105,16 +105,15 @@
                                 <span class="detalle-valor precio-destacado">{{
                                     actividadSeleccionada.precio }}€/H</span>
                             </div>
-                            <!-- Puedes añadir más detalles aquí si tienes más información en tu modelo de datos -->
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button class="btn-reservar"
-                        (click)="irAreserva(actividadSeleccionada.id_actividad)">Reservar
-                        Ahora</button>
-                </div>
             </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn-reservar"
+                (click)="irAreserva(actividadSeleccionada.id_actividad)">Reservar
+                Ahora</button>
         </div>
     </div>
 </div>

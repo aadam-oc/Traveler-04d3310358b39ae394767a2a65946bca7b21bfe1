@@ -38,25 +38,24 @@
   </form>
 
   <div class="content-container">
-    <div class="card-container">
-      <div class="card-deck">
-        <div class="card expand"
-          *ngFor="let alojamiento of alojamientosFiltrados  | paginate: { itemsPerPage: 6, currentPage: p }">
-          <img [src]="alojamiento.imagenes[0]" class="card-img-top"
-            alt="Alojamiento">
-          <div class="card-body">
-            <h5 class="card-title">{{ alojamiento.nombre_alojamiento }}</h5>
-            <p class="card-text">{{ alojamiento.descripcion }}</p>
-            <p class="card-text">{{ alojamiento.pais }}, {{ alojamiento.ciudad
-              }}</p>
+    <div class="tarjetas-grid">
+      <ng-container
+        *ngFor="let alojamiento of alojamientosFiltrados | paginate: { itemsPerPage: 6, currentPage: p }">
+        <div class="actividad expand">
+          <img class="fto-actividad" [src]="alojamiento.imagenes[0]"
+            alt="Alojamiento" />
+          <div class="contenido">
+            <div class="titulo">{{ alojamiento.nombre_alojamiento }}</div>
+            <p>{{ alojamiento.pais }}, {{ alojamiento.ciudad }}</p>
+            <p class="descripcion">{{ alojamiento.descripcion }}</p>
             <div class="botones">
-              <p>{{alojamiento.precio_dia}} €/dia</p>
-              <button class="btn btn-primary"
-                (click)="abrirModal(alojamiento)">Saber más</button>
+              <div class="precio">{{ alojamiento.precio_dia }} €/día</div>
+              <button class="saber-mas" (click)="abrirModal(alojamiento)">Saber
+                más</button>
             </div>
           </div>
         </div>
-      </div>
+      </ng-container>
     </div>
 
     <!-- Paginación -->
@@ -114,7 +113,8 @@
       </div>
     </div>
     <div class="modal-footer">
-      <button class="btn-reservar" (click)="irAFormularioReserva(alojamientoSeleccionado.id_alojamiento)">Reservar
+      <button class="btn-reservar"
+        (click)="irAFormularioReserva(alojamientoSeleccionado.id_alojamiento)">Reservar
         Ahora</button>
     </div>
   </div>

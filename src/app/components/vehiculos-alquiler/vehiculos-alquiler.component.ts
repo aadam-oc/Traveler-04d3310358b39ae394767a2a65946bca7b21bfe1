@@ -15,7 +15,7 @@ import { of } from 'rxjs';
 })
 export class VehiculosAlquilerComponent implements OnInit {
   vehiculos: VehiculosAlquiler[] = [];
-  tiposVehiculo = ['Sedán', 'SUV', 'Deportivo', 'Camioneta'];
+  tiposVehiculo: string[] = []; // Cambia aquí: inicia vacío
   filtrosForm!: FormGroup;
   vehiculosFiltrados: VehiculosAlquiler[] = [];
 
@@ -44,6 +44,8 @@ export class VehiculosAlquilerComponent implements OnInit {
       )
       .subscribe((data: VehiculosAlquiler[]) => {
         this.vehiculos = data;
+        // Extrae los tipos únicos de los datos recibidos
+        this.tiposVehiculo = [...new Set(data.map((v) => v.nombre_tipo_vehiculo))];
         this.vehiculosFiltrados = data;
       });
   }

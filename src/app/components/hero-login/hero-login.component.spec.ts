@@ -20,4 +20,14 @@ describe('HeroLoginComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('debe tener el título correcto', () => {
+    expect(component.title).toBe('HeroLogin');
+  });
+
+  it('debe renderizar el componente login-form', () => {
+    const compiled = fixture.nativeElement as HTMLElement;
+    // Busca el selector del componente hijo
+    expect(compiled.querySelector('app-login-form')).toBeTruthy();
+  });
 });
