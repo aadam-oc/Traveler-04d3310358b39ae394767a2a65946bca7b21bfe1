@@ -41,7 +41,7 @@
     <div class="card-container">
       <div class="card-deck">
         <div class="card expand"
-          *ngFor="let alojamiento of alojamientosFiltrados  | paginate: { itemsPerPage: 4, currentPage: p }">
+          *ngFor="let alojamiento of alojamientosFiltrados  | paginate: { itemsPerPage: 6, currentPage: p }">
           <img [src]="alojamiento.imagenes[0]" class="card-img-top"
             alt="Alojamiento">
           <div class="card-body">

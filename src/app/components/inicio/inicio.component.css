@@ -148,8 +148,13 @@ body {
 }
 
 @keyframes scroll-carousel {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-6000px); }
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-6000px);
+    }
 }
 
 /* TÍTULOS DE SECCIONES MODERNIZADOS */
@@ -255,6 +260,11 @@ body {
     margin-bottom: 15px;
     line-height: 1.6;
     color: #555;
+    /* Limitar descripción a 3 líneas */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .precio {

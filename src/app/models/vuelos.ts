@@ -10,4 +10,5 @@ export interface Vuelos {
   dia: string; // Fecha del vuelo en formato YYYY-MM-DD
   hora: string; // Hora del vuelo en formato HH:mm:ss
   imagen_url?: string; // URL de la imagen del vuelo (opcional)
+  
 }

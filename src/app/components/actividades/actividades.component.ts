@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ApiService } from '../../services/api.service';
 import { Actividad } from '../../models/actividad';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-actividades',
@@ -26,7 +27,7 @@ export class ActividadesComponent implements OnInit {
   // Propiedad para el modal
   actividadSeleccionada: Actividad | null = null;
 
-  constructor(private apiService: ApiService, private fb: FormBuilder) { }
+  constructor(private apiService: ApiService, private fb: FormBuilder, private router: Router) { }
 
   ngOnInit() {
 
@@ -51,6 +52,10 @@ export class ActividadesComponent implements OnInit {
         this.filtrarActividades();
       });
     });
+  }
+  irAreserva(id_actividad: number) {
+    localStorage.setItem('id_actividad', id_actividad.toString());
+    this.router.navigate(['/reservaActividad', id_actividad]);
   }
 
   filtrarActividades() {

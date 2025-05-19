@@ -12,6 +12,7 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
   templateUrl: './perfil.component.html',
   styleUrls: ['./perfil.component.css']
 })
+
 export class PerfilComponent implements OnInit {
 
   nombre: string = 'Usuario';
@@ -106,6 +107,36 @@ export class PerfilComponent implements OnInit {
     this.selectedFile = null;
     this.getUsuario(); // recarga valores reales
   }
+
+reservasAlojamiento: any[] = [];
+reservasActividades: any[] = [];
+reservasVehiculos: any[] = [];
+reservasVuelos: any[] = [];
+
+gOnInit() {
+  const id_usuario = Number(localStorage.getItem('id_usuario'));
+  this.apiService.getReservasAlojamientoUsuario(id_usuario).subscribe(data => {
+    this.reservasAlojamiento = data;
+  });
+  this.apiService.getReservasActividadesUsuario(id_usuario).subscribe(data => {
+    this.reservasActividades = data;
+  });
+  this.apiService.getReservasVehiculosUsuario(id_usuario).subscribe(data => {
+    this.reservasVehiculos = data;
+  });
+  this.apiService.getReservasVuelosUsuario(id_usuario).subscribe(data => {
+    this.reservasVuelos = data;
+  });
+}
+
+tieneReservas(): boolean {
+  return (
+    this.reservasAlojamiento.length > 0 ||
+    this.reservasActividades.length > 0 ||
+    this.reservasVehiculos.length > 0 ||
+    this.reservasVuelos.length > 0
+  );
+}
 
   onSubmitEditar() {
     if (this.editarUsuarioForm.valid) {

@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { HttpClientTestingModule } from '@angular/common/http/testing'; 
 import { EditarRolesComponent } from './editar-roles.component';
+import { ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
 
 describe('EditarRolesComponent', () => {
   let component: EditarRolesComponent;
@@ -8,7 +10,10 @@ describe('EditarRolesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EditarRolesComponent]
+      imports: [EditarRolesComponent, HttpClientTestingModule],
+      providers: [
+        { provide: ActivatedRoute, useValue: { params: of({}), snapshot: { params: {}, data: {} } } }
+      ]
     })
     .compileComponents();
 

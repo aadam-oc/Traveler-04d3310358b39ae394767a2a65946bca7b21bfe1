@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { GestionContactoComponent } from './gestion-contacto.component';
 
 describe('GestionContactoComponent', () => {
@@ -8,7 +8,7 @@ describe('GestionContactoComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GestionContactoComponent]
+      imports: [GestionContactoComponent, HttpClientTestingModule] // <-- Añade HttpClientTestingModule aquí
     })
     .compileComponents();
 

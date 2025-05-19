@@ -13,14 +13,14 @@ import { Actividad } from '../../models/actividad';
 import { Alojamientos } from '../../models/alojamientos';
 import { ImagenesAlojamientos } from '../../models/imagenes-alojamientos';
 import { Renderer2 } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink, RouterModule} from '@angular/router';
 import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
 
 @Component({
   selector: 'app-inicio',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink, RouterModule],
   standalone: true,
   templateUrl: './inicio.component.html',
   styleUrl: './inicio.component.css'
@@ -120,13 +120,15 @@ export class InicioComponent {
           });
         });
 
+        // Mostrar solo 3 alojamientos
+        this.alojamientosFiltrados = this.alojamientos.slice(0, 3);
+
         console.log('Alojamientos completos:', this.alojamientos);
       },
       (error: any) => {
         console.error('Error fetching alojamientos completos:', error);
       }
     );
-    this.alojamientosFiltrados = this.alojamientos.slice(0, 3);
   }
 
   scrollToSection(): void {

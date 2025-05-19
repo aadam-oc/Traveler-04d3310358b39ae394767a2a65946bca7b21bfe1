@@ -1,6 +1,6 @@
 //login-form.component.spec.ts
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { LoginFormComponent } from './login-form.component';
 
 describe('LoginFormComponent', () => {
@@ -9,7 +9,7 @@ describe('LoginFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LoginFormComponent]
+      imports: [LoginFormComponent, HttpClientTestingModule]
     })
     .compileComponents();
 

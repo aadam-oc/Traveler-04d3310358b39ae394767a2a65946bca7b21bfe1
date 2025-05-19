@@ -5,4 +5,5 @@ export interface VehiculosAlquiler {
     nombre_vehiculo: string;
     nombre_tipo_vehiculo: string;
     imagen: string; 
+    precio: number;
 }

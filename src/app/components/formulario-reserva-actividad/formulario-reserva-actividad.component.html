@@ -1,8 +1,32 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <input formControlName="nombre" placeholder="Nombre" required>
-  <input formControlName="apellidos" placeholder="Apellidos" required>
-  <input formControlName="email" placeholder="Email" required>
-  <input formControlName="telefono" placeholder="Teléfono" required>
-  <input type="date" formControlName="fecha_actividad" required>
-<button class="btn-reservar" type="submit">Reservar Ahora</button>
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="booking-form">
+  <h2>Introduce tus datos</h2>
+  <p class="form-info">¡Ya casi estás! Solo tienes que rellenar los campos marcados con <span class="required">*</span></p>
+  <div class="form-group">
+    <label for="nombre">Nombre <span class="required">*</span></label>
+    <input id="nombre" type="text" placeholder="Nombre" formControlName="nombre" required />
+  </div>
+  <div class="form-group">
+    <label for="apellidos">Apellidos <span class="required">*</span></label>
+    <input id="apellidos" type="text" placeholder="Apellidos" formControlName="apellidos" required />
+  </div>
+  <div class="form-group">
+    <label for="email">Email <span class="required">*</span></label>
+    <input id="email" type="email" placeholder="Email" formControlName="email" required />
+  </div>
+  <div class="form-group">
+    <label for="telefono">Teléfono <span class="required">*</span></label>
+    <input id="telefono" type="tel" placeholder="Teléfono" formControlName="telefono" required />
+  </div>
+  <div class="form-group">
+    <label for="fecha_actividad">Fecha <span class="required">*</span></label>
+    <input id="fecha_actividad" type="date" formControlName="fecha_actividad" required />
+  </div>
+  <div class="form-group">
+    <label for="hora_actividad">Hora <span class="required">*</span></label>
+    <select id="hora_actividad" formControlName="hora_actividad" required>
+      <option value="" disabled selected>Selecciona una hora</option>
+      <option *ngFor="let hora of horasDisponibles" [value]="hora">{{ hora }}</option>
+    </select>
+  </div>
+  <button type="submit" class="btn">Reservar</button>
 </form>

@@ -570,7 +570,39 @@ export class ApiService {
     };
     return this.http.post(`${this.apiUrl}/traveler/reservas_actividades`, reserva, { headers });
   }
+
+  // Reservas de Alojamiento por usuario
+getReservasAlojamientoUsuario(id_usuario: number) {
+  const token = localStorage.getItem('authToken');
+  const headers = { Authorization: `Bearer ${token}` };
+  return this.http.get<any[]>(`${this.apiUrl}/traveler/reservas_alojamientos/usuario/${id_usuario}`, { headers });
 }
+
+// Reservas de Actividades por usuario
+getReservasActividadesUsuario(id_usuario: number) {
+  const token = localStorage.getItem('authToken');
+  const headers = { Authorization: `Bearer ${token}` };
+  return this.http.get<any[]>(`${this.apiUrl}/traveler/reservas_actividades/usuario/${id_usuario}`, { headers });
+}
+
+// Reservas de Vehículos por usuario
+getReservasVehiculosUsuario(id_usuario: number) {
+  const token = localStorage.getItem('authToken');
+  const headers = { Authorization: `Bearer ${token}` };
+  return this.http.get<any[]>(`${this.apiUrl}/traveler/reservas_vehiculos/usuario/${id_usuario}`, { headers });
+}
+
+// Reservas de Vuelos por usuario
+getReservasVuelosUsuario(id_usuario: number) {
+  const token = localStorage.getItem('authToken');
+  const headers = { Authorization: `Bearer ${token}` };
+  return this.http.get<any[]>(`${this.apiUrl}/traveler/reservas_vuelos/usuario/${id_usuario}`, { headers });
+}
+
+}
+
+
+
 
 
 

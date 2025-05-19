@@ -38,15 +38,19 @@
 
     <div class="tarjetas-grid">
         <!-- Lista de actividades filtradas -->
-        <ng-container *ngFor="let actividad of actividadesFiltradasDisponibles | paginate: { itemsPerPage: 6, currentPage: p }">
+        <ng-container
+            *ngFor="let actividad of actividadesFiltradasDisponibles | paginate: { itemsPerPage: 6, currentPage: p }">
             <div class="actividad expand">
-                <img class="fto-actividad" [src]="actividad.nombre_imagen_actividad" alt="Actividad" />
+                <img class="fto-actividad"
+                    [src]="actividad.nombre_imagen_actividad" alt="Actividad" />
                 <div class="contenido">
-                    <div class="titulo">{{ actividad.nombre_tipo_actividad }}</div>
+                    <div class="titulo">{{ actividad.nombre_tipo_actividad
+                        }}</div>
                     <p>{{ actividad.pais }}, {{ actividad.ciudad }}</p>
                     <div class="botones">
                         <div class="precio">{{ actividad.precio }}€/H</div>
-                        <button class="saber-mas" (click)="abrirModal(actividad)">
+                        <button class="saber-mas"
+                            (click)="abrirModal(actividad)">
                             Saber Más
                         </button>
                     </div>
@@ -87,28 +91,30 @@
             </div>
 
             <div class="modal-info">
-            <div class="modal-info">
-                <div class="modal-seccion">
-                    <h3>Descripción</h3>
-                    <p>{{ actividadSeleccionada.descripcion }}</p>
-                </div>
+                <div class="modal-info">
+                    <div class="modal-seccion">
+                        <h3>Descripción</h3>
+                        <p>{{ actividadSeleccionada.descripcion }}</p>
+                    </div>
 
-                <div class="modal-seccion">
-                    <h3>Detalles</h3>
-                    <div class="modal-detalles">
-                        <div class="detalle-item">
-                            <span class="detalle-label">Precio:</span>
-                            <span class="detalle-valor precio-destacado">{{
-                                actividadSeleccionada.precio }}€/H</span>
+                    <div class="modal-seccion">
+                        <h3>Detalles</h3>
+                        <div class="modal-detalles">
+                            <div class="detalle-item">
+                                <span class="detalle-label">Precio:</span>
+                                <span class="detalle-valor precio-destacado">{{
+                                    actividadSeleccionada.precio }}€/H</span>
+                            </div>
+                            <!-- Puedes añadir más detalles aquí si tienes más información en tu modelo de datos -->
                         </div>
-                        <!-- Puedes añadir más detalles aquí si tienes más información en tu modelo de datos -->
                     </div>
                 </div>
+                <div class="modal-footer">
+                    <button class="btn-reservar"
+                        (click)="irAreserva(actividadSeleccionada.id_actividad)">Reservar
+                        Ahora</button>
+                </div>
             </div>
-        </div>
-
-        <div class="modal-footer">
-            <button class="btn-reservar" (click)="irAreserva(actividadSeleccionada.id_actividad)">Reservar Ahora</button>
         </div>
     </div>
 </div>

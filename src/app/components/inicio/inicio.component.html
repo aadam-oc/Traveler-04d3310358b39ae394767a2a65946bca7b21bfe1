@@ -72,7 +72,7 @@
             <p class="descripcion">{{ alojamiento.pais }}, {{ alojamiento.ciudad }}</p>
             <div class="botones">
                 <div class="precio">{{ alojamiento.precio_dia }}€/H</div>
-                <button class="btn btn-primary">Ver actividad</button>
+                <button class="btn btn-primary" routerLink="/alojamientos">Ver alojamientos</button>
             </div>
         </div>
     </div>
@@ -94,7 +94,7 @@
             </p>
             <div class="botones">
                 <div class="precio">{{ actividad.precio }}€/H</div>
-                <button class="btn btn-primary">Ver actividad</button>
+                <button class="btn btn-primary" routerLink="/actividades">Ver actividad</button>
             </div>
         </div>
     </div>
@@ -107,5 +107,4 @@
         <img src="http://172.17.131.14:3000/uploads/1744381510145.png"
             alt="Subir">
     </button>
-
 </div>
