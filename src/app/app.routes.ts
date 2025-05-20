@@ -60,12 +60,12 @@ export const appRoutes: Routes = [
   { path: 'gestionUsuarios', component: GestionUsuariosComponent, data: { title: 'GESTIÓN USUARIOS' }, canActivate: [AuthGuard] },
   { path: 'gestionRoles', component: GestionRolesComponent, data: { title: 'GESTIÓN ROLES' }, canActivate: [AuthGuard] },
   { path: 'editarAlojamiento/:id', component: EditarAlojamientoComponent, data: { title: 'EDITAR ALOJAMIENTO' }, canActivate: [AuthGuard] },
-  { path: 'reserva', component: FormularioReservaComponent, data: { title: 'FORMULARIO RESERVA' }, canActivate: [AuthGuard] },
+  { path: 'reserva', component: FormularioReservaComponent, data: { title: 'RESERVA ALOJAMIENTOS' }, canActivate: [AuthGuard] },
   { path: 'editarTiposActividades/:id', component: EditarTiposActividadesComponent, data: { title: 'EDITAR TIPO ACTIVIDAD' }, canActivate: [AuthGuard] },
   { path: 'editarVehiculo/:id', component: EditarVehiculoComponent, data: { title: 'EDITAR VEHÍCULO' }, canActivate: [AuthGuard] },
   { path: 'editarRol/:id', component: EditarRolesComponent, data: { title: 'EDITAR ROL' }, canActivate: [AuthGuard] },
   { path: 'editarDestinos/:id', component: EditarDestinosComponent, data: { title: 'EDITAR DESTINO' }, canActivate: [AuthGuard] },
-  { path: 'reservaActividad/:id', component: FormularioReservaActividadComponent, data: { title: 'FORMULARIO RESERVA ACTIVIDAD' }, canActivate: [AuthGuard] },
+  { path: 'reservaActividad/:id', component: FormularioReservaActividadComponent, data: { title: 'RESERVA ACTIVIDADES' }, canActivate: [AuthGuard] },
   { path: '**', redirectTo: '' }
 ];
 

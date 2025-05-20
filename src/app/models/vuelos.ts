@@ -10,5 +10,8 @@ export interface Vuelos {
   dia: string; // Fecha del vuelo en formato YYYY-MM-DD
   hora: string; // Hora del vuelo en formato HH:mm:ss
   imagen_url?: string; // URL de la imagen del vuelo (opcional)
+  precio: number; // Precio del vuelo
+  duracion: string; // Duración del vuelo (ej: "2h 30m")
+  aerolinea: string; // Nombre de la aerolínea
   
 }

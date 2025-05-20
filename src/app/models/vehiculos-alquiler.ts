@@ -3,7 +3,10 @@ export interface VehiculosAlquiler {
     tipo_vehiculo: string;
     id_destino: number;
     nombre_vehiculo: string;
+    descripcion: string;
+    cv: number;
+    plazas: number;
     nombre_tipo_vehiculo: string;
-    imagen: string; 
+    imagen: string;
     precio: number;
 }

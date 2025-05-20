@@ -5,6 +5,7 @@ import { VehiculosAlquiler } from '../../models/vehiculos-alquiler';
 import { CommonModule } from '@angular/common';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-vehiculos-alquiler',
@@ -18,16 +19,19 @@ export class VehiculosAlquilerComponent implements OnInit {
   tiposVehiculo: string[] = []; // Cambia aquí: inicia vacío
   filtrosForm!: FormGroup;
   vehiculosFiltrados: VehiculosAlquiler[] = [];
+  modalAbierto = false;
+  vehiculoSeleccionado: any = null;
 
   constructor(
     private fb: FormBuilder,
-    private vehiculosService: FakeApiVehiculosService
+    private vehiculosService: FakeApiVehiculosService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.filtrosForm = this.fb.group({
       tipoVehiculo: [''],
-      priceRange: [500],
+      priceRange: [200],
     });
 
     this.filtrosForm.valueChanges.subscribe(() => {
@@ -44,6 +48,7 @@ export class VehiculosAlquilerComponent implements OnInit {
       )
       .subscribe((data: VehiculosAlquiler[]) => {
         this.vehiculos = data;
+        console.log('Vehículos:', this.vehiculos);
         // Extrae los tipos únicos de los datos recibidos
         this.tiposVehiculo = [...new Set(data.map((v) => v.nombre_tipo_vehiculo))];
         this.vehiculosFiltrados = data;
@@ -62,8 +67,21 @@ export class VehiculosAlquilerComponent implements OnInit {
     });
   }
 
-  verMas(vehiculo: any): void {
-    console.log('Ver más detalles del vehículo:', vehiculo);
+  verMas(vehiculo: any) {
+    this.vehiculoSeleccionado = vehiculo;
+    this.modalAbierto = true;
+  }
+
+  cerrarModal(event: Event) {
+    event.stopPropagation();
+    this.modalAbierto = false;
+    this.vehiculoSeleccionado = null;
+  }
+
+  irAFormularioReserva(idVehiculo: number) {
+    // Redirige o abre el formulario de reserva
+    // Por ejemplo:
+    this.router.navigate(['/reservar-vehiculo', idVehiculo]);
   }
 }
 

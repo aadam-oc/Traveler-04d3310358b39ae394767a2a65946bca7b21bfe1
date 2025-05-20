@@ -1,16 +1,91 @@
-<div class="vuelos-container">
-    <div *ngIf="vuelos.length > 0; else sinVuelos" class="vuelos-list">
-        <div *ngFor="let vuelo of vuelos" class="vuelo-card">
-            <img [src]="vuelo.imagen_url" alt="Imagen del vuelo" class="vuelo-imagen">
-            <div class="vuelo-info">
-                <h3 class="vuelo-name">{{ vuelo.origen_ciudad }} → {{ vuelo.destino_ciudad }}</h3>
-                <p class="vuelo-details">{{ vuelo.origen_pais }} - {{ vuelo.destino_pais }}</p>
-                <p><strong>Día:</strong> {{ vuelo.dia | date:'dd/MM/yyyy' }}</p>
-                <p><strong>Hora:</strong> {{ vuelo.hora }}</p>
-            </div>
-        </div>
+<div class="layout">
+  <!-- FILTROS -->
+  <form [formGroup]="filtrosForm" class="form-container">
+    <div class="form-group">
+      <label for="origen">🛫 País de Origen:</label>
+      <select formControlName="origen" id="origen">
+        <option value>-- Selecciona país de origen --</option>
+        <option *ngFor="let origen of origenes" [value]="origen">{{ origen }}</option>
+      </select>
     </div>
-    <ng-template #sinVuelos>
-        <p class="no-vuelos">No hay vuelos disponibles.</p>
-    </ng-template>
+    <div class="form-group">
+      <label for="destino">🛬 País de Destino:</label>
+      <select formControlName="destino" id="destino">
+        <option value>-- Selecciona país de destino --</option>
+        <option *ngFor="let destino of destinos" [value]="destino">{{ destino }}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="priceRange">💰 Precio máximo:</label>
+      <input type="range" formControlName="priceRange" id="priceRange" min="0" max="200" step="10" />
+      <span>0€ - {{ filtrosForm.value.priceRange }}€</span>
+    </div>
+  </form>
+
+  <!-- CARDS -->
+  <div *ngIf="vuelosFiltrados.length > 0; else sinVuelos" class="tarjetas-grid">
+    <div *ngFor="let vuelo of vuelosFiltrados" class="vuelo">
+      <img class="fto-vuelo" [src]="vuelo.imagen_url" alt="Imagen del vuelo">
+      <div class="contenido">
+        <p class="titulo">{{ vuelo.origen_ciudad }} → {{ vuelo.destino_ciudad }}</p>
+        <p class="descripcion">{{ vuelo.origen_pais }} - {{ vuelo.destino_pais }}</p>
+        <div class="botones">
+          <div class="precio">{{ vuelo.precio }}€</div>
+          <button class="saber-mas" (click)="verMas(vuelo)">Saber más</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+<ng-template #sinVuelos>
+  <p>No hay vuelos disponibles.</p>
+</ng-template>
+
+<!-- Modal -->
+<div class="modal-overlay" *ngIf="modalAbierto && vueloSeleccionado" (click)="cerrarModal($event)">
+  <div class="modal-contenido" [class.modal-abierto]="vueloSeleccionado" (click)="$event.stopPropagation()">
+    <button class="cerrar-modal" (click)="cerrarModal($event)">×</button>
+    <div class="modal-header">
+      <h2>{{ vueloSeleccionado?.origen_ciudad }} → {{ vueloSeleccionado?.destino_ciudad }}</h2>
+      <div class="modal-ubicacion">
+        <span>🛫 {{ vueloSeleccionado?.origen_pais }}</span>
+        <span>🛬 {{ vueloSeleccionado?.destino_pais }}</span>
+        <span>💲 {{ vueloSeleccionado?.precio }} €</span>
+      </div>
+    </div>
+    <div class="modal-body">
+      <div class="modal-imagen-container">
+        <img [src]="vueloSeleccionado?.imagen_url" alt="Imagen del vuelo" class="modal-imagen">
+      </div>
+      <div class="modal-info">
+        <div class="modal-seccion">
+          <h3>Detalles del vuelo</h3>
+          <div class="modal-detalles">
+            <div class="detalle-item">
+              <span class="detalle-label">Día:</span>
+              <span class="detalle-valor">{{ vueloSeleccionado?.dia | date:'dd/MM/yyyy' }}</span>
+            </div>
+            <div class="detalle-item">
+              <span class="detalle-label">Hora:</span>
+              <span class="detalle-valor">{{ vueloSeleccionado?.hora }}</span>
+            </div>
+            <div class="detalle-item">
+              <span class="detalle-label">Duración:</span>
+              <span class="detalle-valor">{{ vueloSeleccionado?.duracion }} hora/s</span>
+            </div>
+            <div class="detalle-item">
+              <span class="detalle-label">Aerolínea:</span>
+              <span class="detalle-valor">{{ vueloSeleccionado?.aerolinea }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-reservar" (click)="irAFormularioReserva(vueloSeleccionado.id_vuelo)">Reservar Ahora</button>
+    </div>
+  </div>
+</div>
+
+<!-- Esto servira para el button de arriba = (click)="irAFormularioReserva(vueloSeleccionado.id) -->

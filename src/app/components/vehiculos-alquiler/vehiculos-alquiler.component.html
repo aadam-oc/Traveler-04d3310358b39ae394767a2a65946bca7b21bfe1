@@ -13,7 +13,7 @@
     <!-- Rango de precio -->
     <div class="form-group">
       <label for="priceRange">💰 Rango de Precio:</label>
-      <input type="range" formControlName="priceRange" id="priceRange" min="10" max="500" step="5" />
+      <input type="range" formControlName="priceRange" id="priceRange" min="10" max="200" step="5" />
       <span>0€ - {{ filtrosForm.value.priceRange }}€</span>
     </div>
   </form>
@@ -28,10 +28,10 @@
         <p class="titulo">{{ vehiculo.nombre_vehiculo }}</p>
         <!-- Tipo de vehículo -->
         <p class="descripcion">Tipo: {{ vehiculo.nombre_tipo_vehiculo }}</p>
-        <!-- Precio -->
-        <div class="precio">{{ vehiculo.precio }}€/día</div>
-        <!-- Botón -->
-        <button class="saber-mas" (click)="verMas(vehiculo)">Ver más</button>
+        <div class="botones">
+          <div class="precio">{{ vehiculo.precio }}€/día</div>
+          <button class="saber-mas" (click)="verMas(vehiculo)">Ver más</button>
+        </div>
       </div>
     </div>
   </div>
@@ -40,3 +40,48 @@
 <ng-template #sinVehiculos>
   <p>No hay vehículos disponibles.</p>
 </ng-template>
+
+<!-- Modal -->
+<div class="modal-overlay" *ngIf="modalAbierto && vehiculoSeleccionado" (click)="cerrarModal($event)">
+  <div class="modal-contenido" [class.modal-abierto]="vehiculoSeleccionado" (click)="$event.stopPropagation()">
+    <button class="cerrar-modal" (click)="cerrarModal($event)">×</button>
+
+    <div class="modal-header">
+      <h2>{{ vehiculoSeleccionado?.nombre_vehiculo }}</h2>
+      <div class="modal-ubicacion">
+        <span class="modal-pais">🚗 {{ vehiculoSeleccionado?.nombre_tipo_vehiculo }}</span>
+        <span class="modal-ciudad">💲 {{ vehiculoSeleccionado?.precio }} €/día</span>
+      </div>
+    </div>
+
+    <div class="modal-body">
+      <div class="modal-imagen-container">
+        <img [src]="vehiculoSeleccionado?.imagen" alt="Imagen del vehículo" class="modal-imagen">
+      </div>
+
+      <div class="modal-info">
+        <div class="modal-seccion">
+          <h3>Descripción</h3>
+          <p>{{ vehiculoSeleccionado?.descripcion }}</p>
+        </div>
+
+        <div class="modal-seccion">
+          <h3>Detalles</h3>
+          <div class="modal-detalles">
+            <div class="detalle-item">
+              <span class="detalle-label">Caballos de vapor:</span>
+              <span class="detalle-valor precio-destacado">{{ vehiculoSeleccionado?.cv }} CV</span>
+            </div>
+            <div class="detalle-item">
+              <span class="detalle-label">Plazas:</span>
+              <span class="detalle-valor">{{ vehiculoSeleccionado?.plazas }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-reservar" (click)="irAFormularioReserva(vehiculoSeleccionado.id)">Reservar Ahora</button>
+    </div>
+  </div>
+</div>

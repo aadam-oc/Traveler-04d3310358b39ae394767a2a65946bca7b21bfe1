@@ -11,57 +11,108 @@ body {
 .titulo {
   text-align: center;
   color: #143D2C;
-  font-size: 2rem;
-  margin-bottom: 2rem;
+  font-size: 2.2rem;
+  margin-bottom: 2.5rem;
   font-weight: 700;
+  position: relative;
+  padding-bottom: 1rem;
+  letter-spacing: 0.5px;
 }
 
-/* Modern Card Styles */
+.titulo::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 3px;
+  background: #143D2C;
+  border-radius: 2px;
+}
+
+/* INFO PERFIL */
 .card {
-  display: flex;
-  flex-direction: row;
   background-color: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   overflow: hidden;
   max-width: 900px;
-  margin: 0 auto;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin: 0 auto 3rem;
+  position: relative;
+  border: 1px solid #e5e7eb;
 }
 
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+.card::before {
+  content: 'PERFIL DE USUARIO';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 0.5rem 0;
+  background-color: #143D2C;
+  color: white;
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
 }
 
-.foto-usuario {
-  width: 220px;
-  height: auto;
-  object-fit: cover;
+.card {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  padding-top: 2rem;
+}
+
+.foto-usuario-container {
+  grid-column: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  background-color: #f9fafb;
   border-right: 1px solid #e5e7eb;
 }
 
+.foto-usuario {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid #ffffff;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.5rem;
+}
+
 .card-info {
+  grid-column: 2;
   padding: 2rem;
-  flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  position: relative;
 }
 
-.nombre, .correo, .rol, .apellido, .telefono {
-  margin-bottom: 1rem;
-  font-size: 1.2rem;
-  color: #555;
+.nombre, .apellido, .correo, .telefono {
+  margin-bottom: 1.25rem;
+  font-size: 1.1rem;
+  color: #4b5563;
+  padding: 0.75rem 1rem;
+  background-color: #f9fafb;
+  border-radius: 8px;
+  border-left: 3px solid #143D2C;
+  display: flex;
+  align-items: center;
 }
 
-.nombre strong, .correo strong, .rol strong, .apellido strong, .telefono strong {
+.nombre strong, .apellido strong, .correo strong, .telefono strong {
   color: #143D2C;
   font-weight: 700;
+  min-width: 150px;
+  display: inline-block;
 }
 
 .edit-btn {
-  align-self: flex-start;
+  align-self: flex-end;
   background-color: #143D2C;
   color: #ffffff;
   border: none;
@@ -73,6 +124,9 @@ body {
   margin-top: 1.5rem;
   letter-spacing: 0.5px;
   box-shadow: 0 4px 10px rgba(20, 61, 44, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .edit-btn:hover {
@@ -80,6 +134,45 @@ body {
   transform: translateY(-3px);
   box-shadow: 0 6px 15px rgba(20, 61, 44, 0.3);
 }
+
+.card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background: #143D2C;
+  opacity: 0.7;
+}
+
+.card-info p {
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.card-info p:hover {
+  transform: translateX(5px);
+  background-color: #f0f9f4;
+}
+
+/* Animaciones para mejorar la experiencia */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.card {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.nombre { animation: fadeIn 0.3s ease-out forwards; animation-delay: 0.1s; }
+.apellido { animation: fadeIn 0.3s ease-out forwards; animation-delay: 0.2s; }
+.correo { animation: fadeIn 0.3s ease-out forwards; animation-delay: 0.3s; }
+.telefono { animation: fadeIn 0.3s ease-out forwards; animation-delay: 0.4s; }
+.edit-btn { animation: fadeIn 0.3s ease-out forwards; animation-delay: 0.5s; }
+
+
 
 /* Enlace al dashboard */
 .dashboard-container {
@@ -122,8 +215,13 @@ body {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 .modal-content {
@@ -138,8 +236,15 @@ body {
 }
 
 @keyframes slideUp {
-  from { transform: translateY(30px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .close {
@@ -232,105 +337,313 @@ form button:hover {
 }
 
 /*RESERVAS*/
+/* Estilos corregidos para la sección de reservas */
 .reservas-card {
-  background-color: #fff;
+  background-color: #ffffff;
   border-radius: 12px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
-  padding: 2rem;
-  max-width: 800px;
-  margin: 2rem auto;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #333;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  max-width: 900px;
+  margin: 3rem auto;
+  position: relative;
+  border: 1px solid #e5e7eb;
+  overflow: hidden;
+  padding-top: 2rem;
+  display: block; /* Cambiado de grid a block para evitar conflictos */
 }
 
-.card-info h2 {
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
+/* Encabezado de la tarjeta de reservas */
+.reservas-card::before {
+  content: 'MIS RESERVAS';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 0.5rem 0;
+  background-color: #143D2C;
+  color: white;
   text-align: center;
-  color: #2c3e50;
-  border-bottom: 2px solid #ddd;
-  padding-bottom: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
 }
 
+/* Contenedor de información de reservas */
+.card-info-reserva {
+  padding: 1.5rem 2rem 2.5rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Título de la sección de reservas */
+.card-info-reserva h2 {
+  font-size: 1.8rem;
+  margin: 1rem 0 2rem;
+  text-align: center;
+  color: #143D2C;
+  font-weight: 700;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.card-info-reserva h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background-color: #143D2C;
+  border-radius: 2px;
+}
+
+/* Contenedor para cada tipo de reserva */
 .reserva-section {
-  margin-bottom: 1.8rem;
-  padding: 1rem;
-  border: 1px solid #eaeaea;
-  border-radius: 8px;
-  background-color: #fafafa;
-  transition: background-color 0.3s ease;
+  margin-bottom: 1.5rem;
+  padding: 1.5rem;
+  border-radius: 12px;
+  background-color: #f9fafb;
+  transition: all 0.3s ease;
+  border: 1px solid #e5e7eb;
+  border-left: 5px solid #143D2C;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
 }
 
 .reserva-section:hover {
-  background-color: #f0f8ff;
+  background-color: #f0f9f4;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
 }
 
+/* Títulos de cada sección */
 .reserva-section h3 {
-  margin-bottom: 0.75rem;
-  color: #1a73e8;
+  margin-bottom: 1.2rem;
+  color: #143D2C;
   font-size: 1.3rem;
-  border-left: 4px solid #1a73e8;
-  padding-left: 0.5rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #e5e7eb;
 }
 
+.reserva-section h3::before {
+  content: '';
+  display: block;
+  width: 6px;
+  height: 24px;
+  background: #143D2C;
+  border-radius: 3px;
+}
+
+/* Grid para las reservas */
 .reserva-section ul {
   list-style: none;
   padding-left: 0;
   margin: 0;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
 }
 
-.reserva-section li {
+/* Cada elemento de reserva */
+.reserva-item {
   background-color: #ffffff;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  padding: 0.75rem;
-  margin-bottom: 0.6rem;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
-  transition: transform 0.2s ease;
+  border-radius: 10px;
+  padding: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+  border: 1px solid #e5e7eb;
 }
 
-.reserva-section li:hover {
-  transform: translateY(-2px);
-  background-color: #fefefe;
+.reserva-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+  border-color: #143D2C;
 }
 
+/* Iconos */
+.reserva-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: #143D2C;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Detalles de la reserva */
+.reserva-details {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.reserva-name {
+  font-weight: 600;
+  color: #1e293b;
+  font-size: 1.05rem;
+  margin-bottom: 0.4rem;
+}
+
+.reserva-date {
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+/* Mensaje de no reservas */
 .no-reservas {
   text-align: center;
+  padding: 3rem 1.5rem;
+  background-color: #f9fafb;
+  border-radius: 12px;
+  color: #64748b;
   font-style: italic;
-  color: #888;
-  padding: 1rem;
-  background-color: #f9f9f9;
-  border-radius: 6px;
-  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  border: 2px dashed #e5e7eb;
+  margin: 1rem 0;
 }
 
+.no-reservas i {
+  font-size: 3rem;
+  color: #94a3b8;
+}
+
+.no-reservas p {
+  font-size: 1.1rem;
+  margin: 0;
+  font-weight: 500;
+}
+
+/* Colores específicos para cada tipo de reserva */
+.reserva-section:nth-of-type(1) {
+  border-left-color: #2563eb;
+}
+
+.reserva-section:nth-of-type(2) {
+  border-left-color: #059669;
+}
+
+.reserva-section:nth-of-type(3) {
+  border-left-color: #d97706;
+}
+
+.reserva-section:nth-of-type(4) {
+  border-left-color: #7c3aed;
+}
+
+/* Iconos con colores específicos */
+.reserva-section:nth-of-type(1) .reserva-icon {
+  background-color: #2563eb;
+}
+
+.reserva-section:nth-of-type(2) .reserva-icon {
+  background-color: #059669;
+}
+
+.reserva-section:nth-of-type(3) .reserva-icon {
+  background-color: #d97706;
+}
+
+.reserva-section:nth-of-type(4) .reserva-icon {
+  background-color: #7c3aed;
+}
+
+/* Etiquetas visuales para cada tipo de reserva */
+.reserva-section:nth-of-type(1) h3::after {
+  content: 'Alojamiento';
+  font-size: 0.8rem;
+  background-color: #2563eb;
+  color: white;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  margin-left: auto;
+  letter-spacing: 0.5px;
+}
+
+.reserva-section:nth-of-type(2) h3::after {
+  content: 'Actividades';
+  font-size: 0.8rem;
+  background-color: #059669;
+  color: white;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  margin-left: auto;
+  letter-spacing: 0.5px;
+}
+
+.reserva-section:nth-of-type(3) h3::after {
+  content: 'Vehículos';
+  font-size: 0.8rem;
+  background-color: #d97706;
+  color: white;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  margin-left: auto;
+  letter-spacing: 0.5px;
+}
+
+.reserva-section:nth-of-type(4) h3::after {
+  content: 'Vuelos';
+  font-size: 0.8rem;
+  background-color: #7c3aed;
+  color: white;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  margin-left: auto;
+  letter-spacing: 0.5px;
+}
+
+/* Decoración de la tarjeta de reservas */
+.reservas-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background: linear-gradient(to right, #143D2C, #2d7a58, #143D2C);
+  opacity: 0.7;
+}
 
 /* Responsive */
 @media (max-width: 768px) {
-  .card {
-    flex-direction: column;
-  }
-  
-  .foto-usuario {
-    width: 100%;
-    height: 250px;
-    border-right: none;
-    border-bottom: 1px solid #e5e7eb;
-  }
-  
-  .modal-content {
-    width: 95%;
-    max-height: 90vh;
-    overflow-y: auto;
-  }
-  
-  .modal-content h2 {
-    padding: 1.25rem 1.5rem;
-  }
-  
-  form {
+  .reserva-section ul {
     grid-template-columns: 1fr;
-    padding: 1.5rem;
-    gap: 1rem;
+  }
+  
+  .card-info-reserva {
+    padding: 1rem 1.5rem 2rem;
+  }
+  
+  .reserva-section h3::after {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.4rem;
   }
 }
+
+/* Animaciones */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.reserva-section {
+  animation: fadeInUp 0.4s ease-out forwards;
+}
+
+.reserva-section:nth-of-type(1) { animation-delay: 0.1s; }
+.reserva-section:nth-of-type(2) { animation-delay: 0.2s; }
+.reserva-section:nth-of-type(3) { animation-delay: 0.3s; }
+.reserva-section:nth-of-type(4) { animation-delay: 0.4s; }

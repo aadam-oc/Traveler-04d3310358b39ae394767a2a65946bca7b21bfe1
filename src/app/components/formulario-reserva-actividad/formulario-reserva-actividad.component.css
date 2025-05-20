@@ -1,119 +1,307 @@
+/* Estilos modernos para el formulario de reserva de actividades */
 .booking-form {
-  max-width: 600px;
-  margin: 2rem auto;
-  padding: 2rem;
-  font-family: Arial, sans-serif;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 650px;
+  margin: 3rem auto;
+  padding: 2.5rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #f0f0f0;
 }
 
-h2 {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-  text-align: center;
-  color: #333;
+/* Decoración de fondo */
+.booking-form::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background: #143D2C;
 }
 
+/* Título del formulario */
+.booking-form h2 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+  color: #143D2C;
+  font-weight: 700;
+  text-align: left;
+  position: relative;
+  padding-bottom: 0.75rem;
+}
+
+.booking-form h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background-color: #143D2C;
+  border-radius: 2px;
+}
+
+/* Texto informativo */
 .form-info {
-  font-size: 0.9rem;
-  color: #555;
-  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #2c2c2c;
+  margin-bottom: 2rem;
+  text-align: left;
+  line-height: 1.5;
+}
+
+/* Indicador de campo obligatorio */
+.required {
+  color: #e53e3e;
+  font-size: 1.1rem;
+  vertical-align: middle;
+  margin-left: 2px;
+}
+
+/* Grupos de formulario */
+.form-group {
+  margin-bottom: 1.75rem;
+  position: relative;
+}
+
+/* Fila de formulario para layout de dos columnas */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+/* Contenedor para fecha y hora */
+.date-time-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+/* Etiquetas de campo */
+.booking-form label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+  color: #333333;
+  font-size: 0.95rem;
+  transition: color 0.2s ease;
+}
+
+.form-group:focus-within label {
+  color: #143D2C;
+}
+
+/* Campos de entrada */
+.booking-form input,
+.booking-form select {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+  background-color: #f9f9f9;
+  color: #333333;
+}
+
+.booking-form input:focus,
+.booking-form select:focus {
+  outline: none;
+  border-color: #143D2C;
+  box-shadow: 0 0 0 3px rgba(20, 61, 44, 0.1);
+  background-color: #ffffff;
+}
+
+/* Placeholder */
+.booking-form input::placeholder {
+  color: #aaaaaa;
+  font-size: 0.95rem;
+}
+
+/* Campos de fecha */
+.booking-form input[type="date"] {
+  appearance: none;
+  padding-right: 0.75rem;
+  cursor: pointer;
+  position: relative;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23666666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='2' ry='2'%3E%3C/rect%3E%3Cline x1='16' y1='2' x2='16' y2='6'%3E%3C/line%3E%3Cline x1='8' y1='2' x2='8' y2='6'%3E%3C/line%3E%3Cline x1='3' y1='10' x2='21' y2='10'%3E%3C/line%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: calc(100% - 12px) center;
+  background-size: 16px;
+}
+
+.booking-form input[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+}
+
+/* Estilo para el selector de hora */
+.booking-form select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23666666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: calc(100% - 12px) center;
+  background-size: 16px;
+  padding-right: 2.5rem;
+  cursor: pointer;
+}
+
+/* Botón de envío */
+.booking-form .btn {
+  display: block;
+  width: 100%;
+  padding: 1rem 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #143D2C;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
   text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(20, 61, 44, 0.2);
+  margin-top: 2rem;
+  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+}
+
+.booking-form .btn:hover {
+  background-color: #0d2a1e;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(20, 61, 44, 0.3);
+}
+
+.booking-form .btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 5px rgba(20, 61, 44, 0.2);
+}
+
+/* Efecto de onda al hacer clic en el botón */
+.booking-form .btn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%, -50%);
+  transform-origin: 50% 50%;
+}
+
+.booking-form .btn:focus:not(:active)::after {
+  animation: ripple 1s ease-out;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0, 0);
+    opacity: 0.5;
+  }
+
+  20% {
+    transform: scale(25, 25);
+    opacity: 0.3;
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(40, 40);
+  }
+}
+
+/* Animaciones para mejorar la experiencia */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .form-group {
-  margin-bottom: 1.5rem;
+  animation: fadeIn 0.3s ease-out forwards;
 }
 
-label {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-  color: #333;
+.form-group:nth-child(1) {
+  animation-delay: 0.05s;
 }
 
-input, select {
-  width: 100%;
-  padding: 0.75rem;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
+.form-group:nth-child(2) {
+  animation-delay: 0.1s;
 }
 
-input::placeholder {
-  color: #aaa;
+.form-group:nth-child(3) {
+  animation-delay: 0.15s;
 }
 
-small {
-  display: block;
-  margin-top: 0.5rem;
+.form-group:nth-child(4) {
+  animation-delay: 0.2s;
+}
+
+.form-group:nth-child(5) {
+  animation-delay: 0.25s;
+}
+
+.form-group:nth-child(6) {
+  animation-delay: 0.3s;
+}
+
+.booking-form .btn {
+  animation-delay: 0.4s;
+}
+
+/* Estilos para campos con error */
+.booking-form .error input,
+.booking-form .error select,
+.booking-form input.ng-invalid.ng-touched,
+.booking-form select.ng-invalid.ng-touched {
+  border-color: #e53e3e;
+  background-color: #fff5f5;
+}
+
+.booking-form .error-message,
+.booking-form .ng-invalid.ng-touched+small.error {
+  color: #e53e3e;
   font-size: 0.8rem;
-  color: #777;
+  margin-top: 0.5rem;
+  display: block;
 }
 
-.required {
-  color: red;
-}
-
-.btn {
-  display: inline-block;
-  width: 100%;
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  color: #fff;
-  background-color: #143D2C;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  text-align: center;
-}
-
-.btn:hover {
-  background-color: #143D2C;
-}
-
-.form-reserva {
-    background: #fff;
+/* Responsive */
+@media (max-width: 768px) {
+  .booking-form {
     padding: 2rem;
-    border-radius: 1rem;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    max-width: 500px;
     margin: 2rem auto;
-}
+  }
 
-.input-reserva {
-    padding: 0.8rem 1rem;
-    border-radius: 0.5rem;
-    border: 1px solid #e5e7eb;
-    font-size: 1rem;
-    background: #f9fafb;
-    transition: border 0.2s;
-}
+  .form-row,
+  .date-time-container {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
 
-.input-reserva:focus {
-    border: 1.5px solid #143D2C;
-    outline: none;
-    background: #fff;
-}
-
-.btn-reservar {
-   background-color: #143D2C;
-    color: white;
-    border: none;
-    padding: 1rem 0;
-    border-radius: 0.5rem;
-    font-weight: 600;
-    cursor: pointer;
-    font-size: 1.1rem;
-    transition: background-color 0.3s;
-}
-
-.btn-reservar:hover {
-    background-color: #0a2213;
+  .booking-form h2 {
+    font-size: 1.5rem;
+  }
 }

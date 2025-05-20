@@ -2,71 +2,98 @@
 
 <!-- INFO PERFIL -->
 <div class="card">
-  <img
-    class="foto-usuario"
-    [src]="foto || 'http://172.17.131.14:3000/uploads/1743518085523.png'"
-    alt="Foto del usuario" />
+  <div class="foto-usuario-container">
+    <img
+      class="foto-usuario"
+      [src]="foto || 'http://172.17.131.14:3000/uploads/1743518085523.png'"
+      alt="Foto del usuario" />
+    <div class="usuario-estado">Usuario Activo</div>
+  </div>
 
   <div class="card-info">
-    <p class="nombre"><strong>Nombre:</strong> {{ nombre }}</p>
-    <p class="apellido"><strong>Apellidos:</strong> {{ apellido1 }} {{ apellido2
-      }}</p>
-    <p class="correo"><strong>Correo:</strong> {{ correo }}</p>
-    <p class="telefono"><strong>Teléfono 1:</strong> {{ telefono1 }}</p>
-    <p class="telefono"><strong>Teléfono 2:</strong> {{ telefono2 ||
-      'No proporcionado' }}</p>
-
+    <p class="nombre"><strong>Nombre:</strong> <span>{{ nombre }}</span></p>
+    <p class="apellido"><strong>Primer Apellido:</strong> <span>{{ apellido1
+        }}</span></p>
+    <p class="correo"><strong>Correo:</strong> <span>{{ correo }}</span></p>
+    <p class="telefono"><strong>Teléfono:</strong> <span>{{ telefono1
+        }}</span></p>
     <button class="edit-btn" (click)="openModal()">EDITAR PERFIL</button>
   </div>
 </div>
 
 <!-- RESERVAS -->
 <div class="card reservas-card">
-    <div class="card-info">
-      <h2>Mis Reservas</h2>
-      <ng-container *ngIf="tieneReservas(); else sinReservas">
-        <div *ngIf="reservasAlojamiento.length > 0">
-          <h3>Reserva de Alojamiento</h3>
-          <ul>
-            <li *ngFor="let r of reservasAlojamiento">
-              {{ r.nombre_alojamiento }} - {{ r.fecha_entrada_alojamiento }} a
-              {{ r.fecha_salida_alojamiento }}
-            </li>
-          </ul>
-        </div>
-        <div *ngIf="reservasActividades.length > 0">
-          <h3>Actividades</h3>
-          <ul>
-            <li *ngFor="let r of reservasActividades">
-              {{ r.nombre_actividad }} - {{ r.fecha_actividad }} {{
-              r.hora_actividad }}
-            </li>
-          </ul>
-        </div>
-        <div *ngIf="reservasVehiculos.length > 0">
-          <h3>Vehículos de Alquiler</h3>
-          <ul>
-            <li *ngFor="let r of reservasVehiculos">
-              {{ r.nombre_vehiculo }} - {{ r.fecha_inicio }} a {{ r.fecha_fin }}
-            </li>
-          </ul>
-        </div>
-        <div *ngIf="reservasVuelos.length > 0">
-          <h3>Vuelos</h3>
-          <ul>
-            <li *ngFor="let r of reservasVuelos">
-              {{ r.origen }} → {{ r.destino }} - {{ r.fecha_vuelo }}
-            </li>
-          </ul>
-        </div>
-      </ng-container>
-      <ng-template #sinReservas>
-        <p>(No tienes ninguna Reserva)</p>
-      </ng-template>
-    </div>
+  <div class="card-info-reserva">
+    <h2>Mis Reservas</h2>
+    <ng-container *ngIf="tieneReservas(); else sinReservas">
+      <div *ngIf="reservasAlojamiento.length > 0" class="reserva-section">
+        <h3>Reserva de Alojamiento</h3>
+        <ul>
+          <li *ngFor="let r of reservasAlojamiento" class="reserva-item">
+            <div class="reserva-icon">
+              <i class="fas fa-hotel"></i>
+            </div>
+            <div class="reserva-details">
+              <span class="reserva-name">{{ r.nombre_alojamiento }}</span>
+              <span class="reserva-date">{{ r.fecha_entrada_alojamiento }} a {{
+                r.fecha_salida_alojamiento }}</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div *ngIf="reservasActividades.length > 0" class="reserva-section">
+        <h3>Actividades</h3>
+        <ul>
+          <li *ngFor="let r of reservasActividades" class="reserva-item">
+            <div class="reserva-icon">
+              <i class="fas fa-hiking"></i>
+            </div>
+            <div class="reserva-details">
+              <span class="reserva-name">{{ r.nombre_actividad }}</span>
+              <span class="reserva-date">{{ r.fecha_actividad }} {{
+                r.hora_actividad }}</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div *ngIf="reservasVehiculos.length > 0" class="reserva-section">
+        <h3>Vehículos de Alquiler</h3>
+        <ul>
+          <li *ngFor="let r of reservasVehiculos" class="reserva-item">
+            <div class="reserva-icon">
+              <i class="fas fa-car"></i>
+            </div>
+            <div class="reserva-details">
+              <span class="reserva-name">{{ r.nombre_vehiculo }}</span>
+              <span class="reserva-date">{{ r.fecha_inicio }} a {{ r.fecha_fin
+                }}</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div *ngIf="reservasVuelos.length > 0" class="reserva-section">
+        <h3>Vuelos</h3>
+        <ul>
+          <li *ngFor="let r of reservasVuelos" class="reserva-item">
+            <div class="reserva-icon">
+              <i class="fas fa-plane"></i>
+            </div>
+            <div class="reserva-details">
+              <span class="reserva-name">{{ r.origen }} → {{ r.destino }}</span>
+              <span class="reserva-date">{{ r.fecha_vuelo }}</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </ng-container>
+    <ng-template #sinReservas>
+      <div class="no-reservas">
+        <i class="fas fa-calendar-times"></i>
+        <p>No tienes ninguna reserva actualmente</p>
+      </div>
+    </ng-template>
   </div>
-
-<br /><br />
+</div>
 
 <!-- DASHBOARD -->
 <div class="dashboard-container">
@@ -85,14 +112,6 @@
         <input id="correo" type="email" formControlName="correo" />
       </div>
       <div>
-        <label for="contrasena">Contraseña:</label>
-        <input id="contrasena" type="password" formControlName="contrasena" />
-      </div>
-      <div>
-        <label for="id_rol">ID Rol:</label>
-        <input id="id_rol" type="text" formControlName="id_rol" />
-      </div>
-      <div>
         <label for="nombre">Nombre:</label>
         <input id="nombre" type="text" formControlName="nombre" />
       </div>
@@ -105,12 +124,61 @@
         <input id="apellido2" type="text" formControlName="apellido2" />
       </div>
       <div>
-        <label for="telefono1">Teléfono 1:</label>
+        <label for="telefono1">Teléfono:</label>
         <input id="telefono1" type="text" formControlName="telefono1" />
       </div>
       <div>
         <label for="telefono2">Teléfono 2:</label>
         <input id="telefono2" type="text" formControlName="telefono2" />
+      </div>
+      <div>
+        <label for="contrasena">Contraseña:</label>
+        <input id="contrasena" type="password" formControlName="contrasena" />
+      </div>
+      <div>
+        <label for="confirmarContrasena">Confirmar Contraseña:</label>
+        <input id="confirmarContrasena" type="password"
+          formControlName="confirmarContrasena" />
+        <div
+          *ngIf="editarUsuarioForm.hasError('passwordMismatch') && editarUsuarioForm.get('confirmarContrasena')?.touched"
+          style="color:red;">
+          Las contraseñas no coinciden
+        </div>
+      </div>
+      <!-- Imagen -->
+      <div>
+        <label for="alojamiento_imagen">Imagen del
+          alojamiento</label>
+        <div class="imagen-upload-container">
+          <div class="imagen-upload-text">
+            <label for="alojamiento_imagen"
+              class="imagen-upload-label">
+              Subir imagen
+              <input id="alojamiento_imagen"
+                type="file" class="sr-only"
+                (change)="onFileSelectedperfil($event)" />
+              <i class="fas fa-upload"></i>
+            </label>
+            <span>o arrastra y suelta</span>
+          </div>
+          <p class="imagen-upload-note">PNG, JPG, GIF
+            hasta 10MB</p>
+        </div>
+        <div
+          *ngIf="!perfilImagenUrl && perfilImagenSeleccionada"
+          class="imagen-subiendo">
+          Subiendo imagen, por favor espera...
+        </div>
+      </div>
+
+      <!-- Vista previa -->
+      <div *ngIf="perfilImagenUrl"
+        class="vista-previa-container">
+        <p class="vista-previa-titulo">Vista previa:</p>
+        <div class="vista-previa-imagen">
+          <img [src]="perfilImagenUrl"
+            alt="Vista previa">
+        </div>
       </div>
       <button type="submit">Guardar</button>
     </form>

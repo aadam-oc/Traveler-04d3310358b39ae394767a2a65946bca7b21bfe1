@@ -572,41 +572,63 @@ export class ApiService {
   }
 
   // Reservas de Alojamiento por usuario
-getReservasAlojamientoUsuario(id_usuario: number) {
-  const token = localStorage.getItem('authToken');
-  const headers = { Authorization: `Bearer ${token}` };
-  return this.http.get<any[]>(`${this.apiUrl}/traveler/reservas_alojamientos/usuario/${id_usuario}`, { headers });
+  getReservasAlojamientoUsuario(id_usuario: number) {
+    const token = localStorage.getItem('authToken');
+    const headers = { Authorization: `Bearer ${token}` };
+    return this.http.get<any[]>(`${this.apiUrl}/traveler/reservas_alojamientos/usuario/${id_usuario}`, { headers });
+  }
+
+  // Reservas de Actividades por usuario
+  getReservasActividadesUsuario(id_usuario: number) {
+    const token = localStorage.getItem('authToken');
+    const headers = { Authorization: `Bearer ${token}` };
+    return this.http.get<any[]>(`${this.apiUrl}/traveler/reservas_actividades/usuario/${id_usuario}`, { headers });
+  }
+
+  // Reservas de Vehículos por usuario
+  getReservasVehiculosUsuario(id_usuario: number) {
+    const token = localStorage.getItem('authToken');
+    const headers = { Authorization: `Bearer ${token}` };
+    return this.http.get<any[]>(`${this.apiUrl}/traveler/reservas_vehiculos/usuario/${id_usuario}`, { headers });
+  }
+
+  // Reservas de Vuelos por usuario
+  getReservasVuelosUsuario(id_usuario: number) {
+    const token = localStorage.getItem('authToken');
+    const headers = { Authorization: `Bearer ${token}` };
+    return this.http.get<any[]>(`${this.apiUrl}/traveler/reservas_vuelos/usuario/${id_usuario}`, { headers });
+  }
+
+  subirRutaImagenUsuario(imageUrl: string, id_usuario: number): Observable<any> {
+    const token = localStorage.getItem('authToken');
+    const headers = {
+      Authorization: `Bearer ${token}`
+    };
+    const body = {
+      nombre_imagen_usuario: imageUrl,
+      id_usuario: id_usuario
+    };
+    console.log('Cuerpo de la solicitud:', body);
+    // Cambia la URL al endpoint correcto de imágenes de usuarios
+    return this.http.post(`${this.apiUrl}/traveler/imagenes_usuarios`, body, { headers });
+
+  }
+
+  getImagenesUsuarios(id_usuario: number): Observable<any> {
+    const token = localStorage.getItem('authToken');
+    const headers = {
+      Authorization: `Bearer ${token}`
+    };
+    return this.http.get(`${this.apiUrl}/traveler/imagenes_usuarios/${id_usuario}`, { headers });
+  }
+
+  putImagenUsuario(id_usuario: number, imagen: any): Observable<any> {
+    const token = localStorage.getItem('authToken');
+    const headers = {
+      Authorization: `Bearer ${token}`
+    };
+    return this.http.put(`${this.apiUrl}/traveler/imagenes_usuarios/${id_usuario}`, imagen, { headers });
+  }
+
 }
-
-// Reservas de Actividades por usuario
-getReservasActividadesUsuario(id_usuario: number) {
-  const token = localStorage.getItem('authToken');
-  const headers = { Authorization: `Bearer ${token}` };
-  return this.http.get<any[]>(`${this.apiUrl}/traveler/reservas_actividades/usuario/${id_usuario}`, { headers });
-}
-
-// Reservas de Vehículos por usuario
-getReservasVehiculosUsuario(id_usuario: number) {
-  const token = localStorage.getItem('authToken');
-  const headers = { Authorization: `Bearer ${token}` };
-  return this.http.get<any[]>(`${this.apiUrl}/traveler/reservas_vehiculos/usuario/${id_usuario}`, { headers });
-}
-
-// Reservas de Vuelos por usuario
-getReservasVuelosUsuario(id_usuario: number) {
-  const token = localStorage.getItem('authToken');
-  const headers = { Authorization: `Bearer ${token}` };
-  return this.http.get<any[]>(`${this.apiUrl}/traveler/reservas_vuelos/usuario/${id_usuario}`, { headers });
-}
-
-}
-
-
-
-
-
-
-
-
-
 
