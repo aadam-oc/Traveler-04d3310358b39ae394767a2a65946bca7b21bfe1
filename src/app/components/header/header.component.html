@@ -28,8 +28,11 @@
     </div>
   </header>
 
-<!-- Hero con imagen de fondo -->
-<div *ngIf="!isLoginOrRegister" class="hero-section" [ngClass]="{ 'home-hero': isHomePage }">
-  <h1 [class.fade-in]="animateTitle">{{ pageTitle }}</h1>
-</div>
+  <!-- Hero con imagen de fondo -->
+  <div *ngIf="!isLoginOrRegister"
+    class="hero-section"
+    [class.home-hero]="isHomePage"
+    id="heroSection">
+    <h1 [class.fade-in]="animateTitle">{{ pageTitle }}</h1>
+  </div>
 </div>

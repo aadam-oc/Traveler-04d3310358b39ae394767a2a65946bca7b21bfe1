@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 * {
-  font-family: 'Poppins', sans-serif;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 /*HEADER*/
@@ -21,7 +21,6 @@
 header {
     width: 100%;
     color: white;
-    padding: 10px 20px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -66,7 +65,8 @@ header {
 }
 
 .nav-menu a {
-    color: rgb(255, 255, 255); /* Cambié el color a negro para resaltar sin fondo */
+    color: rgb(255, 255, 255);
+    /* Cambié el color a negro para resaltar sin fondo */
     text-decoration: none;
     font-size: 16px;
     font-weight: bold;
@@ -87,11 +87,13 @@ header {
     color: white;
     border-radius: 10px;
     font-weight: bold;
-    background-color: #143D2C; /* Verde oscuro */
+    background-color: #143D2C;
+    /* Verde oscuro */
 }
 
 .auth-buttons .btn:hover {
-    background-color: #1f5a41; /* Un verde más oscuro al pasar el ratón */
+    background-color: #1f5a41;
+    /* Un verde más oscuro al pasar el ratón */
 }
 
 @keyframes fadeIn {
@@ -99,6 +101,7 @@ header {
         opacity: 0;
         transform: translateY(10px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -110,18 +113,19 @@ header {
 }
 
 .hero-container {
-position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  min-height: 90vh;
-  background-image: url('http://172.17.131.14:3000/uploads/1743523341161.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  padding: 20px;
-  /* Estas propiedades hacen que la imagen se extienda hacia arriba */
-  margin-top: -90px; /* Ajusta este valor según la altura de tu header */
-  padding-top: 90px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 90vh;
+    background-image: url('http://172.17.131.14:3000/uploads/1743523341161.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 20px;
+    /* Estas propiedades hacen que la imagen se extienda hacia arriba */
+    margin-top: -90px;
+    /* Ajusta este valor según la altura de tu header */
+    padding-top: 90px;
 }

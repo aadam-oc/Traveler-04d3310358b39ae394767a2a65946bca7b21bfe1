@@ -98,7 +98,7 @@ export class FormularioReservaVehiculosComponent {
         telefono: formData.telefono,
         email: formData.email,
         nombre_vehiculo: this.nombre_vehiculo,
-
+        
       };
 
       this.apiService.postReservaVehiculo(reserva).subscribe(
@@ -119,7 +119,7 @@ export class FormularioReservaVehiculosComponent {
     this.timeoutModalReserva = setTimeout(() => {
       this.cerrarModalReservaExito();
       this.router.navigate(['/inicio']);
-    }, 15000); // 15 segundos
+    }, 5000); 
   }
 
   cerrarModalReservaExito(event?: MouseEvent) {

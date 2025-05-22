@@ -144,6 +144,7 @@ export class GestionActividadesComponent {
     if (this.formCrearActividad.valid) {
       const nuevaActividad = {
         id_actividad: this.formCrearActividad.value.id_actividad,
+        id_usuario_actividad: this.id_usuario,
         id_tipo_actividad: this.formCrearActividad.value.id_tipo_actividad,
         id_destino: this.formCrearActividad.value.id_destino,
         descripcion: this.formCrearActividad.value.descripcion,

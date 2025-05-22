@@ -11,9 +11,9 @@
     </div>
 
     <div class="form-group">
-      <label for="apellidos">Apellidos <span class="required">*</span></label>
-      <input id="apellidos" type="text" placeholder="Apellidos"
-        formControlName="apellidos" required />
+      <label for="apellido">Apellido <span class="required">*</span></label>
+      <input id="apellido" type="text" placeholder="Apellido"
+        formControlName="apellido" required />
     </div>
   </div>
 
@@ -29,24 +29,6 @@
       formControlName="telefono" required />
   </div>
 
-  <div class="date-time-container">
-    <div class="form-group">
-      <label for="fecha_actividad">Fecha <span class="required">*</span></label>
-      <input id="fecha_actividad" type="date" formControlName="fecha_actividad"
-        required />
-    </div>
-
-    <div class="form-group">
-      <label for="hora_actividad">Hora <span class="required">*</span></label>
-      <select id="hora_actividad" formControlName="hora_actividad" required>
-        <option value disabled selected>Selecciona una hora</option>
-        <option *ngFor="let hora of horasDisponibles" [value]="hora">{{ hora
-          }}</option>
-      </select>
-    </div>
-    
-  </div>
-
   <button type="submit" class="btn">Reservar ahora</button>
 </form>
 
@@ -56,6 +38,6 @@
   (click)="cerrarModalReservaExito($event)">
   <div class="modal-reserva-exito-contenido" (click)="$event.stopPropagation()">
     <p>La reserva se ha realizado correctamente</p>
-    <small>Serás redirigido al inicio en 15 segundos...</small>
+    <small>Serás redirigido al inicio en 5 segundos...</small>
   </div>
 </div>

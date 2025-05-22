@@ -92,6 +92,7 @@ export class PerfilComponent implements OnInit {
 
     this.apiService.getReservasVuelosUsuario(id_usuario).subscribe({
       next: data => {
+        console.log('Reservas de vuelos:', data);
         this.reservasVuelos = data;
       },
       error: err => {
@@ -101,6 +102,7 @@ export class PerfilComponent implements OnInit {
 
     this.apiService.getReservasVehiculosUsuario(id_usuario).subscribe({
       next: data => {
+        
         this.reservasVehiculos = data;
       },
       error: err => {
@@ -289,7 +291,7 @@ export class PerfilComponent implements OnInit {
     this.modalExitoAbierto = true;
     this.timeoutModalExito = setTimeout(() => {
       this.cerrarModalExito();
-    }, 15000);
+    }, 5000);
   }
 
   cerrarModalExito(event?: MouseEvent) {

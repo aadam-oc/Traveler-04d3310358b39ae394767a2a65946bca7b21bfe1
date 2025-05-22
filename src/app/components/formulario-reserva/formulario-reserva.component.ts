@@ -107,7 +107,7 @@ export class FormularioReservaComponent {
   this.timeoutModalReserva = setTimeout(() => {
     this.cerrarModalReservaExito();
     this.router.navigate(['/inicio']);
-  }, 15000); // 15 segundos
+  }, 5000); 
 }
 
 cerrarModalReservaExito(event?: MouseEvent) {

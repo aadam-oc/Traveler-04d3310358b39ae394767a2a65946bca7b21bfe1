@@ -14,7 +14,7 @@ export class HeaderComponent {
 
   isHomePage: boolean = false;
   isLoginOrRegister: boolean = false;
-  pageTitle: string = 'Bienvenido';
+  pageTitle: string = '';
   animateTitle: boolean = true;
 
   constructor(private router: Router, private route: ActivatedRoute) { }
@@ -29,21 +29,58 @@ export class HeaderComponent {
   }
 
   ngOnInit(): void {
+    // Verificar la ruta inicial
+    this.checkCurrentRoute(this.router.url);
+    
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
-    ).subscribe((event: NavigationEnd) => {
-      const currentUrl = event.urlAfterRedirects;
-      console.log('URL actual:', currentUrl);
-
-      this.pageTitle = this.route.root.firstChild?.snapshot.data['title'] || '';
-      this.isHomePage = currentUrl === '/';
-      // Verifica si estamos en login o register
-      this.isLoginOrRegister = currentUrl.includes('/login') || currentUrl.includes('/register');
-
-      this.animateTitle = false;
-      setTimeout(() => {
-        this.animateTitle = true;
-      }, 10);
+    ).subscribe((event: any) => {
+      this.checkCurrentRoute(event.urlAfterRedirects);
     });
+  }
+
+  private checkCurrentRoute(url: string): void {
+    console.log('Checking route:', url);
+    
+    // Verificar si estamos en la página de inicio
+    // Comprobamos tanto '/' como '/inicio' para cubrir ambas posibilidades
+    this.isHomePage = url === '/' || url === '/inicio';
+    console.log('Is home page:', this.isHomePage);
+    
+    // Verificar si estamos en login o register
+    this.isLoginOrRegister = url.includes('/login') || url.includes('/register');
+    console.log('Is login or register:', this.isLoginOrRegister);
+    
+    // Obtener el título de la página desde los datos de la ruta
+    this.pageTitle = this.route.root.firstChild?.snapshot.data['title'] || '';
+    
+    // Forzar la detección de cambios y la aplicación de estilos
+    if (!this.isLoginOrRegister) {
+      // Si venimos de login/register, forzar un reflow
+      setTimeout(() => {
+        const heroSection = document.querySelector('.hero-section') as HTMLElement;
+        if (heroSection) {
+          console.log('Forcing reflow on hero section');
+          
+          // Forzar un reflow
+          void heroSection.offsetHeight;
+          
+          // Asegurarnos de que la clase se aplica correctamente
+          if (this.isHomePage) {
+            heroSection.classList.add('home-hero');
+            console.log('Added home-hero class');
+          } else {
+            heroSection.classList.remove('home-hero');
+            console.log('Removed home-hero class');
+          }
+        }
+      }, 0);
+    }
+    
+    // Reiniciar la animación del título
+    this.animateTitle = false;
+    setTimeout(() => {
+      this.animateTitle = true;
+    }, 10);
   }
 }

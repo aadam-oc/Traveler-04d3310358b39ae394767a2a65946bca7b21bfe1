@@ -124,7 +124,7 @@ export class ApiService {
     return this.http.get(`${this.apiUrl}/traveler/actividades_completo/${id_actividad}`);
   }
 
-  putActividadCompleta(id_actividad: number, actividad: Item): Observable<any> {
+  putActividadCompleta(id_actividad: number, actividad: any): Observable<any> {
 
     const token = localStorage.getItem('authToken');
     console.log('TOKEN ENVIADO:', token);
@@ -638,5 +638,12 @@ export class ApiService {
     return this.http.post(`${this.apiUrl}/traveler/reservas_vehiculos`, reserva, { headers });
   }
 
+  postReservaVuelo(reserva: any): Observable<any> {
+    const token = localStorage.getItem('authToken');
+    const headers = {
+      Authorization: `Bearer ${token}`
+    };
+    return this.http.post(`${this.apiUrl}/traveler/reservas_vuelos`, reserva, { headers });
+  }
 }
 

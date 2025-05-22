@@ -15,6 +15,7 @@ export class EditarActividadesComponent {
   editaractividadForm: FormGroup;
   id_actividad: number = 0;
   actividadesCompletas: Actividad[] = [];
+  id_usuario: number = Number(localStorage.getItem('id_usuario'));
 
   constructor(
     private router: Router,
@@ -68,8 +69,16 @@ export class EditarActividadesComponent {
 
   onSubmit() {
     if (this.editaractividadForm.valid) {
-      const formData = this.editaractividadForm.value;
-      console.log('Formulario enviado:', formData);
+      const formData = {
+        id_destino: this.editaractividadForm.value.id_destino,
+        id_tipo_actividad: this.editaractividadForm.value.id_tipo_actividad,
+        disponibilidad_actividad: this.editaractividadForm.value.disponibilidad_actividad,
+        precio: this.editaractividadForm.value.precio,
+        descripcion: this.editaractividadForm.value.descripcion,
+        id_usuario_actividad: this.id_usuario
+      };
+      console.log('formData:', formData);
+      console.log('ID Actividad:', this.id_actividad);
       this.apiService.putActividadCompleta(this.id_actividad, formData).subscribe((response: any) => {
         console.log('Actividad actualizada:', response);
         this.router.navigate(['/dashboard']);
