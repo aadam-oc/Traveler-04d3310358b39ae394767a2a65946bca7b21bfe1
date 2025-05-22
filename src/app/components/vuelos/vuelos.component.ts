@@ -6,6 +6,7 @@ import { FakeApiVuelosService } from '../../services/fake-api-vuelos.service';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { Vuelos } from '../../models/vuelos';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-vuelos',
@@ -26,7 +27,8 @@ export class VuelosComponent implements OnInit {
 
   constructor(
     private fakeApiVuelosService: FakeApiVuelosService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
   ) {
     this.filtrosForm = this.fb.group({
       origen: [''],
@@ -78,10 +80,9 @@ export class VuelosComponent implements OnInit {
     this.vueloSeleccionado = null;
   }
 
-  irAFormularioReserva(id: number) {
-    console.log('Reservar vuelo con ID:', id);
-    // Aquí puedes navegar al formulario de reserva, por ejemplo usando Router
-    // this.router.navigate(['/reservar-vuelo', id]);
+  irAFormularioReserva(idVuelos: number) {
+    localStorage.setItem('id_vuelo', idVuelos.toString());
+    this.router.navigate(['/reservar-vuelos', idVuelos]);
 
   }
 }

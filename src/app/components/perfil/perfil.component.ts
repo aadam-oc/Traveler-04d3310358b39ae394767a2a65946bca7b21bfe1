@@ -22,7 +22,7 @@ export class PerfilComponent implements OnInit {
   telefono1: string = '';
   telefono2: string = '';
   foto: string = '';
-  rol: string = '1';
+  rol= localStorage.getItem('nombre_rol');
 
   reservas: boolean = false;
 
@@ -41,6 +41,10 @@ export class PerfilComponent implements OnInit {
   perfilImagenUrl: string = '';
   perfilImagenPreview: string | ArrayBuffer | null = null;
 
+  modalExitoAbierto: boolean = false;
+  private timeoutModalExito: any;
+
+
   constructor(
     private router: Router,
     private apiService: ApiService,
@@ -48,10 +52,12 @@ export class PerfilComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.rol = localStorage.getItem('nombre_rol') || 'User';
+    console.log('rol:', this.rol);
     this.getImagenUsuario();
     this.correo = localStorage.getItem('correo') || '';
     this.nombre = localStorage.getItem('nombre') || 'Usuario';
-    this.rol = localStorage.getItem('id_rol') || '1';
+    
 
     this.initEditarForm();
     this.getUsuario();
@@ -178,12 +184,6 @@ export class PerfilComponent implements OnInit {
             console.error('Error al asociar la imagen al usuario:', error);
           }
         );
-        
-        
-
-
-
-      
   }
 
   openModal() {
@@ -214,7 +214,6 @@ export class PerfilComponent implements OnInit {
   }
 
   onSubmitEditar() {
-
     this.postImagenUsuario(this.id_usuario);
     if (this.editarUsuarioForm.invalid) {
       if (this.editarUsuarioForm.hasError('passwordMismatch')) {
@@ -244,44 +243,60 @@ export class PerfilComponent implements OnInit {
 
     this.apiService.getCaracterisitcaUsuarioById(this.id_usuario).subscribe(
       (response: any) => {
-        console.log('Característica obtenida:', response);
         const caracteristica = response.caracteristica_usuario;
         if (caracteristica) {
           this.apiService.putCaracterisitcaUsuario(caracteristica.id_caracteristica, usuarioActualizado).subscribe(
-            (response: any) => {
-              console.log('Característica actualizada:', response);
+            () => {
+              this.abrirModalExito();
+              this.closeModal();
             },
-            (error) => {
-              console.error('Error al actualizar característica:', error);
+            () => {
+              this.abrirModalExito();
+              this.closeModal();
             }
           );
         } else {
-          // Si no hay característica, crea una nueva
           const usuarioActualizadoConId = { ...usuarioActualizado, id_usuario: this.id_usuario };
           this.apiService.postCaracterisitcaUsuario(usuarioActualizadoConId).subscribe(
-            (response: any) => {
-              console.log('Característica creada:', response);
+            () => {
+              this.abrirModalExito();
+              this.closeModal();
             },
-            (error) => {
-              console.error('Error al crear característica:', error);
+            () => {
+              this.abrirModalExito();
+              this.closeModal();
             }
           );
         }
       },
-      (error) => {
-        // Si hay error (por ejemplo, no existe la característica), crea una nueva
+      () => {
         const usuarioActualizadoConId = { ...usuarioActualizado, id_usuario: this.id_usuario };
         this.apiService.postCaracterisitcaUsuario(usuarioActualizadoConId).subscribe(
-          (response: any) => {
-            console.log('Característica creada tras error:', response);
+          () => {
+            this.abrirModalExito();
+            this.closeModal();
           },
-          (error) => {
-            console.error('Error al crear característica tras error:', error);
+          () => {
+            this.abrirModalExito();
+            this.closeModal();
           }
         );
       }
     );
   }
 
-  
+  abrirModalExito() {
+    this.modalExitoAbierto = true;
+    this.timeoutModalExito = setTimeout(() => {
+      this.cerrarModalExito();
+    }, 15000);
+  }
+
+  cerrarModalExito(event?: MouseEvent) {
+    this.modalExitoAbierto = false;
+    if (this.timeoutModalExito) {
+      clearTimeout(this.timeoutModalExito);
+      this.timeoutModalExito = null;
+    }
+  }
 }

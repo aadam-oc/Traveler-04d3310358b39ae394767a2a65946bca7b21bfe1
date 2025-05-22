@@ -4,19 +4,20 @@ import { ApiService } from '../../services/api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Actividad } from '../../models/actividad';
+import { Vuelos } from '../../models/vuelos';
 
 @Component({
-   imports: [CommonModule, FormsModule, ReactiveFormsModule],
-  selector: 'app-formulario-reserva-actividad',
-  templateUrl: './formulario-reserva-actividad.component.html',
-  styleUrl: './formulario-reserva-actividad.component.css'
+  selector: 'app-formulario-reserva-vuelos',
+  standalone: true,
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  templateUrl: './formulario-reserva-vuelos.component.html',
+  styleUrls: ['./formulario-reserva-vuelos.component.css']
 })
-export class FormularioReservaActividadComponent {
+export class FormularioReservaVuelosComponent {
   form: FormGroup;
   id_actividad: number = 0;
   horasDisponibles: string[] = [];
-  actividadSeleccionada!: Actividad;
+  actividadSeleccionada!: Vuelos;
   modalAbierto: boolean = false;
   modalReservaExitoAbierto: boolean = false;
   private timeoutModalReserva: any;
@@ -57,7 +58,7 @@ getIdActividad() {
     return;
   }
   this.apiService.getActividadById(this.id_actividad).subscribe(
-    (actividad: Actividad) => {
+    (actividad: Vuelos) => {
       this.actividadSeleccionada = actividad;
       console.log('Actividad seleccionada:', this.actividadSeleccionada);
     },

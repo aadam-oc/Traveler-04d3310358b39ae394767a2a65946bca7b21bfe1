@@ -42,3 +42,13 @@
 
   <button type="submit" class="btn btn-primary">Reservar ahora</button>
 </form>
+
+<div 
+  class="modal-reserva-exito" 
+  *ngIf="modalReservaExitoAbierto" 
+  (click)="cerrarModalReservaExito($event)">
+  <div class="modal-reserva-exito-contenido" (click)="$event.stopPropagation()">
+    <p>La reserva se ha realizado correctamente</p>
+    <small>Serás redirigido al inicio en 15 segundos...</small>
+  </div>
+</div>

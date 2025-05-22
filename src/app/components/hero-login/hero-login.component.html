@@ -1,3 +1,34 @@
+<div class="header-hero-container">
+  <header>
+    <div class="header-container">
+      <a class="logo" routerLink="/inicio">
+        <img src="logo.png" alt="Traveller Logo">
+        <p class="palabralogo">TRAVELER</p>
+      </a>
+      <nav class="nav-menu">
+        <ul>
+          <li><a routerLink="/alojamientos">Alojamientos</a></li>
+          <li><a routerLink="/actividades">Actividades</a></li>
+          <li><a routerLink="/vuelos">Vuelos</a></li>
+          <li><a routerLink="/vehiculos-alquiler">Vehículos de alquiler</a></li>
+          <li><a routerLink="/foro">Foro</a></li>
+          <li><a routerLink="/contacto">Contacto</a></li>
+        </ul>
+      </nav>
+      <div *ngIf="isLoggedIn(); else notLoggedIn" class="auth-buttons">
+        <a class="btn" routerLink="/perfil">MI PERFIL</a>
+        <a class="btn" (click)="logout()">CERRAR SESIÓN</a>
+      </div>
+      <ng-template #notLoggedIn>
+        <div class="auth-buttons">
+          <a class="btn register" routerLink="/register">REGISTRARSE</a>
+          <a class="btn" routerLink="/login">INICIAR SESIÓN</a>
+        </div>
+      </ng-template>
+    </div>
+  </header>
+</div>
+
 <div class="hero-container">
     <div class="hero-form">
         <app-login-form></app-login-form>

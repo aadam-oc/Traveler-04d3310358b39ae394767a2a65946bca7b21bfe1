@@ -1,24 +1,50 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { RegisterFormComponent } from '../register-form/register-form.component';
 import { ApiService } from '../../services/api.service';
 import { Item } from '../../models/item.model';
+import { filter } from 'rxjs/operators';
 import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-hero',
   standalone: true,
-  imports: [CommonModule, RegisterFormComponent],
+  imports: [CommonModule, RegisterFormComponent, RouterLink],
   templateUrl: './hero.component.html',
   styleUrls: ['./hero.component.css']
 })
 export class HeroComponent {
 
   title = 'HeroRegister';
+  isHomePage: boolean = false;
+  isLoginOrRegister: boolean = false;
+ 
 
-  constructor(private apiService: ApiService, router: Router) { }
+  constructor(private apiService: ApiService, private router: Router) { }
 
+  isLoggedIn(): boolean {
+    return localStorage.getItem('authToken') !== null;
+  }
 
+  logout() {
+    localStorage.removeItem('authToken');
+    this.router.navigate(['/login']);
+  }
+
+  ngOnInit(): void {
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe((event: NavigationEnd) => {
+      const currentUrl = event.urlAfterRedirects;
+      console.log('URL actual:', currentUrl);
+
+      this.isHomePage = currentUrl === '/';
+      // Verifica si estamos en login o register
+      this.isLoginOrRegister = currentUrl.includes('/login') || currentUrl.includes('/register');
+    });
+  }
 
   // Método que recibe los datos del formulario
   onRegister(userData: any) {

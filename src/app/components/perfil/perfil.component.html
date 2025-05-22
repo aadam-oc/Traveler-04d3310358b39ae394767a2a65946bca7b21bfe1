@@ -35,8 +35,8 @@
             </div>
             <div class="reserva-details">
               <span class="reserva-name">{{ r.nombre_alojamiento }}</span>
-              <span class="reserva-date">{{ r.fecha_entrada_alojamiento }} a {{
-                r.fecha_salida_alojamiento }}</span>
+              <span class="reserva-date">{{ r.fecha_entrada_alojamiento | date:'dd/MM/yyyy' }} a {{
+                r.fecha_salida_alojamiento | date:'dd/MM/yyyy' }}</span>
             </div>
           </li>
         </ul>
@@ -49,8 +49,8 @@
               <i class="fas fa-hiking"></i>
             </div>
             <div class="reserva-details">
-              <span class="reserva-name">{{ r.nombre_actividad }}</span>
-              <span class="reserva-date">{{ r.fecha_actividad }} {{
+              <span class="reserva-name">{{ r.nombre_tipo_actividad }}</span>
+              <span class="reserva-date">{{ r.fecha_actividad | date:'dd/MM/yyyy' }} {{
                 r.hora_actividad }}</span>
             </div>
           </li>
@@ -65,8 +65,7 @@
             </div>
             <div class="reserva-details">
               <span class="reserva-name">{{ r.nombre_vehiculo }}</span>
-              <span class="reserva-date">{{ r.fecha_inicio }} a {{ r.fecha_fin
-                }}</span>
+              <span class="reserva-date">{{ r.fecha_inicio_reserva | date:'dd/MM/yyyy' }} a {{ r.fecha_final_reserva | date:'dd/MM/yyyy' }}</span>
             </div>
           </li>
         </ul>
@@ -80,7 +79,7 @@
             </div>
             <div class="reserva-details">
               <span class="reserva-name">{{ r.origen }} → {{ r.destino }}</span>
-              <span class="reserva-date">{{ r.fecha_vuelo }}</span>
+              <span class="reserva-date">{{ r.fecha_vuelo | date:'dd/MM/yyyy' }}</span>
             </div>
           </li>
         </ul>
@@ -96,8 +95,8 @@
 </div>
 
 <!-- DASHBOARD -->
-<div class="dashboard-container">
-  <a routerLink="/dashboard" class="dashboard-link">Ir al Dashboard</a>
+<div class="dashboard-container" *ngIf="rol != 'user'">
+  <a routerLink="/dashboard" class="dashboard-link" >Ir al Dashboard</a>
 </div>
 
 <!-- Modal de edición -->
@@ -147,8 +146,7 @@
       </div>
       <!-- Imagen -->
       <div>
-        <label for="alojamiento_imagen">Imagen del
-          alojamiento</label>
+        <label for="alojamiento_imagen">Imagen del Usuario:</label>
         <div class="imagen-upload-container">
           <div class="imagen-upload-text">
             <label for="alojamiento_imagen"
@@ -182,5 +180,15 @@
       </div>
       <button type="submit">Guardar</button>
     </form>
+  </div>
+</div>
+
+<div 
+  class="modal-exito" 
+  *ngIf="modalExitoAbierto" 
+  (click)="cerrarModalExito($event)">
+  <div class="modal-exito-contenido" (click)="$event.stopPropagation()">
+    <p>Cambio realizado</p>
+    <small>Este mensaje se cerrará en 15 segundos...</small>
   </div>
 </div>

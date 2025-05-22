@@ -630,5 +630,13 @@ export class ApiService {
     return this.http.put(`${this.apiUrl}/traveler/imagenes_usuarios/${id_usuario}`, imagen, { headers });
   }
 
+  postReservaVehiculo(reserva: any): Observable<any> {
+    const token = localStorage.getItem('authToken');
+    const headers = {
+      Authorization: `Bearer ${token}`
+    };
+    return this.http.post(`${this.apiUrl}/traveler/reservas_vehiculos`, reserva, { headers });
+  }
+
 }
 

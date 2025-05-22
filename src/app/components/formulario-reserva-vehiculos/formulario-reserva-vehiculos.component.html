@@ -29,25 +29,43 @@
       formControlName="telefono" required />
   </div>
 
+
   <div class="date-time-container">
     <div class="form-group">
-      <label for="fecha_actividad">Fecha <span class="required">*</span></label>
-      <input id="fecha_actividad" type="date" formControlName="fecha_actividad"
+      <label for="fecha_inicio_reserva">Fecha de recogida <span class="required">*</span></label>
+      <input id="fecha_inicio_reserva" type="date" formControlName="fecha_inicio_reserva"
         required />
     </div>
 
     <div class="form-group">
-      <label for="hora_actividad">Hora <span class="required">*</span></label>
-      <select id="hora_actividad" formControlName="hora_actividad" required>
+      <label for="hora_inicio_reserva">Hora de recogida <span class="required">*</span></label>
+      <select id="hora_inicio_reserva" formControlName="hora_inicio_reserva" required>
         <option value disabled selected>Selecciona una hora</option>
         <option *ngFor="let hora of horasDisponibles" [value]="hora">{{ hora
           }}</option>
       </select>
     </div>
-    
+
+    <div class="form-group">
+      <label for="fecha_final_reserva">Fecha de finalización <span class="required">*</span></label>
+      <input id="fecha_final_reserva" type="date" formControlName="fecha_final_reserva"
+        required />
+    </div>
+
+    <div class="form-group">
+      <label for="hora_final_reserva">Hora de finalización <span class="required">*</span></label>
+      <select id="hora_final_reserva" formControlName="hora_final_reserva" required>
+        <option value disabled selected>Selecciona una hora</option>
+        <option *ngFor="let hora of horasDisponibles" [value]="hora">{{ hora
+          }}</option>
+      </select>
+    </div>
+
+   
+
   </div>
 
-  <button type="submit" class="btn">Reservar ahora</button>
+  <button type="submit" class="btn">Reservar vehículo</button>
 </form>
 
 <div 
@@ -55,7 +73,7 @@
   *ngIf="modalReservaExitoAbierto" 
   (click)="cerrarModalReservaExito($event)">
   <div class="modal-reserva-exito-contenido" (click)="$event.stopPropagation()">
-    <p>La reserva se ha realizado correctamente</p>
+    <p>La reserva del vehículo se ha realizado correctamente</p>
     <small>Serás redirigido al inicio en 15 segundos...</small>
   </div>
 </div>

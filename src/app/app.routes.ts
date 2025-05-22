@@ -33,7 +33,8 @@ import { EditarTiposActividadesComponent } from './components/editar-tipos-activ
 import { EditarVehiculoComponent } from './components/editar-vehiculo/editar-vehiculo.component';
 import { EditarRolesComponent } from './components/editar-roles/editar-roles.component';
 import { EditarDestinosComponent } from './components/editar-destinos/editar-destinos.component';
-
+import {FormularioReservaVehiculosComponent} from './components/formulario-reserva-vehiculos/formulario-reserva-vehiculos.component';
+import { FormularioReservaVuelosComponent } from './components/formulario-reserva-vuelos/formulario-reserva-vuelos.component';
 
 export const appRoutes: Routes = [
   { path: '', component: InicioComponent },
@@ -66,6 +67,8 @@ export const appRoutes: Routes = [
   { path: 'editarRol/:id', component: EditarRolesComponent, data: { title: 'EDITAR ROL' }, canActivate: [AuthGuard] },
   { path: 'editarDestinos/:id', component: EditarDestinosComponent, data: { title: 'EDITAR DESTINO' }, canActivate: [AuthGuard] },
   { path: 'reservaActividad/:id', component: FormularioReservaActividadComponent, data: { title: 'RESERVA ACTIVIDADES' }, canActivate: [AuthGuard] },
+  { path: 'reservar-vehiculo/:id', component: FormularioReservaVehiculosComponent, data: { title: 'RESERVA VEHÍCULO' }, canActivate: [AuthGuard] },
+  { path: 'reservar-vuelos/:id', component: FormularioReservaVuelosComponent, data: { title: 'RESERVA VUELOS' }, canActivate: [AuthGuard] },
   { path: '**', redirectTo: '' }
 ];
 

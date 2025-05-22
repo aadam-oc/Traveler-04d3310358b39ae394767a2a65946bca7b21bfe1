@@ -231,7 +231,8 @@ body {
   max-width: 650px;
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
   position: relative;
-  overflow: hidden;
+  overflow-y: auto; /* Permite el scroll vertical */
+  max-height: 90vh; /* Limita la altura máxima al 90% de la ventana */
   animation: slideUp 0.3s ease-out;
 }
 
@@ -253,7 +254,7 @@ body {
   right: 1.5rem;
   font-size: 1.75rem;
   cursor: pointer;
-  color: #666;
+  color: red;
   transition: color 0.2s;
   z-index: 10;
   width: 32px;
@@ -334,6 +335,198 @@ form button:hover {
   background-color: #0d2a1e;
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(20, 61, 44, 0.3);
+}
+
+/* Estilos para el apartado de imagen en el modal de edición */
+
+/* Contenedor principal para la carga de imágenes */
+.imagen-upload-container {
+  border: 2px dashed #143D2C;
+  border-radius: 10px;
+  padding: 1.5rem;
+  background-color: #f9fafb;
+  text-align: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.imagen-upload-container:hover {
+  border-color: #143D2C;
+  background-color: #f0f9f4;
+}
+
+/* Texto y elementos dentro del área de carga */
+.imagen-upload-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+/* Etiqueta para el botón de carga */
+.imagen-upload-label {
+  background-color: #143D2C;
+  color: #fff;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 2px 5px rgba(20, 61, 44, 0.2);
+}
+
+.imagen-upload-label:hover {
+  background-color: #0d2a1e;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(20, 61, 44, 0.3);
+}
+
+/* Icono dentro del botón */
+.imagen-upload-label i {
+  font-size: 1rem;
+}
+
+/* Texto de arrastrar y soltar */
+.imagen-upload-text span {
+  color: #6b7280;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+/* Nota sobre tipos de archivo */
+.imagen-upload-note {
+  color: #9ca3af;
+  font-size: 0.8rem;
+  margin: 0.5rem 0 0;
+}
+
+/* Ocultar el input de archivo real */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Mensaje de carga */
+.imagen-subiendo {
+  background-color: #e0f2fe;
+  color: #0369a1;
+  padding: 0.75rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  margin: 1rem 0;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  animation: pulse 1.5s infinite;
+}
+
+.imagen-subiendo::before {
+  content: '';
+  width: 16px;
+  height: 16px;
+  border: 2px solid #0369a1;
+  border-top-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  animation: spin 1s linear infinite;
+}
+
+/* Contenedor de vista previa */
+.vista-previa-container {
+  grid-column: 1 / -1;
+  background-color: #f9fafb;
+  border-radius: 10px;
+  padding: 1.5rem;
+  border: 1px solid #e5e7eb;
+  margin-top: 1rem;
+}
+
+/* Título de vista previa */
+.vista-previa-titulo {
+  font-weight: 600;
+  color: #374151;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+/* Contenedor de la imagen de vista previa */
+.vista-previa-imagen {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  position: relative;
+}
+
+/* Imagen de vista previa */
+.vista-previa-imagen img {
+  max-width: 100%;
+  max-height: 250px;
+  border-radius: 4px;
+  object-fit: contain;
+}
+
+/* Animaciones */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Efecto de arrastrar sobre el área de carga */
+.imagen-upload-container.drag-over {
+  border-color: #143D2C;
+  background-color: #f0f9f4;
+  box-shadow: 0 0 0 2px rgba(20, 61, 44, 0.2);
+}
+
+/* Estilos para errores */
+.imagen-error {
+  background-color: #fee2e2;
+  color: #b91c1c;
+  padding: 0.75rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  margin: 1rem 0;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.imagen-error::before {
+  content: '⚠️';
+  font-size: 1.1rem;
 }
 
 /*RESERVAS*/
@@ -496,7 +689,11 @@ form button:hover {
 
 .reserva-date {
   color: #64748b;
-  font-size: 0.9rem;
+  font-size: 1rem;
+  margin-top: 0.2rem;
+  display: block;
+  font-style: italic;
+  letter-spacing: 0.2px;
 }
 
 /* Mensaje de no reservas */
@@ -647,3 +844,35 @@ form button:hover {
 .reserva-section:nth-of-type(2) { animation-delay: 0.2s; }
 .reserva-section:nth-of-type(3) { animation-delay: 0.3s; }
 .reserva-section:nth-of-type(4) { animation-delay: 0.4s; }
+
+.modal-exito {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  animation: fadeIn 0.2s;
+}
+
+.modal-exito-contenido {
+  background: #fff;
+  padding: 2rem 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(20,61,44,0.15);
+  text-align: center;
+  min-width: 300px;
+  animation: fadeIn 0.3s;
+}
+
+.modal-exito-contenido p {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #143D2C;
+  margin-bottom: 0.5rem;
+}
+
+.modal-exito-contenido small {
+  color: #666;
+}

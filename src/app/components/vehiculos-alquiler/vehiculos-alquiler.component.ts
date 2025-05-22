@@ -79,8 +79,7 @@ export class VehiculosAlquilerComponent implements OnInit {
   }
 
   irAFormularioReserva(idVehiculo: number) {
-    // Redirige o abre el formulario de reserva
-    // Por ejemplo:
+    localStorage.setItem('id_vehiculo', idVehiculo.toString());
     this.router.navigate(['/reservar-vehiculo', idVehiculo]);
   }
 }

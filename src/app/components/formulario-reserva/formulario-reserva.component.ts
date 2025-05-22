@@ -14,6 +14,8 @@ import { RouterModule } from '@angular/router';
 })
 export class FormularioReservaComponent {
   form: FormGroup;
+  modalReservaExitoAbierto: boolean = false;
+  private timeoutModalReserva: any;
 
   constructor(private fb: FormBuilder, private apiService: ApiService, private router: Router) {
     this.form = this.fb.group(
@@ -68,37 +70,54 @@ export class FormularioReservaComponent {
   }
 
  onSubmit() {
-  if (this.form.valid) {
-    const formData = this.form.value;
-    const fechaReserva = formData.fechaReserva || new Date().toISOString().split('T')[0];
-    const id_alojamiento = Number(localStorage.getItem('id_alojamiento'));
-    const id_usuario = Number(localStorage.getItem('id_usuario'));
+    if (this.form.valid) {
+      const formData = this.form.value;
+      const fechaReserva = formData.fechaReserva || new Date().toISOString().split('T')[0];
+      const id_alojamiento = Number(localStorage.getItem('id_alojamiento'));
+      const id_usuario = Number(localStorage.getItem('id_usuario'));
 
-    const reserva = {
-      id_alojamiento: id_alojamiento,
-      id_usuario: id_usuario,
-      fecha_reserva_alojamiento: formData.fechaReserva,
-      fecha_entrada_alojamiento: formData.fecha_entrada_alojamiento,
-      fecha_salida_alojamiento: formData.fecha_salida_alojamiento,
-      hora_entrada_alojamiento: '12:00:00', 
-      hora_salida_alojamiento: '15:00:00',  
-      nombre: formData.nombre,
-      apellidos: formData.apellidos,
-      email: formData.email,
-      telefono: formData.telefono
-    };
-    console.log(reserva);
-    this.apiService.postReserva(reserva).subscribe(
-      (response) => {
-        alert('Reserva Completada');
-        this.router.navigate(['/inicio']);
-      },
-      (error) => {
-        alert('Hubo un error al realizar la reserva. Inténtalo de nuevo.');
-      }
-    );
-  } else {
-    alert('Por favor, completa todos los campos requeridos.');
+      const reserva = {
+        id_alojamiento: id_alojamiento,
+        id_usuario: id_usuario,
+        fecha_reserva_alojamiento: formData.fechaReserva,
+        fecha_entrada_alojamiento: formData.fecha_entrada_alojamiento,
+        fecha_salida_alojamiento: formData.fecha_salida_alojamiento,
+        hora_entrada_alojamiento: '12:00:00', 
+        hora_salida_alojamiento: '15:00:00',  
+        nombre: formData.nombre,
+        apellidos: formData.apellidos,
+        email: formData.email,
+        telefono: formData.telefono
+      };
+      this.apiService.postReserva(reserva).subscribe(
+        (response) => {
+          this.abrirModalReservaExito();
+        },
+        (error) => {
+          alert('Hubo un error al realizar la reserva. Inténtalo de nuevo.');
+        }
+      );
+    } else {
+      alert('Por favor, completa todos los campos requeridos.');
+    }
+  }
+
+  abrirModalReservaExito() {
+  this.modalReservaExitoAbierto = true;
+  this.timeoutModalReserva = setTimeout(() => {
+    this.cerrarModalReservaExito();
+    this.router.navigate(['/inicio']);
+  }, 15000); // 15 segundos
+}
+
+cerrarModalReservaExito(event?: MouseEvent) {
+  this.modalReservaExitoAbierto = false;
+  if (this.timeoutModalReserva) {
+    clearTimeout(this.timeoutModalReserva);
+    this.timeoutModalReserva = null;
+  }
+  if (event) {
+    this.router.navigate(['/inicio']);
   }
 }
 }
