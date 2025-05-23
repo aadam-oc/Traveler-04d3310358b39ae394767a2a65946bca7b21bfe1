@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { FakeApiVehiculosService } from '../../services/fake-api-vehiculos.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -7,12 +7,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { VehiculosAlquiler } from '../../models/vehiculos-alquiler';
 import { ApiService } from '../../services/api.service';
 
+// Validador personalizado para comparar fechas
+
+
 @Component({
    imports: [CommonModule, FormsModule, ReactiveFormsModule],
   selector: 'app-formulario-reserva-vehiculos',
   templateUrl: './formulario-reserva-vehiculos.component.html',
   styleUrls: ['./formulario-reserva-vehiculos.component.css']
 })
+
 export class FormularioReservaVehiculosComponent {
   form: FormGroup;
   id_vehiculo: number = 0;
@@ -35,7 +39,8 @@ export class FormularioReservaVehiculosComponent {
       hora_final_reserva: ['', Validators.required],
       
 
-    });
+    }, { validators: this.validarFechas() },
+    ); // Aplica el validador al formulario
 
     for (let h = 8; h <= 20; h++) {
       const hora = h < 10 ? `0${h}:00:00` : `${h}:00:00`;
@@ -54,6 +59,18 @@ export class FormularioReservaVehiculosComponent {
       }
     });
   }
+
+  validarFechas(): ValidatorFn {
+  return (formGroup: AbstractControl): ValidationErrors | null => {
+    const fechaInicio = formGroup.get('fecha_inicio_reserva')?.value;
+    const fechaFinal = formGroup.get('fecha_final_reserva')?.value;
+
+    if (fechaInicio && fechaFinal && new Date(fechaInicio) > new Date(fechaFinal)) {
+      return { fechasInvalidas: true }; // Error si la fecha de inicio es posterior a la final
+    }
+    return null; // Sin errores
+  };
+}
 
   ngOnInit() {
     this.getIdVehiculo();
@@ -77,6 +94,7 @@ export class FormularioReservaVehiculosComponent {
   }
 
   onSubmit() {
+    this.validarFechas();
     if (this.form.valid) {
       const formData = this.form.value;
       const id_vehiculo = Number(localStorage.getItem('id_vehiculo'));

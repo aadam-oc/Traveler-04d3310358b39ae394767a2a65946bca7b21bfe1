@@ -7,11 +7,13 @@ import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { Vuelos } from '../../models/vuelos';
 import { Router } from '@angular/router';
+import { NgxPaginationModule } from 'ngx-pagination';
+
 
 @Component({
   selector: 'app-vuelos',
   standalone: true,
-  imports: [CommonModule, HttpClientModule, ReactiveFormsModule],
+  imports: [CommonModule, HttpClientModule, ReactiveFormsModule, NgxPaginationModule],
   templateUrl: './vuelos.component.html',
   styleUrls: ['./vuelos.component.css'],
   providers: [FakeApiVuelosService]
@@ -24,6 +26,9 @@ export class VuelosComponent implements OnInit {
   filtrosForm: FormGroup;
   modalAbierto = false;
   vueloSeleccionado: Vuelos | null = null;
+
+  // Paginación
+  p: number = 1;
 
   constructor(
     private fakeApiVuelosService: FakeApiVuelosService,

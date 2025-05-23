@@ -390,3 +390,158 @@ body {
 .btn-reservar:hover {
   background-color: #0a2213;
 }
+
+/*PAGINACIÓN*/
+/* Estilos para la paginación */
+.paginacion {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0 40px 0;
+  width: 100%;
+  position: relative;
+}
+
+/* Uso de ::ng-deep para penetrar el encapsulamiento de estilos */
+:host ::ng-deep .ngx-pagination {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  list-style: none;
+  border-radius: 12px;
+  background-color: white;
+  padding: 8px 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  border: 1px solid #eaeef2;
+}
+
+/* Estilos para todos los elementos de la paginación */
+:host ::ng-deep .ngx-pagination li {
+  margin: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+/* Estilos para los números y enlaces de la paginación */
+:host ::ng-deep .ngx-pagination a,
+:host ::ng-deep .ngx-pagination button {
+  padding: 10px 16px;
+  border-radius: 8px;
+  color: #333;
+  font-weight: 500;
+  min-width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.95rem;
+}
+
+/* Efecto hover para los enlaces */
+:host ::ng-deep .ngx-pagination a:hover,
+:host ::ng-deep .ngx-pagination button:hover {
+  background-color: rgba(20, 61, 44, 0.1);
+  color: #143D2C;
+}
+
+/* Página actual seleccionada */
+:host ::ng-deep .ngx-pagination .current {
+  background-color: #143D2C !important;
+  color: white !important;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 10px 16px;
+  min-width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(20, 61, 44, 0.3);
+}
+
+/* Botones de anterior y siguiente */
+:host ::ng-deep .ngx-pagination .pagination-previous a,
+:host ::ng-deep .ngx-pagination .pagination-next a,
+:host ::ng-deep .ngx-pagination .pagination-previous.disabled,
+:host ::ng-deep .ngx-pagination .pagination-next.disabled {
+  font-weight: 600;
+  position: relative;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Añadir iconos a los botones de anterior y siguiente */
+:host ::ng-deep .ngx-pagination .pagination-previous a::before,
+:host ::ng-deep .ngx-pagination .pagination-previous.disabled::before {
+  content: '←';
+  margin-right: 6px;
+  font-size: 1.1rem;
+}
+
+:host ::ng-deep .ngx-pagination .pagination-next a::after,
+:host ::ng-deep .ngx-pagination .pagination-next.disabled::after {
+  content: '→';
+  margin-left: 6px;
+  font-size: 1.1rem;
+}
+
+/* Eliminar texto "Anterior" y "Siguiente" en móviles */
+@media (max-width: 480px) {
+
+  :host ::ng-deep .ngx-pagination .pagination-previous a span,
+  :host ::ng-deep .ngx-pagination .pagination-next a span {
+    display: none;
+  }
+
+  :host ::ng-deep .ngx-pagination .pagination-previous a::before,
+  :host ::ng-deep .ngx-pagination .pagination-previous.disabled::before,
+  :host ::ng-deep .ngx-pagination .pagination-next a::after,
+  :host ::ng-deep .ngx-pagination .pagination-next.disabled::after {
+    margin: 0;
+  }
+
+  :host ::ng-deep .ngx-pagination a,
+  :host ::ng-deep .ngx-pagination button {
+    padding: 8px 12px;
+    min-width: 36px;
+    height: 36px;
+  }
+
+  :host ::ng-deep .ngx-pagination .current {
+    padding: 8px 12px;
+    min-width: 36px;
+    height: 36px;
+  }
+}
+
+/* Estilos para los elementos deshabilitados */
+:host ::ng-deep .ngx-pagination .disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  color: #888;
+  padding: 10px 16px;
+}
+
+/* Animación al cambiar de página */
+@keyframes fadeScale {
+  0% {
+    opacity: 0.7;
+    transform: scale(0.95);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

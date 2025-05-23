@@ -21,7 +21,7 @@ export class FormularioReservaComponent {
     this.form = this.fb.group(
       {
         nombre: ['', Validators.required],
-        apellidos: ['', Validators.required],
+        apellido: ['', Validators.required],
         email: ['', [Validators.required, Validators.email]],
         telefono: ['', Validators.required],
         fecha_entrada_alojamiento: ['', Validators.required],

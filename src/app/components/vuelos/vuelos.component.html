@@ -2,14 +2,14 @@
   <!-- FILTROS -->
   <form [formGroup]="filtrosForm" class="form-container">
     <div class="form-group">
-      <label for="origen">🛫 País de Origen:</label>
+      <label for="origen">🛫 Ciudad de Origen:</label>
       <select formControlName="origen" id="origen">
         <option value>-- Selecciona país de origen --</option>
         <option *ngFor="let origen of origenes" [value]="origen">{{ origen }}</option>
       </select>
     </div>
     <div class="form-group">
-      <label for="destino">🛬 País de Destino:</label>
+      <label for="destino">🛬 Ciudad de Destino:</label>
       <select formControlName="destino" id="destino">
         <option value>-- Selecciona país de destino --</option>
         <option *ngFor="let destino of destinos" [value]="destino">{{ destino }}</option>
@@ -23,17 +23,26 @@
   </form>
 
   <!-- CARDS -->
-  <div *ngIf="vuelosFiltrados.length > 0; else sinVuelos" class="tarjetas-grid">
-    <div *ngFor="let vuelo of vuelosFiltrados" class="vuelo">
-      <img class="fto-vuelo" [src]="vuelo.imagen_url" alt="Imagen del vuelo">
-      <div class="contenido">
-        <p class="titulo">{{ vuelo.origen_ciudad }} → {{ vuelo.destino_ciudad }}</p>
-        <p class="descripcion">{{ vuelo.origen_pais }} - {{ vuelo.destino_pais }}</p>
-        <div class="botones">
-          <div class="precio">{{ vuelo.precio }}€</div>
-          <button class="saber-mas" (click)="verMas(vuelo)">Saber más</button>
+  <div class="content-container">
+    <div *ngIf="vuelosFiltrados.length > 0; else sinVuelos" class="tarjetas-grid">
+      <div class="vuelo" *ngFor="let vuelo of vuelosFiltrados | paginate: { itemsPerPage: 6, currentPage: p }">
+        <img class="fto-vuelo" [src]="vuelo.imagen_url" alt="Imagen del vuelo">
+        <div class="contenido">
+          <p class="titulo">{{ vuelo.origen_ciudad }} → {{ vuelo.destino_ciudad }}</p>
+          <p class="descripcion">{{ vuelo.origen_pais }} - {{ vuelo.destino_pais }}</p>
+          <div class="botones">
+            <div class="precio">{{ vuelo.precio }}€</div>
+            <button class="saber-mas" (click)="verMas(vuelo)">Saber más</button>
+          </div>
         </div>
-      </div>
+      </div>    
+    </div>
+    <!-- Paginación -->
+    <div class="paginacion">
+      <pagination-controls (pageChange)="p = $event"
+        previousLabel="Anterior"
+        nextLabel="Siguiente">
+      </pagination-controls>
     </div>
   </div>
 </div>

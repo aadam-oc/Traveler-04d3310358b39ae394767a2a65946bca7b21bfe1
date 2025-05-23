@@ -6,11 +6,13 @@ import { CommonModule } from '@angular/common';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { Router } from '@angular/router';
+import { NgxPaginationModule } from 'ngx-pagination';
+
 
 @Component({
   selector: 'app-vehiculos-alquiler',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, NgxPaginationModule],
   templateUrl: './vehiculos-alquiler.component.html',
   styleUrls: ['./vehiculos-alquiler.component.css'],
 })
@@ -21,6 +23,9 @@ export class VehiculosAlquilerComponent implements OnInit {
   vehiculosFiltrados: VehiculosAlquiler[] = [];
   modalAbierto = false;
   vehiculoSeleccionado: any = null;
+
+  // Paginación
+  p: number = 1;
 
   constructor(
     private fb: FormBuilder,

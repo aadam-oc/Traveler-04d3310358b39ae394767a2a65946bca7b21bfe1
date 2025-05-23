@@ -19,20 +19,29 @@
   </form>
 
   <!-- CARDS -->
-  <div *ngIf="vehiculosFiltrados.length > 0; else sinVehiculos" class="tarjetas-grid">
-    <div *ngFor="let vehiculo of vehiculosFiltrados" class="vehiculo">
-      <!-- Imagen del vehículo -->
-      <img class="fto-vehiculo" [src]="vehiculo.imagen" alt="Imagen del vehículo">
-      <div class="contenido">
-        <!-- Nombre del vehículo -->
-        <p class="titulo">{{ vehiculo.nombre_vehiculo }}</p>
-        <!-- Tipo de vehículo -->
-        <p class="descripcion">Tipo: {{ vehiculo.nombre_tipo_vehiculo }}</p>
-        <div class="botones">
-          <div class="precio">{{ vehiculo.precio }}€/día</div>
-          <button class="saber-mas" (click)="verMas(vehiculo)">Ver más</button>
+  <div class="content-container">
+    <div *ngIf="vehiculosFiltrados.length > 0; else sinVehiculos" class="tarjetas-grid">
+      <div class="vehiculo" *ngFor="let vehiculo of vehiculosFiltrados | paginate: { itemsPerPage: 6, currentPage: p }">
+        <!-- Imagen del vehículo -->
+        <img class="fto-vehiculo" [src]="vehiculo.imagen" alt="Imagen del vehículo">
+        <div class="contenido">
+          <!-- Nombre del vehículo -->
+          <p class="titulo">{{ vehiculo.nombre_vehiculo }}</p>
+          <!-- Tipo de vehículo -->
+          <p class="descripcion">Tipo: {{ vehiculo.nombre_tipo_vehiculo }}</p>
+          <div class="botones">
+            <div class="precio">{{ vehiculo.precio }}€/día</div>
+            <button class="saber-mas" (click)="verMas(vehiculo)">Ver más</button>
+          </div>
         </div>
       </div>
+    </div>
+    <!-- Paginación -->
+    <div class="paginacion">
+      <pagination-controls (pageChange)="p = $event"
+        previousLabel="Anterior"
+        nextLabel="Siguiente">
+      </pagination-controls>
     </div>
   </div>
 </div>

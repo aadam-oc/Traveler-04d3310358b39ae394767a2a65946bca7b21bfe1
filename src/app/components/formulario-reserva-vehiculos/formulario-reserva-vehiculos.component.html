@@ -29,17 +29,19 @@
       formControlName="telefono" required />
   </div>
 
-
   <div class="date-time-container">
     <div class="form-group">
-      <label for="fecha_inicio_reserva">Fecha de recogida <span class="required">*</span></label>
-      <input id="fecha_inicio_reserva" type="date" formControlName="fecha_inicio_reserva"
-        required />
+      <label for="fecha_inicio_reserva">Fecha de recogida <span
+          class="required">*</span></label>
+      <input id="fecha_inicio_reserva" type="date"
+        formControlName="fecha_inicio_reserva" required />
     </div>
 
     <div class="form-group">
-      <label for="hora_inicio_reserva">Hora de recogida <span class="required">*</span></label>
-      <select id="hora_inicio_reserva" formControlName="hora_inicio_reserva" required>
+      <label for="hora_inicio_reserva">Hora de recogida <span
+          class="required">*</span></label>
+      <select id="hora_inicio_reserva" formControlName="hora_inicio_reserva"
+        required>
         <option value disabled selected>Selecciona una hora</option>
         <option *ngFor="let hora of horasDisponibles" [value]="hora">{{ hora
           }}</option>
@@ -47,30 +49,35 @@
     </div>
 
     <div class="form-group">
-      <label for="fecha_final_reserva">Fecha de finalización <span class="required">*</span></label>
-      <input id="fecha_final_reserva" type="date" formControlName="fecha_final_reserva"
-        required />
+      <label for="fecha_final_reserva">Fecha de finalización <span
+          class="required">*</span></label>
+      <input id="fecha_final_reserva" type="date"
+        formControlName="fecha_final_reserva" required />
     </div>
 
     <div class="form-group">
-      <label for="hora_final_reserva">Hora de finalización <span class="required">*</span></label>
-      <select id="hora_final_reserva" formControlName="hora_final_reserva" required>
+      <label for="hora_final_reserva">Hora de finalización <span
+          class="required">*</span></label>
+      <select id="hora_final_reserva" formControlName="hora_final_reserva"
+        required>
         <option value disabled selected>Selecciona una hora</option>
         <option *ngFor="let hora of horasDisponibles" [value]="hora">{{ hora
           }}</option>
       </select>
     </div>
 
-   
-
+    <!-- Mensaje de error -->
+    <div *ngIf="form.errors?.['fechasInvalidas']" class="error-message">
+      La fecha de recogida debe ser anterior a la fecha de finalización.
+    </div>
   </div>
 
   <button type="submit" class="btn">Reservar vehículo</button>
 </form>
 
-<div 
-  class="modal-reserva-exito" 
-  *ngIf="modalReservaExitoAbierto" 
+<div
+  class="modal-reserva-exito"
+  *ngIf="modalReservaExitoAbierto"
   (click)="cerrarModalReservaExito($event)">
   <div class="modal-reserva-exito-contenido" (click)="$event.stopPropagation()">
     <p>La reserva del vehículo se ha realizado correctamente</p>

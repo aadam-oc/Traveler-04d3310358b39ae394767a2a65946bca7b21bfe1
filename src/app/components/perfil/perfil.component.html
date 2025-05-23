@@ -78,8 +78,8 @@
               <i class="fas fa-plane"></i>
             </div>
             <div class="reserva-details">
-                <span class="reserva-name">{{ r.origen_ciudad }} → {{ r.destino_ciudad }}</span>
-              <span class="reserva-date">{{ r.dia | date:'dd/MM/yyyy' }}</span>
+                <span class="reserva-name">{{ r.ciudad_salida_vuelo }} → {{ r.ciudad_llegada_vuelo }}</span>
+              <span class="reserva-date">Día: {{ r.fecha_salida_vuelo | date:'dd/MM/yyyy' }} hora {{ r.hora_salida_vuelo }}</span>
             </div>
           </li>
         </ul>

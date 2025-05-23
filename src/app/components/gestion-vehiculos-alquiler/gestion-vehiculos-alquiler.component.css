@@ -389,3 +389,11 @@ mat-expansion-panel mat-expansion-panel mat-panel-title {
     background-color: #f0fdf4 !important;
     border-left: 3px solid #10b981;
 }
+
+.vehiculo-imagen {
+    width: 100px; 
+    height: 100px; 
+    object-fit: cover; 
+    border-radius: 8px; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+}
